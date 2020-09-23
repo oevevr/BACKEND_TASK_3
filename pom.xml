@@ -3,4 +3,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.coderodde.cskit</groupId>
-    <artif
+    <artifactId>ComputerScienceKit</artifactId>
+    <version>1.618033</version>
+    <packaging
