@@ -5,4 +5,7 @@
     <groupId>net.coderodde.cskit</groupId>
     <artifactId>ComputerScienceKit</artifactId>
     <version>1.618033</version>
-    <packaging
+    <packaging>jar</packaging>
+
+    <name>ComputerScienceKit</name>
+    <url>http://maven.apach
