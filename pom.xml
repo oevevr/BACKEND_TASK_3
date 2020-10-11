@@ -30,4 +30,7 @@
         </dependency>
     </dependencies>
 
-    <buil
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plu
