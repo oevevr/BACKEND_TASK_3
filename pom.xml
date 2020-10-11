@@ -33,4 +33,5 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plu
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifac
