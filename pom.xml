@@ -47,4 +47,6 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.1</version>
                 <configuration>
-                    <mainClass>net.coderodd
+                    <mainClass>net.coderodde.cskit.Demo</mainClass>
+                </configuration>
+          
