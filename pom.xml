@@ -49,4 +49,7 @@
                 <configuration>
                     <mainClass>net.coderodde.cskit.Demo</mainClass>
                 </configuration>
-          
+            </plugin>
+        </plugins>
+    </build>
+</project>
