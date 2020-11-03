@@ -5,4 +5,9 @@ package net.coderodde.cskit;
  * the object implementing this interface, in both directions.
  *
  * @author Rodion Efremov
- * @version 1.6
+ * @version 1.61803 (24.12.2013)
+ */
+public interface AllIterable<T> {
+
+    /**
+     * Returns the <tt>
