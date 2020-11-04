@@ -14,4 +14,5 @@ public interface AllIterable<T> {
      *
      * @return the <tt>Iterable</tt> over all connected nodes.
      */
-    public Iterable<T> all
+    public Iterable<T> allIterable();
+}
