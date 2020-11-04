@@ -62,3 +62,79 @@ import net.coderodde.cskit.sorting.CombSort;
 import net.coderodde.cskit.sorting.CountingSort;
 import net.coderodde.cskit.sorting.HeapSelectionSort;
 import net.coderodde.cskit.sorting.HeapSort;
+import net.coderodde.cskit.sorting.IterativeMergeSort;
+import net.coderodde.cskit.sorting.NaturalMergeSort;
+import net.coderodde.cskit.sorting.ObjectSortingAlgorithm;
+import net.coderodde.cskit.sorting.TreeSort;
+
+/**
+ * Hello from cskit. This is a performance demo.
+ */
+public class Demo{
+
+    public static void main(String... args) {
+//        debugTreeList();
+//        debugTreeList3();
+//        profileTreeList();
+//        profileObjectSortingAlgorithms(new BatchersSort<Integer>(),
+//                                       new CombSort<Integer>(),
+//                                       new CountingSort<Integer>(),
+//                                       new HeapSelectionSort<Integer>(),
+//                                       new IterativeMergeSort<Integer>(),
+//                                       new NaturalMergeSort<Integer>(),
+//                                       new TreeSort<Integer>(),
+//                                       new HeapSort<Integer>(
+//                                            new BinaryHeap<Integer, Integer>()),
+//                                       new HeapSort<Integer>(
+//                                            new FibonacciHeap<Integer, Integer>())
+//                );
+//        profileShortestPathAlgorithms();
+        profileBreadthFirstSearchAlgorithms();
+//        profileOrderStatisticTree();
+//        profileMaxFlowAlgorithms();
+//        profileMSTAlgorithms();
+//        debugMaxFlowAlgorithms();
+//        profileFibonacciHeap();
+    }
+
+    public static void profileOrderStatisticTree() {
+        title("OrderStatisticTree demo");
+        OrderStatisticTree<Integer, Integer> m1 =
+                new OrderStatisticTree<Integer, Integer>();
+        Map<Integer, Integer> m2 = new TreeMap<Integer, Integer>();
+
+        long ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 100000; ++i) {
+            m1.put(i, i);
+        }
+
+        long tb = System.currentTimeMillis();
+
+        System.out.println("OST.put() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 100000; ++i) {
+            m2.put(i, i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("TreeMap.put() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 102000; ++i) {
+            m1.get(i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("OST.get() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 102000; ++i) {
+            m2.get(i);
+        }
