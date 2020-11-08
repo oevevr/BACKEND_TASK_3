@@ -384,3 +384,87 @@ public class Demo{
 
         SIZE = 20000;
         RUNS = 16;
+
+        array = getPresortedArray(SIZE, RUNS);
+
+        profileSortingAlgorithmsOn(array, "Presorted array of " + SIZE +
+                " elements with " + RUNS + " runs", algos);
+    }
+
+    private static void profileSortingAlgorithmsOn(
+            Integer[] array, String title,
+            ObjectSortingAlgorithm<Integer>... algos) {
+        title2(title);
+
+        // + 1 for Arrays.sort().
+        Integer[][] arrays = new Integer[algos.length + 1][];
+        arrays[0] = array;
+
+        for (int i = 1; i < arrays.length; ++i) {
+            arrays[i] = arrays[0].clone();
+        }
+
+        // - 1, for it is the arrray going to Arrays.sort().
+        for (int i = 0; i < arrays.length - 1; ++i) {
+            System.out.print(algos[i].getClass().getName() + " in ");
+
+            long ta = System.currentTimeMillis();
+            algos[i].sort(arrays[i]);
+            long tb = System.currentTimeMillis();
+
+            System.out.print((tb - ta) + " ms, sorted: ");
+            System.out.println(isSorted(arrays[i]));
+        }
+
+        long ta = System.currentTimeMillis();
+        Arrays.sort(arrays[arrays.length - 1]);
+        long tb = System.currentTimeMillis();
+
+        System.out.println("Arrays.sort() in " + (tb - ta) + " ms, sorted: "
+                + isSorted(arrays[arrays.length - 1]));
+
+        line();
+
+        System.out.println("All arrays same: " + allWeakEquals(arrays));
+    }
+
+    private static void profileBinaryHeap() {
+        BinaryHeap<Integer, Integer> heap = new BinaryHeap<Integer, Integer>();
+
+        for (int i = 10; i > 0; --i) {
+            heap.insert(i, i);
+        }
+
+        while(heap.isEmpty() == false) {
+            System.out.print(heap.extractMinimum() + " ");
+        }
+
+        System.out.println();
+
+        heap.clear();
+        line();
+
+        for (int i = 10; i > 0; --i) {
+            heap.insert(i, i);
+        }
+
+        heap.decreasePriority(10, 0);
+
+        while(heap.isEmpty() == false) {
+            System.out.print(heap.extractMinimum() + " ");
+        }
+
+        System.out.println();
+    }
+
+    private static void profileFibonacciHeap() {
+        FibonacciHeap<Integer, Integer> heap =
+                new FibonacciHeap<Integer, Integer>();
+
+        for (int i = 10; i > 0; --i) {
+            heap.insert(i, i);
+        }
+
+        while(heap.isEmpty() == false) {
+            System.out.println("Removing: " + heap.min());
+            heap.extractMinimum();
