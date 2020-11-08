@@ -225,3 +225,87 @@ public class Demo{
         }
 
         return -1;
+    }
+
+    private static <K, V> K getFromTreeMapHack(int key, Map<K, V> map) {
+        int pos = 0;
+
+        for (K k : map.keySet()) {
+            if (key == pos) {
+                return k;
+            }
+
+            pos++;
+        }
+
+        return null;
+    }
+
+    public static void profileBreadthFirstSearchAlgorithms() {
+        title("Uniform cost graph search");
+        final long SEED = System.currentTimeMillis();
+        final Random r = new Random(SEED);
+        final int SIZE = 100000;
+        final float LOAD_FACTOR = 5.5f / SIZE;
+
+        System.out.println("Nodes in the graph: " + SIZE + ", load factor: "
+                + LOAD_FACTOR);
+
+        System.out.println("Seed: " + SEED);
+
+        List<DirectedGraphNode> graph =
+                generateSimpleGraph(SIZE, LOAD_FACTOR, r);
+
+        DirectedGraphNode source = graph.get(r.nextInt(SIZE));
+        DirectedGraphNode target = graph.get(r.nextInt(SIZE));
+
+        UniformCostPathFinder finder1 =
+                new BreadthFirstSearchFinder();
+
+        UniformCostPathFinder finder2 =
+                new BidirectionalBFSFinder();
+
+        UniformCostPathFinder finder3 =
+                new ParallelBidirectionalBFSFinder();
+        
+        long ta = System.currentTimeMillis();
+        List<DirectedGraphNode> path1 = finder1.find(source, target);
+        long tb = System.currentTimeMillis();
+
+        System.out.println("BreadthFirstSearchFinder in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+        List<DirectedGraphNode> path2 = finder2.find(source, target);
+        tb = System.currentTimeMillis();
+
+        System.out.println("BidirectionalBFSFinder in "
+                + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+        List<DirectedGraphNode> path3 = finder3.find(source, target);
+        tb = System.currentTimeMillis();
+
+        System.out.println("ParallelBidirectionalBFSFinder in "
+                + (tb - ta) + " ms.");
+        
+        line();
+
+        boolean eq = path1.size() == path2.size()
+                  && path2.size() == path3.size();
+
+        if (eq == true) {
+            System.out.println("Paths are of same length: " + eq
+                    + ", length: " + path1.size());
+        } else {
+            System.out.println("Erroneous paths! Lengths: "
+                    + path1.size() + ", " + path2.size()
+                    + " and " + path3.size() + ".");
+        }
+
+        boolean ok1 = (isConnectedPath(path1)
+                && path1.get(0).equals(source)
+                && path1.get(path1.size() - 1).equals(target));
+
+        boolean ok2 = (isConnectedPath(path2)
+                && path2.get(0).equals(source)
+                && path2.get(path2.size() - 1).equals(target));
