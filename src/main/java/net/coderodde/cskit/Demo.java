@@ -309,3 +309,78 @@ public class Demo{
         boolean ok2 = (isConnectedPath(path2)
                 && path2.get(0).equals(source)
                 && path2.get(path2.size() - 1).equals(target));
+
+        boolean ok3 = (isConnectedPath(path3)
+                && path3.get(0).equals(source)
+                && path3.get(path3.size() - 1).equals(target));
+
+        System.out.println("Breadth-first search path OK: " + ok1);
+        System.out.println("Bidirectional breadth-first search path OK: "
+                + ok2);
+        System.out.println("Bidirectional parallel BFS path OK: "
+                + ok3);
+        
+        line();
+
+        System.gc();
+    }
+
+    private static void profileObjectSortingAlgorithms(
+            ObjectSortingAlgorithm<Integer>... algos) {
+        title("Object sorting algorithms");
+
+        ////
+
+        long SEED = System.currentTimeMillis();
+
+        System.out.println("Seed: " + SEED);
+
+        int SIZE = 200000;
+        Random r = new Random();
+
+        Integer[] array = getRandomIntegerArray(SIZE, 0, 100, r);
+
+        profileSortingAlgorithmsOn(array, "Small amount of different elements"
+                + ", size: " + SIZE + ", random order", algos);
+
+        ////
+
+        SIZE = 20000;
+
+        array = getRandomIntegerArray(SIZE, 0, 100, r);
+
+        profileSortingAlgorithmsOn(array, "Small amount of different elements"
+                + ", size: " + SIZE + ", random order", algos);
+
+        ////
+
+        SIZE = 200000;
+
+        array = getRandomIntegerArray(SIZE, r);
+
+        profileSortingAlgorithmsOn(array, "Random elements, size: " + SIZE,
+                                   algos);
+
+        ////
+
+        SIZE = 20000;
+
+        array = getRandomIntegerArray(SIZE, r);
+
+        profileSortingAlgorithmsOn(array, "Random elements, size: " + SIZE,
+                                   algos);
+
+        ////
+
+        SIZE = 200000;
+        int RUNS = 16;
+
+        array = getPresortedArray(SIZE, RUNS);
+
+        profileSortingAlgorithmsOn(array, "Presorted array of " + SIZE +
+                " elements with " + RUNS + " runs", algos);
+
+        ////
+
+        SIZE = 20000;
+        RUNS = 16;
