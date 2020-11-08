@@ -138,3 +138,90 @@ public class Demo{
         for (int i = 0; i < 102000; ++i) {
             m2.get(i);
         }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("TreeMap.get() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 102000; ++i) {
+            m1.remove(i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("OST.remove() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 102000; ++i) {
+            m2.remove(i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("TreeMap.remove() in " + (tb - ta) + " ms.");
+
+        for (int i = 0; i < 100000; ++i) {
+            m1.put(i, i);
+            m2.put(i, i);
+        }
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 20000; ++i) {
+            m1.entryAt(i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("OST.entryAt() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 20000; ++i) {
+            getFromTreeMapHack(i, m2);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("TreeMap dirty select() hack in " + (tb - ta)
+                + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 20000; ++i) {
+            m1.rankOf(i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("OST.rankOf() in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 20000; ++i) {
+            getRankOfTreeMapHack(i, m2);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("TreeMap dirty rankOf() hack in " + (tb - ta)
+                + " ms.");
+
+        line();
+    }
+
+    private static <K, V>   int getRankOfTreeMapHack(K key, Map<K, V> map) {
+        int index = 0;
+
+        for (K k : map.keySet()) {
+            if (k.equals(key)) {
+                return index;
+            }
+
+            ++index;
+        }
+
+        return -1;
