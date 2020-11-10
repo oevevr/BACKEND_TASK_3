@@ -468,3 +468,89 @@ public class Demo{
         while(heap.isEmpty() == false) {
             System.out.println("Removing: " + heap.min());
             heap.extractMinimum();
+        }
+
+        System.out.println();
+
+        heap.clear();
+        line();
+
+        for (int i = 10; i > 0; --i) {
+            heap.insert(i, i);
+        }
+
+        heap.decreasePriority(10, 0);
+
+        while(heap.isEmpty() == false) {
+            System.out.print(heap.extractMinimum() + " ");
+        }
+
+        System.out.println();
+    }
+
+    private static void profileShortestPathAlgorithmsOn(
+            PriorityQueue<DirectedGraphNode, Double> pq,
+            int size,
+            long seed,
+            float lf) {
+        title2("General shortest path algorithms with " + pq.getClass().getName());
+
+        Random r = new Random(seed);
+        Triple<List<DirectedGraphNode>,
+               DirectedGraphWeightFunction,
+               CoordinateMap> triple =
+                getRandomGraph(size, lf, r, new EuclidianMetric(null, null));
+
+        DirectedGraphNode source = triple.first.get(r.nextInt(size));
+        DirectedGraphNode target = triple.first.get(r.nextInt(size));
+
+        System.out.println("Source: " + source.toString());
+        System.out.println("Target: " + target.toString());
+
+        PriorityQueue<DirectedGraphNode, Double> OPEN = pq.newInstance();
+
+        GeneralPathFinder finder1 = new DijkstraFinder(OPEN);
+
+        long ta = System.currentTimeMillis();
+
+        List<DirectedGraphNode> path1 =
+                finder1.find(source, target, triple.second);
+
+        long tb = System.currentTimeMillis();
+
+        System.out.println("DijkstraFinder in " + (tb - ta) + " ms, "
+                + "path connected: " + isConnectedPath(path1)
+                + ", cost: " + getPathCost(path1, triple.second));
+
+        OPEN = pq.newInstance();
+
+        GeneralPathFinder finder2 =
+                new AStarFinder(OPEN,
+                                new EuclidianMetric(
+                                    triple.third,
+                                    target));
+
+        ta = System.currentTimeMillis();
+
+        List<DirectedGraphNode> path2 =
+                finder2.find(source, target, triple.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("AStarFinder in " + (tb - ta) + " ms, "
+                + "path connected: " + isConnectedPath(path2)
+                + ", cost: " + getPathCost(path2, triple.second));
+
+        OPEN = pq.newInstance();
+
+        GeneralPathFinder finder3 =
+                new BidirectionalDijkstraFinder(OPEN);
+
+        ta = System.currentTimeMillis();
+
+        List<DirectedGraphNode> path3 =
+                finder3.find(source, target, triple.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("BidirectionalDijkstraFinder in " + (tb - ta)
