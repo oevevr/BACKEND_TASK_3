@@ -554,3 +554,72 @@ public class Demo{
         tb = System.currentTimeMillis();
 
         System.out.println("BidirectionalDijkstraFinder in " + (tb - ta)
+                + " ms, " + "path connected: " + isConnectedPath(path3)
+                + ", cost: " + getPathCost(path3, triple.second));
+
+        GeneralPathFinder finder4 =
+                new BHPAFinder(OPEN,
+                               new EuclidianMetric(
+                                    triple.third,
+                                    target),
+                               new EuclidianMetric(
+                                    triple.third,
+                                    source));
+
+        ta = System.currentTimeMillis();
+
+        List<DirectedGraphNode> path4 =
+                finder4.find(source, target, triple.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("BHPAFinder in " + (tb - ta)
+                + " ms, " + "path connected: " + isConnectedPath(path4)
+                + ", cost: " + getPathCost(path4, triple.second));
+
+        GeneralPathFinder finder5 =
+                new WhangboFinder(OPEN,
+                               new EuclidianMetric(
+                                    triple.third,
+                                    target),
+                               new EuclidianMetric(
+                                    triple.third,
+                                    source));
+
+        ta = System.currentTimeMillis();
+
+        List<DirectedGraphNode> path5 =
+                finder5.find(source, target, triple.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("WhangboFinder in " + (tb - ta)
+                + " ms, " + "path connected: " + isConnectedPath(path4)
+                + ", cost: " + getPathCost(path5, triple.second));
+
+        GeneralPathFinder finder6 =
+                new FastSuboptimalFinder(OPEN,
+                               new EuclidianMetric(
+                                    triple.third,
+                                    target),
+                               new EuclidianMetric(
+                                    triple.third,
+                                    source));
+
+        ta = System.currentTimeMillis();
+
+        List<DirectedGraphNode> path6 =
+                finder6.find(source, target, triple.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("FastSuboptimalFinder in " + (tb - ta)
+                + " ms, " + "path connected: " + isConnectedPath(path4)
+                + ", cost: " + getPathCost(path6, triple.second));
+
+        line();
+
+        System.out.println("Paths are same: " + pathsAreSame(path1,
+                                                             path2,
+                                                             path3,
+                                                             path4,
