@@ -850,3 +850,74 @@ public class Demo{
                 new org.apache.commons.collections4.list.TreeList<Integer>();
 
         title("coderodde's TreeList vs. Commons Collections TreeList");
+
+        title2("Adding");
+
+        System.out.println("My TreeList is healthy: " + list.isHealthy());
+
+        long ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 100000; ++i) {
+            list.add(i);
+        }
+
+        long tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.add in " + (tb - ta) + " ms.");
+
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 100000; ++i) {
+            enemyList.add(i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.add in " + (tb - ta) + " ms.");
+        System.out.println("My TreeList is healthy: " + list.isHealthy());
+
+        title2("Getting by index");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 100000; ++i) {
+            if (list.get(i) != i) {
+                System.out.println("coderodde's TreeList.get(int) is broken!");
+                break;
+            }
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.get in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 100000; ++i) {
+            if (enemyList.get(i) != i) {
+                System.out.println("CC TreeList.get(int) is broken!");
+                break;
+            }
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.get in " + (tb - ta) + " ms.");
+
+        title2("Removing");
+
+        ta = System.currentTimeMillis();
+
+        Integer tmp;
+
+        for (int i = 99999; i >= 0; --i) {
+            if (i % 2 == 1) {
+                if ((tmp = list.remove(i)) != i) {
+                    System.out.println("coderodde's TreeList.remove(int) is " +
+                            "broken! " + tmp + " at " + i
+                            );
+                    break;
+                }
+            }
+        }
