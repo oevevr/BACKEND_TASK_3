@@ -623,3 +623,73 @@ public class Demo{
                                                              path2,
                                                              path3,
                                                              path4,
+                                                             path5,
+                                                             path6));
+
+        line();
+    }
+
+    private static void profileShortestPathAlgorithms() {
+        final int N = 20000;
+        final float LOAD_FACTOR = 10.0f / N;
+        final long SEED = System.currentTimeMillis();
+
+        /*
+         * Seed 1396252274440L, 1396255300780L produces an invalid result in BHPA.
+         */
+
+        title("General shortest path algorihtms with " + N + " nodes");
+        System.out.println("Seed: " + SEED);
+
+        profileShortestPathAlgorithmsOn(
+                new BinaryHeap<DirectedGraphNode, Double>(),
+                N,
+                SEED,
+                LOAD_FACTOR);
+
+        profileShortestPathAlgorithmsOn(
+                new FibonacciHeap<DirectedGraphNode, Double>(),
+                N,
+                SEED,
+                LOAD_FACTOR);
+    }
+
+    private static void debugHeapSelectionSort() {
+        Random r = new Random();
+        Integer[] array = getRandomIntegerArray(10, 0, 10, r);
+
+        debugPrintArray(array);
+        new HeapSelectionSort<Integer>().sort(array);
+        debugPrintArray(array);
+    }
+
+    private static void debugOST() {
+        OrderStatisticTree<Integer, Integer> tree =
+                new OrderStatisticTree<Integer, Integer>();
+
+        for (int i = 0; i < 100; ++i) {
+            tree.put(i, i);
+        }
+
+        System.out.println("Size: " + tree.size());
+
+        for (Integer i = 0; i < tree.size(); ++i) {
+            System.out.println("i.equals(tree.get(i)): " + i.equals(tree.get(i)));
+            System.out.println("i.equals(tree.entryAt(i).getKey()): " + i.equals(tree.entryAt(i).getKey()));
+            System.out.println("i.equals(tree.entryAt(i).getValue()): " + i.equals(tree.entryAt(i).getValue()));
+            System.out.println(i + ".equals(" + tree.rankOf(i) + "): " + i.equals(tree.rankOf(i)));
+        }
+
+        for (Integer i = 20; i < 100; ++i) {
+            tree.remove(i);
+        }
+
+        System.out.println("size: " + tree.size());
+        System.out.println("Healthy: " + tree.isHealthy());
+    }
+
+    private static void debugMaxFlowAlgorithms() {
+        DirectedGraphNode Vancouver = new DirectedGraphNode("Vancover");
+        DirectedGraphNode Edmonton = new DirectedGraphNode("Edmonton");
+        DirectedGraphNode Calgary = new DirectedGraphNode("Calgary");
+        DirectedGraphNode Saskatoon = new DirectedGraphNode("Saskatoon");
