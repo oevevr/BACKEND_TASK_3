@@ -772,3 +772,81 @@ public class Demo{
 
         System.out.println("EdmondKarpFlowFinder in " + (tb - ta)
                 + " ms, |f| = " + result1.second);
+
+        ta = System.currentTimeMillis();
+
+        Pair<DirectedGraphWeightFunction, Double> result2 =
+                new BidirectionalEdmondKarpFlowFinder()
+                .find(source, sink, pair.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("BidirectionalEdmondKarpFlowFinder in " + (tb - ta)
+                + " ms, |f| = " + result2.second);
+
+        ta = System.currentTimeMillis();
+
+        line();
+
+        System.out.println(
+                "Flows equal: " + epsilonEquals(0.001,
+                                                result1.second,
+                                                result2.second));
+    }
+
+    private static void profileMSTAlgorithms() {
+        final int N = 50;
+        final float ELF = 5.0f / N;
+        final long SEED = System.currentTimeMillis();
+
+        title("Minimum-spanning-tree algorithm demo");
+        System.out.println("Seed: " + SEED);
+
+        Random r = new Random(SEED);
+
+        Pair<List<UndirectedGraphNode>, UndirectedGraphWeightFunction> pair =
+                Utilities.getRandomUndirectedGraph(N, ELF, r, 10.0);
+
+        MinimumSpanningTreeFinder finder1 =
+                new KruskalMSTFinder();
+
+        long ta = System.currentTimeMillis();
+
+        Pair<List<UndirectedGraphEdge>, Double> result1 =
+                finder1.find(pair.first, pair.second);
+
+        long tb = System.currentTimeMillis();
+
+        System.out.println("Kruskal in " + (tb - ta) + " ms, " +
+                "cost: " + result1.second +
+                "/" + sumEdgeWeights(result1.first) +
+                ", is spanning forest: " + isSpanningTree(result1.first)
+                );
+
+        MinimumSpanningTreeFinder finder2 =
+                new PrimMSTFinder();
+
+        ta = System.currentTimeMillis();
+
+        Pair<List<UndirectedGraphEdge>, Double> result2 =
+                finder2.find(pair.first, pair.second);
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("Prim in " + (tb - ta) + " ms, " +
+                "cost: " + result2.second + "/" +
+                sumEdgeWeights(result2.first) +
+                ", is spanning forest: " + isSpanningTree(result2.first));
+
+        line();
+
+        System.out.println("MST equal: " + spanningTreesEqual(result1.first,
+                                                              result2.first));
+    }
+
+    private static void profileTreeList() {
+        TreeList<Integer> list = new TreeList<Integer>();
+        org.apache.commons.collections4.list.TreeList<Integer> enemyList =
+                new org.apache.commons.collections4.list.TreeList<Integer>();
+
+        title("coderodde's TreeList vs. Commons Collections TreeList");
