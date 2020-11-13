@@ -693,3 +693,82 @@ public class Demo{
         DirectedGraphNode Edmonton = new DirectedGraphNode("Edmonton");
         DirectedGraphNode Calgary = new DirectedGraphNode("Calgary");
         DirectedGraphNode Saskatoon = new DirectedGraphNode("Saskatoon");
+        DirectedGraphNode Regina = new DirectedGraphNode("Regina");
+        DirectedGraphNode Winnipeg = new DirectedGraphNode("Winnipeg");
+
+        DirectedGraphWeightFunction c = new DirectedGraphWeightFunction();
+
+        /// 1 - 3
+        Vancouver.addChild(Edmonton);
+        c.put(Vancouver, Edmonton, 16.0);
+
+        Vancouver.addChild(Calgary);
+        c.put(Vancouver, Calgary, 13.0);
+
+        Calgary.addChild(Edmonton);
+        c.put(Calgary, Edmonton, 4.0);
+
+        /// 4 - 6
+        Edmonton.addChild(Saskatoon);
+        c.put(Edmonton, Saskatoon, 12.0);
+
+        Saskatoon.addChild(Calgary);
+        c.put(Saskatoon, Calgary, 9.0);
+
+        Calgary.addChild(Regina);
+        c.put(Calgary, Regina, 14.0);
+
+        /// 7 - 9
+        Saskatoon.addChild(Winnipeg);
+        c.put(Saskatoon, Winnipeg, 20.0);
+
+        Regina.addChild(Saskatoon);
+        c.put(Regina, Saskatoon, 7.0);
+
+        Regina.addChild(Winnipeg);
+        c.put(Regina, Winnipeg, 4.0);
+
+        Pair<DirectedGraphWeightFunction, Double> pair =
+                new EdmondKarpFlowFinder().find(Vancouver, Winnipeg, c);
+
+        System.out.println("EdmondKarpFlowFinder: " + pair.second);
+
+        Pair<DirectedGraphWeightFunction, Double> pair2 =
+                new BidirectionalEdmondKarpFlowFinder().find(Vancouver,
+                                                             Winnipeg,
+                                                             c);
+
+        System.out.println("BidirectionalEdmonFlowFinder: " + pair2.second);
+    }
+
+    private static void profileMaxFlowAlgorithms() {
+        final int N = 5000;
+        final float ELF = 5.0f / N;
+        final long SEED = System.currentTimeMillis();
+
+        title("Max-flow algorithm demo");
+        System.out.println("Seed: " + SEED);
+
+        Random r = new Random(SEED);
+
+        Pair<List<DirectedGraphNode>, DirectedGraphWeightFunction> pair =
+                Utilities.getRandomFlowNetwork(N, ELF, r, 10.0);
+
+        FlowFinder.resolveParallelEdges(pair.first, pair.second);
+        FlowFinder.removeSelfLoops(pair.first);
+
+        DirectedGraphNode source = pair.first.get(r.nextInt(N));
+        DirectedGraphNode sink = pair.first.get(r.nextInt(N));
+
+        System.out.println("Source: " + source.toString());
+        System.out.println("Sink:   " + sink.toString());
+        long ta = System.currentTimeMillis();
+
+        Pair<DirectedGraphWeightFunction, Double> result1 =
+                new EdmondKarpFlowFinder()
+                .find(source, sink, pair.second);
+
+        long tb = System.currentTimeMillis();
+
+        System.out.println("EdmondKarpFlowFinder in " + (tb - ta)
+                + " ms, |f| = " + result1.second);
