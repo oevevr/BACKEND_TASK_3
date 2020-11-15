@@ -921,3 +921,78 @@ public class Demo{
                 }
             }
         }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.remove in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 99999; i >= 0; --i) {
+            if (i % 2 == 1) {
+                if ((tmp = enemyList.remove(i)) != i) {
+                    System.out.println("CC TreeList.remove(int) is broken! "
+                            + tmp + " at " + i);
+                    break;
+                }
+            }
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.remove in " + (tb - ta) + " ms.");
+
+        System.out.println("My TreeList is healthy: " + list.isHealthy());
+
+        title2("Removing from head");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 20000; i > 0; --i) {
+            list.removeFirst();
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.removeFirst in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 20000; i > 0; --i) {
+                enemyList.remove(0);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.removeFirst hack in " + (tb - ta)
+                + " ms.");
+
+        System.out.println("My TreeList is healthy: " + list.isHealthy());
+
+        title2("Removing from tail");
+
+        list.clear();
+        enemyList.clear();
+
+        for (int i = 0; i < 100000; ++i) {
+            list.add(i);
+            enemyList.add(i);
+        }
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 20000; i > 0; --i) {
+            list.removeLast();
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.removeLast in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 20000; i > 0; --i) {
+            enemyList.remove(enemyList.size() - 1);
+        }
+
+        tb = System.currentTimeMillis();
