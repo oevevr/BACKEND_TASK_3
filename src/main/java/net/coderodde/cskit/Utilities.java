@@ -68,3 +68,66 @@ public class Utilities {
     }
 
     public static void checkModCount(long expected,
+            long actual,
+            String errmsg) {
+        if (expected != actual) {
+            throw new ConcurrentModificationException(errmsg);
+        }
+    }
+
+    public static double getPathCost(List<DirectedGraphNode> path,
+                                     DirectedGraphWeightFunction w) {
+        double cost = 0;
+
+        for (int i = 0; i < path.size() - 1; ++i) {
+            cost += w.get(path.get(i), path.get(i + 1));
+        }
+
+        return cost;
+    }
+
+    public static List<DirectedGraphNode> tracebackPath(
+            DirectedGraphNode target,
+            Map<DirectedGraphNode, DirectedGraphNode> parentMap) {
+        ArrayList<DirectedGraphNode> path = new ArrayList<DirectedGraphNode>();
+
+        while (target != null) {
+            path.add(target);
+            target = parentMap.get(target);
+        }
+
+        java.util.Collections.reverse(path);
+        return path;
+    }
+
+    public static DirectedGraphNode findTouchNode(
+            Set<DirectedGraphNode> levelA,
+            Set<DirectedGraphNode> levelB,
+            Map<DirectedGraphNode, DirectedGraphNode> parentMapA,
+            Map<DirectedGraphNode, DirectedGraphNode> parentMapB,
+            Map<DirectedGraphNode, Integer> distanceMapA,
+            Map<DirectedGraphNode, Integer> distanceMapB) {
+        Integer tmp;
+        DirectedGraphNode touch = null;
+        int minDistance = Integer.MAX_VALUE;
+
+        for (DirectedGraphNode u : levelA) {
+            tmp = distanceMapB.get(u);
+
+            if (tmp != null && minDistance > tmp + distanceMapA.get(u)) {
+                minDistance = tmp + distanceMapA.get(u);
+                touch = u;
+            }
+        }
+
+        for (DirectedGraphNode u : levelB) {
+            tmp = distanceMapA.get(u);
+
+            if (tmp != null && minDistance > tmp + distanceMapB.get(u)) {
+                minDistance = tmp + distanceMapB.get(u);
+                touch = u;
+            }
+        }
+
+        return touch;
+    }
