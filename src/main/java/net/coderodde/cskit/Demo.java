@@ -996,3 +996,93 @@ public class Demo{
         }
 
         tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.removeLast hack in " + (tb - ta) +
+                " ms.");
+
+        System.out.println("My TreeList is healty: " + list.isHealthy());
+
+        title2("Resetting elements");
+
+        Random r = new Random();
+
+        int[] resetIndices = new int[list.size() / 2];
+
+        for (int i = 0; i < resetIndices.length; ++i) {
+            resetIndices[i] = r.nextInt(list.size() / 2);
+        }
+
+        ta = System.currentTimeMillis();
+
+        for (int i : resetIndices) {
+            list.set(i, i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.set in " + (tb - ta) + " ms.");
+
+        ta = System.currentTimeMillis();
+
+        for (int i : resetIndices) {
+            enemyList.set(i, i);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.set in " + (tb - ta) + " ms.");
+
+        System.out.println("My TreeList is healthy: " + list.isHealthy());
+
+        title2("Adding at arbitrary location");
+
+        final long SEED = 12321L; //System.currentTimeMillis();
+
+        r = new Random(SEED);
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i < 10000; ++i) {
+            int t = r.nextInt(list.size());
+            list.add(t, t);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("My TreeList.add(int, E) in " + (tb - ta) + " ms.");
+
+        r = new Random(SEED);
+
+        ta = System.currentTimeMillis();
+
+        for (int i = 0; i <10000; ++i) {
+            int t = r.nextInt(enemyList.size());
+            enemyList.add(t, t);
+        }
+
+        tb = System.currentTimeMillis();
+
+        System.out.println("CC TreeList.add(int, E) in " + (tb - ta) + " ms.");
+
+        System.out.println("My TreeList is healthy: " + list.isHealthy());
+    }
+
+    private static void debugTreeList() {
+        TreeList<Integer> tl = new TreeList<Integer>(3);
+
+        tl.add(0, 0);
+
+        Random r = new Random(12321L);
+
+        for (int i = 0; i < 14; ++i) {
+            int yo = r.nextInt(tl.size());
+            tl.add(yo, yo);
+        }
+
+        System.out.println("TreeList is healthy after add(int, E): "
+                + tl.isHealthy());
+
+        while (tl.isEmpty() == false) {
+            tl.removeFirst();
+            System.out.println("Healthy: " + tl.isHealthy());
+        }
