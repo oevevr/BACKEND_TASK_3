@@ -1086,3 +1086,64 @@ public class Demo{
             tl.removeFirst();
             System.out.println("Healthy: " + tl.isHealthy());
         }
+    }
+
+    private static void debugTreeList2() {
+        org.apache.commons.collections4.list.TreeList<Integer> el =
+                new org.apache.commons.collections4.list.TreeList<Integer>();
+
+        TreeList<Integer> ml = new TreeList<Integer>(2);
+        Random r = new Random(313L);
+
+        el.add(-1);
+
+        for (int i = 0; i < 10; ++i) {
+
+            el.add(i, i);
+//            System.out.println(i + ": " + ml.isHealthy());
+        }
+
+        System.out.println(ml.isHealthy());
+
+        for (Integer i : el) {
+            System.out.print(i + " ");
+        }
+
+        System.out.println();
+    }
+
+    private static void debugTreeList3() {
+        TreeList<Integer> list = new TreeList<Integer>(3);for (int i = 0; i < 40; ++i) {
+            list.add(i, i);
+        }
+
+        Iterator<Integer> it = list.descendingIterator();
+
+        System.out.println(it.hasNext());
+
+        it.next();
+        Integer tmp = it.next();
+
+        System.out.println(new Integer(38).equals(tmp));
+
+        it.remove();
+
+        System.out.println(new Integer(39).equals(list.get(list.size() - 1)));
+        System.out.println(new Integer(37).equals(list.get(list.size() - 2)));
+        System.out.println("Healthy: " + list.isHealthy());
+
+
+        System.out.println("Moving...");
+        for (int i = 0; i < 19; ++i) {
+            System.out.println(it.hasNext());
+            it.next();
+        }
+
+        for (int i = 0; i < 6; ++i) {
+            System.out.println(it.hasNext() + " at " + i);
+            it.next();
+            it.remove();
+            System.out.println("Healthy: " + list.isHealthy());
+        }
+    }
+}
