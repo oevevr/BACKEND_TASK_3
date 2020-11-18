@@ -9,3 +9,5 @@ public interface ParentIterable<T> {
      * @return the iterator over incoming nodes.
      */
     public Iterable<T> parentIterable();
+
+}
