@@ -131,3 +131,90 @@ public class Utilities {
 
         return touch;
     }
+
+    public static List<DirectedGraphNode> tracebackPathBidirectional(
+            DirectedGraphNode touchNode,
+            Map<DirectedGraphNode, DirectedGraphNode> parentMapA,
+            Map<DirectedGraphNode, DirectedGraphNode> parentMapB) {
+        ArrayList<DirectedGraphNode> path = new ArrayList<DirectedGraphNode>();
+        DirectedGraphNode tmp = touchNode;
+
+        while (tmp != null) {
+            path.add(tmp);
+            tmp = parentMapA.get(tmp);
+        }
+
+        java.util.Collections.reverse(path);
+        tmp = parentMapB.get(touchNode);
+
+        while (tmp != null) {
+            path.add(tmp);
+            tmp = parentMapB.get(tmp);
+        }
+
+        return path;
+    }
+
+    public static final void line() {
+        System.out.println(
+                "________________________________________"
+                + "________________________________________");
+    }
+
+    public static final void title(String text) {
+        int w = text.length() + 2;
+        int leftPadding = (80 - w) / 2;
+        int rightPadding = 80 - w - leftPadding;
+        StringBuilder sb = new StringBuilder(80);
+
+        for (int i = 0; i < leftPadding; ++i) {
+            sb.append('/');
+        }
+
+        sb.append(' ');
+        sb.append(text);
+        sb.append(' ');
+
+        for (int i = 0; i < rightPadding; ++i) {
+            sb.append('/');
+        }
+
+        System.out.println(sb.toString());
+    }
+
+    public static final void title2(String text) {
+        int w = text.length() + 2;
+        int leftPadding = (80 - w) / 2;
+        int rightPadding = 80 - w - leftPadding;
+        StringBuilder sb = new StringBuilder(80);
+
+        for (int i = 0; i < leftPadding; ++i) {
+            sb.append('-');
+        }
+
+        sb.append(' ');
+        sb.append(text);
+        sb.append(' ');
+
+        for (int i = 0; i < rightPadding; ++i) {
+            sb.append('-');
+        }
+
+        System.out.println(sb.toString());
+    }
+
+    public static final boolean isConnectedPath(List<DirectedGraphNode> candidate) {
+        for (int i = 0; i < candidate.size() - 1; ++i) {
+            if (candidate.get(i).hasChild(candidate.get(i + 1)) == false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static final boolean pathsAreSame(List<DirectedGraphNode>... paths) {
+        for (int i = 0; i < paths.length - 1; ++i) {
+            if (paths[i].size() != paths[i + 1].size()) {
+                return false;
+            }
