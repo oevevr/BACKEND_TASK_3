@@ -471,3 +471,76 @@ public class Utilities {
                 graph,
                 c);
     }
+
+    public static boolean epsilonEquals(double e, double... values) {
+        for (int i = 0; i < values.length; ++i) {
+            for (int j = 0; j < values.length; ++j) {
+                if (Math.abs(values[i] - values[j]) > e) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Creates the structures defining a laid-out graph.
+     *
+     * @param size the number of nodes.
+     * @param elf edge load factor.
+     * @param r the random number generator.
+     * @return the graph structures.
+     */
+    public static final Triple<List<DirectedGraphNode>,
+                               DirectedGraphWeightFunction,
+                               CoordinateMap> getRandomGraph(
+                                    int size,
+                                    float elf,
+                                    Random r,
+                                    HeuristicFunction f) {
+        ArrayList<DirectedGraphNode> graph =
+                new ArrayList<DirectedGraphNode>(size);
+        DirectedGraphWeightFunction w = new DirectedGraphWeightFunction();
+        CoordinateMap m = new CoordinateMap(2, size);
+
+        for (int i = 0; i < size; ++i) {
+            DirectedGraphNode u = new DirectedGraphNode("" + i);
+            graph.add(u);
+            m.put(u, getRandomCoordinates(2, r, 1000));
+        }
+
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                if (r.nextFloat() < elf) {
+                    graph.get(i).addChild(graph.get(j));
+                    w.put(graph.get(i),
+                          graph.get(j),
+                          1.5 * f.get(m.get(graph.get(i)),
+                                      m.get(graph.get(j))));
+                }
+            }
+        }
+
+        for (int i = 0; i < size - 1; ++i) {
+            graph.get(i).addChild(graph.get(i + 1));
+            w.put(graph.get(i),
+                  graph.get(i + 1),
+                  1.5 * f.get(m.get(graph.get(i)),
+                              m.get(graph.get(i + 1))));
+        }
+
+        graph.get(size - 1).addChild(graph.get(0));
+        w.put(graph.get(size - 1),
+              graph.get(0),
+              1.5 * f.get(m.get(graph.get(size - 1)),
+                          m.get(graph.get(0))));
+
+        return new Triple<List<DirectedGraphNode>,
+                          DirectedGraphWeightFunction,
+                          CoordinateMap>(graph, w, m);
+
+    }
+
+    public static double[] getRandomCoordinates(int n, Random r, double max) {
+        double[] vec = new double[n];
