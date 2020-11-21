@@ -309,3 +309,82 @@ public class Utilities {
 
     public static final boolean
             spanningTreesEqual(List<UndirectedGraphEdge> tree1,
+                               List<UndirectedGraphEdge> tree2) {
+        if (tree1.size() != tree2.size()) {
+            return false;
+        }
+
+        Collections.sort(tree1, new UndirectedGraphEdge.AscendingComparator());
+        Collections.sort(tree2, new UndirectedGraphEdge.AscendingComparator());
+
+        for (int i = 0; i < tree1.size(); ++i) {
+            if (!Utilities.epsilonEquals(0.01,
+                                         tree1.get(i).getWeight(),
+                                         tree2.get(i).getWeight())) {
+                return false;
+            }
+
+            if (tree1.get(i).equals(tree2.get(i)) == false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static final List<DirectedGraphNode>
+            copy(List<DirectedGraphNode> graph) {
+        List<DirectedGraphNode> copyGraph =
+                new ArrayList<DirectedGraphNode>(graph.size());
+
+        Map<DirectedGraphNode, DirectedGraphNode> map =
+                   new HashMap<DirectedGraphNode,
+                               DirectedGraphNode>(graph.size());
+
+        for (DirectedGraphNode u : graph) {
+            DirectedGraphNode copy = new DirectedGraphNode(u.getName());
+            copyGraph.add(copy);
+            map.put(u, copy);
+        }
+
+        for (DirectedGraphNode u : graph) {
+            DirectedGraphNode copyFrom = map.get(u);
+
+            for (DirectedGraphNode child : u) {
+                DirectedGraphNode copyTo = map.get(child);
+                copyFrom.addChild(copyTo);
+            }
+        }
+
+        return copyGraph;
+    }
+
+    public static final List<DirectedGraphNode>
+            getResidualGraphOf(List<DirectedGraphNode> graph) {
+        List<DirectedGraphNode> residualGraph =
+                new ArrayList<DirectedGraphNode>(graph.size());
+
+        Map<DirectedGraphNode, DirectedGraphNode> map =
+                   new HashMap<DirectedGraphNode,
+                               DirectedGraphNode>(graph.size());
+
+        for (DirectedGraphNode u : graph) {
+            DirectedGraphNode copy = new DirectedGraphNode(u.getName());
+            residualGraph.add(copy);
+            map.put(u, copy);
+        }
+
+        for (DirectedGraphNode u : graph) {
+            DirectedGraphNode from = u;
+            DirectedGraphNode residualTo = map.get(u);
+
+            for (DirectedGraphNode child : u) {
+                DirectedGraphNode residualFrom = map.get(child);
+                residualFrom.addChild(residualTo);
+            }
+        }
+
+        return residualGraph;
+    }
+
+    public static final Pair<List<UndirectedGraphNode>,
