@@ -544,3 +544,86 @@ public class Utilities {
 
     public static double[] getRandomCoordinates(int n, Random r, double max) {
         double[] vec = new double[n];
+
+        for (int i = 0; i < n; ++i) {
+            vec[i] = max * r.nextDouble();
+        }
+
+        return vec;
+    }
+
+    public static final <E extends Comparable<? super E>>
+            boolean isSorted(E[] array, Range r) {
+        if (r.from <= r.to) {
+            return ascendingIsSorted(array, r.from, r.to);
+        } else {
+            return descendingIsSorted(array, r.to, r.from);
+        }
+    }
+
+    public static final <E extends Comparable<? super E>>
+            boolean isSorted(E[] array) {
+        return isSorted(array, new Range(0, array.length - 1));
+    }
+
+    public static final Integer[] getRandomIntegerArray(int size,
+                                                        int min,
+                                                        int max,
+                                                        Random r) {
+        Integer[] array = new Integer[size];
+
+        for (int i = 0; i < size; ++i) {
+            array[i] = min + r.nextInt(max - min + 1);
+        }
+
+        return array;
+    }
+
+    public static final Integer[] getRandomIntegerArray(int size, Random r) {
+        return getRandomIntegerArray(size, 0, 1000000000, r);
+    }
+
+    public static final Integer[] getPresortedArray(int size, int runAmount) {
+        Integer[] array = new Integer[size];
+        final int runLength = size / runAmount + 1;
+
+        for (int i = 0; i < size; ++i) {
+            array[i] = i % runLength;
+        }
+
+        return array;
+    }
+
+    public static final <E> void reverse(E[] array, int from, int to) {
+        while (from < to) {
+            E tmp = array[from];
+            array[from] = array[to];
+            array[to] = tmp;
+            from++;
+            to--;
+        }
+    }
+
+    private static final <E extends Comparable<? super E>>
+            boolean ascendingIsSorted(E[] array, int from, int to) {
+        for (int i = from; i < to; ++i) {
+            if (array[i].compareTo(array[i + 1]) > 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static final <E extends Comparable<? super E>>
+            boolean descendingIsSorted(E[] array, int from, int to) {
+        for (int i = from; i < to; ++i) {
+            if (array[i].compareTo(array[i + 1]) < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
