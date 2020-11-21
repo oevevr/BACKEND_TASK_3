@@ -388,3 +388,86 @@ public class Utilities {
     }
 
     public static final Pair<List<UndirectedGraphNode>,
+                             UndirectedGraphWeightFunction>
+            getRandomUndirectedGraph(int size,
+                                     float elf,
+                                     Random r,
+                                     double maxWeight) {
+        List<UndirectedGraphNode> graph =
+                new ArrayList<UndirectedGraphNode>(size);
+        UndirectedGraphWeightFunction c = new UndirectedGraphWeightFunction();
+
+        for (int i = 0; i < size; ++i) {
+            graph.add(new UndirectedGraphNode("" + i));
+        }
+
+        for (int i = 1; i < size; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (r.nextFloat() < elf) {
+                    UndirectedGraphNode a = graph.get(i);
+                    UndirectedGraphNode b = graph.get(j);
+                    double w = maxWeight * r.nextDouble();
+                    a.connect(b);
+                    c.put(a, b, w);
+                }
+            }
+        }
+
+        for (int i = 0; i < size - 1; ++i) {
+            UndirectedGraphNode a = graph.get(i);
+            UndirectedGraphNode b = graph.get(i + 1);
+            double w = maxWeight * r.nextDouble();
+            a.connect(b);
+            c.put(a, b, w);
+        }
+
+        graph.get(graph.size() - 1).connect(graph.get(0));
+        c.put(graph.get(graph.size() - 1),
+              graph.get(0),
+              maxWeight * r.nextDouble());
+
+        return new Pair<List<UndirectedGraphNode>,
+                        UndirectedGraphWeightFunction>(graph, c);
+    }
+
+    public static final Pair<List<DirectedGraphNode>, DirectedGraphWeightFunction>
+            getRandomFlowNetwork(int size,
+                                 float elf,
+                                 Random r,
+                                 double maxCapacity) {
+        List<DirectedGraphNode> graph = new ArrayList<DirectedGraphNode>(size);
+        DirectedGraphWeightFunction c = new DirectedGraphWeightFunction();
+
+        for (int i = 0; i < size; ++i) {
+            graph.add(new DirectedGraphNode("" + i));
+        }
+
+        for (int i = 1; i < size; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (r.nextFloat() < elf) {
+                    DirectedGraphNode from = graph.get(i);
+                    DirectedGraphNode to = graph.get(j);
+
+                    from.addChild(to);
+                    c.put(from, to, maxCapacity * r.nextDouble());
+                }
+            }
+        }
+
+        for (int i = 0; i < size - 1; ++i) {
+            DirectedGraphNode from = graph.get(i);
+            DirectedGraphNode to = graph.get(i + 1);
+
+            from.addChild(to);
+            c.put(from, to, maxCapacity * r.nextDouble());
+        }
+
+        graph.get(graph.size() - 1).addChild(graph.get(0));
+        c.put(graph.get(graph.size() - 1),
+              graph.get(0),
+              maxCapacity * r.nextDouble());
+
+        return new Pair<List<DirectedGraphNode>, DirectedGraphWeightFunction>(
+                graph,
+                c);
+    }
