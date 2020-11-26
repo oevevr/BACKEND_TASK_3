@@ -627,3 +627,81 @@ public class Utilities {
     }
 
     /**
+     * Checks whether input arrays are <b>same</b>. For any index
+     * <code>i</code> and any two arrays <code>A, B</code> (transitivity
+     * assumed), it holds <code>A[i].equals(B[i])</code>, yet it is allowed to
+     * hold also <code>A[i] != B[i]</code>.
+     *
+     * @param <E> the element type.
+     * @param arrays the var-arg array of arrays to check.
+     * @return <code>true</code> if arrays are identical, <code>false</code>
+     * otherwise.
+     */
+    public static final <E> boolean allWeakEquals(E[]... arrays) {
+        for (int i = 0; i < arrays.length - 1; ++i) {
+            if (arrays[i].length != arrays[i + 1].length) {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < arrays[0].length; ++i) {
+            for (int arrayId = 0; arrayId < arrays.length - 1; ++arrayId) {
+                if (arrays[arrayId][i].equals(arrays[arrayId + 1][i]) == false) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks whether input arrays are <b>identical</b>.
+     *
+     * @param <E> the element type.
+     * @param arrays the var-arg array of arrays to check.
+     * @return <code>true</code> if arrays are identical, <code>false</code>
+     * otherwise.
+     */
+    public static final <E> boolean allStrongEquals(E[]... arrays) {
+        for (int i = 0; i < arrays.length - 1; ++i) {
+            if (arrays[i].length != arrays[i + 1].length) {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < arrays[0].length; ++i) {
+            for (int arrayId = 0; arrayId < arrays.length - 1; ++arrayId) {
+                if (arrays[arrayId][i] != arrays[arrayId + 1][i]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public static final <E> void debugPrintArray(E[] array) {
+        debugPrintArray(array, new Range(0, array.length - 1));
+    }
+
+    public static final <E> void debugPrintArray(E[] array, Range r) {
+        for (int i = r.from; i <= r.to; ++i) {
+            System.out.print(array[i] + " ");
+        }
+
+        System.out.println();
+    }
+
+    public static final Integer[] getAscendingArray(int size) {
+        Integer[] array = new Integer[size];
+
+        for (int i = 0; i < size; ++i) {
+            array[i] = i;
+        }
+
+        return array;
+    }
+
+    public static final <E> void shuffle(E[] array, Random r) {
+        for (int i = 0; i < array.length / 2; ++i) {
