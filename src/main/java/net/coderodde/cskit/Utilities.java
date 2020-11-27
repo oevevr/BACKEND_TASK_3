@@ -786,3 +786,11 @@ public class Utilities {
             for (DirectedGraphNode child : current) {
                 if (visited.contains(child) == false) {
                     visited.add(child);
+                    queue.addLast(child);
+                }
+            }
+        }
+
+        return visited;
+    }
+}
