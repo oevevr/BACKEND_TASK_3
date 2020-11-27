@@ -705,3 +705,84 @@ public class Utilities {
 
     public static final <E> void shuffle(E[] array, Random r) {
         for (int i = 0; i < array.length / 2; ++i) {
+            int j = r.nextInt(array.length);
+            int k = r.nextInt(array.length);
+
+            E tmp = array[j];
+            array[j] = array[k];
+            array[k] = tmp;
+        }
+    }
+
+    public static final
+            Pair<Set<UndirectedGraphNode>,
+                 List<UndirectedGraphEdge>>
+                              expandGraphAndGetEdges(UndirectedGraphNode u) {
+        Deque<UndirectedGraphNode> queue =
+                new LinkedList<UndirectedGraphNode>();
+
+        Set<UndirectedGraphNode> visited =
+                new HashSet<UndirectedGraphNode>();
+
+        List<UndirectedGraphEdge> edges =
+                new ArrayList<UndirectedGraphEdge>();
+
+        queue.add(u);
+        visited.add(u);
+
+        while (queue.isEmpty() == false) {
+            UndirectedGraphNode current = queue.removeFirst();
+
+            for (UndirectedGraphNode v : current) {
+                if (visited.contains(v)) {
+                    visited.add(v);
+                    queue.addLast(v);
+                    edges.add(new UndirectedGraphEdge(v, current));
+                }
+            }
+        }
+
+        return new Pair<Set<UndirectedGraphNode>,
+                        List<UndirectedGraphEdge>>(visited, edges);
+    }
+
+    public static final Set<UndirectedGraphNode>
+            expandGraph(List<UndirectedGraphNode> list) {
+        Deque<UndirectedGraphNode> queue =
+                new LinkedList<UndirectedGraphNode>();
+        Set<UndirectedGraphNode> visited =
+                new HashSet<UndirectedGraphNode>();
+
+        for (UndirectedGraphNode u : list) {
+            queue.add(u);
+            visited.add(u);
+        }
+
+        while (queue.isEmpty() == false) {
+            UndirectedGraphNode current = queue.removeFirst();
+
+            for (UndirectedGraphNode v : current) {
+                if (visited.contains(v) == false) {
+                    visited.add(v);
+                    queue.addLast(v);
+                }
+            }
+        }
+
+        return visited;
+    }
+
+    public static final Set<DirectedGraphNode>
+            expandGraph(DirectedGraphNode u) {
+        Deque<DirectedGraphNode> queue = new LinkedList<DirectedGraphNode>();
+        Set<DirectedGraphNode> visited = new HashSet<DirectedGraphNode>();
+
+        queue.add(u);
+        visited.add(u);
+
+        while (queue.isEmpty() == false) {
+            DirectedGraphNode current = queue.removeFirst();
+
+            for (DirectedGraphNode child : current) {
+                if (visited.contains(child) == false) {
+                    visited.add(child);
