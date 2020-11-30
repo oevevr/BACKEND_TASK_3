@@ -13,4 +13,8 @@ public class DisjointSet<E> {
 
     public static class Node<E> {
         E datum;
-       
+        Node<E> parent;
+        int rank;
+
+        Node(E rootElement) {
+            this.
