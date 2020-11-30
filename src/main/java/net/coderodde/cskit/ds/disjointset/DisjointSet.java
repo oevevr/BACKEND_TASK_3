@@ -9,4 +9,8 @@ import java.util.Map;
  * @author Rodion Efremov
  * @version 1.618033 (28.12.2013)
  */
-p
+public class DisjointSet<E> {
+
+    public static class Node<E> {
+        E datum;
+       
