@@ -17,4 +17,9 @@ public class DisjointSet<E> {
         int rank;
 
         Node(E rootElement) {
-            this.
+            this.datum = rootElement;
+            this.parent = this;
+        }
+    }
+
+   
