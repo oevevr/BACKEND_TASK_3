@@ -24,4 +24,7 @@ public class DisjointSet<E> {
 
     private Map<E, Node<E>> map = new HashMap<E, Node<E>>();
 
-    public E find(E 
+    public E find(E e) {
+        Node<E> node = find(getNode(e));
+
+        if (node == node.parent)
