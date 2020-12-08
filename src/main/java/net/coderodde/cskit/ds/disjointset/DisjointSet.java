@@ -22,4 +22,6 @@ public class DisjointSet<E> {
         }
     }
 
-   
+    private Map<E, Node<E>> map = new HashMap<E, Node<E>>();
+
+    public E find(E 
