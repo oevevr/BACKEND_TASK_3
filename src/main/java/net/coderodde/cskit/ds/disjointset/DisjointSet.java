@@ -31,4 +31,9 @@ public class DisjointSet<E> {
             return node.datum;
         }
 
-        node.parent = find(node.p
+        node.parent = find(node.parent);
+        return node.parent.datum;
+    }
+
+    public void union(E e1, E e2) {
+  
