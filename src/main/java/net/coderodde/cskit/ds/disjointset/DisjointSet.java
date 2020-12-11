@@ -27,4 +27,8 @@ public class DisjointSet<E> {
     public E find(E e) {
         Node<E> node = find(getNode(e));
 
-        if (node == node.parent)
+        if (node == node.parent) {
+            return node.datum;
+        }
+
+        node.parent = find(node.p
