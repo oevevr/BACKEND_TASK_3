@@ -37,4 +37,10 @@ public class DisjointSet<E> {
 
     public void union(E e1, E e2) {
         Node<E> n1 = find(getNode(e1));
-        Node<E> n2 = find(get
+        Node<E> n2 = find(getNode(e2));
+
+        if (n1 == n2) {
+            return;
+        }
+
+        if (n1
