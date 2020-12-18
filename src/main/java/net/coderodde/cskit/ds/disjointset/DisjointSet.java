@@ -43,4 +43,7 @@ public class DisjointSet<E> {
             return;
         }
 
-        if (n1
+        if (n1.rank < n2.rank) {
+            n1.parent = n2;
+        } else if (n1.rank > n2.rank) {
+  
