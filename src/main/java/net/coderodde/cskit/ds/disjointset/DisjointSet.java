@@ -49,4 +49,9 @@ public class DisjointSet<E> {
             n2.parent = n1;
         } else {
             n2.parent = n1;
-    
+            n1.rank++;
+        }
+    }
+
+    private Node<E> find(Node<E> node) {
+        if 
