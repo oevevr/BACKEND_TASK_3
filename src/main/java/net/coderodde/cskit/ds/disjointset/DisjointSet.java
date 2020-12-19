@@ -54,4 +54,8 @@ public class DisjointSet<E> {
     }
 
     private Node<E> find(Node<E> node) {
-        if 
+        if (node == node.parent) {
+            return node;
+        }
+
+      
