@@ -67,3 +67,8 @@ public class DisjointSet<E> {
         if (node == null) {
             node = new Node<E>(element);
             map.put(element, node);
+        }
+
+        return node;
+    }
+}
