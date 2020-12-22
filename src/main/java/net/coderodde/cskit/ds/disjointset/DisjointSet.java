@@ -58,4 +58,8 @@ public class DisjointSet<E> {
             return node;
         }
 
-      
+        return find(node.parent);
+    }
+
+    private Node<E> getNode(E element) {
+ 
