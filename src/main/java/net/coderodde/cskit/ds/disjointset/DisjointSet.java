@@ -62,4 +62,7 @@ public class DisjointSet<E> {
     }
 
     private Node<E> getNode(E element) {
- 
+        Node<E> node = map.get(element);
+
+        if (node == null) {
+     
