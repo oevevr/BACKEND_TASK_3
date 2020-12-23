@@ -110,3 +110,74 @@ public class TreeList<E>
 
             if (elementsBefore < elementsAfter) {
                 if (first > 0) {
+                    // Shift left.
+                    for (int i = first, j = 0; j < elementsBefore; ++j, ++i) {
+                        array[i - 1] = array[i];
+                    };
+
+                    --first;
+                } else {
+                    // Shift right.
+                    for (int i = last, j = 0; j < elementsAfter; ++j, --i) {
+                        array[i + 1] = array[i];
+                    }
+
+                    ++last;
+                }
+            } else {
+                // elementsBefore >= elements
+                if (last < array.length - 1) {
+                    // Shift right.
+                    for (int i = last, j = 0; j < elementsAfter; ++j, --i) {
+                        array[i + 1] = array[i];
+                    }
+
+                    ++last;
+                } else {
+                    // Shift left.
+                    for (int i = first, j = 0; j < elementsBefore; ++j, ++i) {
+                        array[i - 1] = array[i];
+                    }
+
+                    --first;
+                }
+            }
+
+            // Do insert.
+            array[index + first] = element;
+        }
+
+        E remove(int index) {
+            E old = (E) array[index + first];
+
+            final int elementsBefore = index;
+            final int elementsAfter = last - index - first;
+
+            if (elementsBefore < elementsAfter) {
+                // Shift left part to right.
+                for (int i = index + first - 1; i >= first; --i) {
+                    array[i + 1] = array[i];
+                }
+
+                array[first++] = null;
+            } else {
+                // elementsBefore >= elementsAfter
+                // Shift right part to left.
+                for (int i = index + first; i < last; ++i) {
+                    array[i] = array[i + 1];
+                }
+
+                array[last--] = null;
+            }
+
+            return old;
+        }
+
+        void clear() {
+            for (int i = first; i <= last; ++i) {
+                array[i] = null;
+            }
+
+            first = array.length >> 1;
+            last = first - 1;
+        }
