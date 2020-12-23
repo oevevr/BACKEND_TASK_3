@@ -181,3 +181,85 @@ public class TreeList<E>
             first = array.length >> 1;
             last = first - 1;
         }
+
+        /**
+         * Assumes that this node is full.
+         *
+         * @return the right node.
+         */
+        Node<E> split() {
+            // TODO: make this run faster.
+            final int degree = this.array.length;
+
+            Node<E> newNode = new Node<E>(degree);
+
+            final int leftElements = degree >> 1;
+            final int leftSkip = (degree - leftElements) >> 1;
+            final int rightElements = degree - leftElements;
+            final int rightSkip = (degree - rightElements) >> 1;
+
+            this.first = leftSkip;
+            this.last = leftSkip + leftElements - 1;
+            newNode.first = rightSkip;
+            newNode.last = rightSkip + rightElements - 1;
+
+            int limit = rightSkip + rightElements;
+
+            // Load the right block of this to newNode.
+            for (int i = rightSkip, j = leftElements;
+                    i < limit;
+                    ++i, ++j) {
+                newNode.array[i] = this.array[j];
+                this.array[j] = null;
+            }
+
+            if (leftSkip > 0) {
+                for (int i = leftElements - 1; i >= 0; --i) {
+                    this.array[i + leftSkip] = this.array[i];
+                    this.array[i] = null;
+                }
+            }
+
+            return newNode;
+        }
+
+        Node<E> min() {
+            Node<E> e = this;
+
+            while (e.left != null) {
+                e = e.left;
+            }
+
+            return e;
+        }
+
+        Node<E> max() {
+            Node<E> e = this;
+
+            while (e.right != null) {
+                e = e.right;
+            }
+
+            return e;
+        }
+
+        Node<E> successor() {
+            if (right != null) {
+                return right.min();
+            }
+
+            Node<E> n = this;
+
+            while (n.parent != null && n.parent.right == n) {
+                n = n.parent;
+            }
+
+            return n.parent;
+        }
+
+        Node<E> predecessor() {
+            if (left != null) {
+                return left.max();
+            }
+
+            Node<E> n = this;
