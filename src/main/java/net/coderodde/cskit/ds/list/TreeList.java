@@ -334,3 +334,81 @@ public class TreeList<E>
             newNode.add(e);
             newNode.parent = lastNode;
             lastNode.right = newNode;
+            lastNode = newNode;
+            fixAfterInsertion(newNode.parent);
+        } else {
+            lastNode.add(e);
+        }
+
+        ++modCount;
+        ++size;
+    }
+
+    @Override
+    public void add(int index, E element) {
+        if (size == 0) {
+            add(element);
+            return;
+        }
+
+        Node<E> n = root;
+
+        for (;;) {
+            if (index < n.leftCount) {
+                n = n.left;
+            } else if (index > n.leftCount + n.size()) {
+                index -= n.leftCount + n.size();
+                n = n.right;
+            } else {
+                index -= n.leftCount;
+                break;
+            }
+        }
+
+        if (n.size() == degree) {
+            // Split node 'n'.
+            Node<E> newNode = n.split();
+
+            if (index < n.size()) {
+                n.add(index, element);
+            } else {
+                newNode.add(index - n.size(), element);
+            }
+
+            if (n.right == null) {
+                n.right = newNode;
+                newNode.parent = n;
+
+                if (lastNode == n) {
+                    lastNode = newNode;
+                }
+
+                updateLeftCounters(n, 1);
+                fixAfterInsertion(n);
+            } else {
+                Node<E> successor = n.right.min();
+                successor.left = newNode;
+                newNode.parent = successor;
+                updateLeftCounters(newNode, newNode.size(), n);
+                updateLeftCounters(n, 1);
+                fixAfterInsertion(successor);
+            }
+        } else {
+            n.add(index, element);
+            updateLeftCounters(n, 1);
+        }
+
+        ++modCount;
+        ++size;
+    }
+
+    @Override
+    public E get(int index) {
+        Node<E> n = root;
+
+        for (;;) {
+            if (index < n.leftCount) {
+                n = n.left;
+            } else if (index >= n.leftCount + n.size()) {
+                index -= n.leftCount + n.size();
+                n = n.right;
