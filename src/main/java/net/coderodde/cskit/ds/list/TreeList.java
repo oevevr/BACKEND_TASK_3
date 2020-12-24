@@ -263,3 +263,74 @@ public class TreeList<E>
             }
 
             Node<E> n = this;
+
+            while (n.parent != null && n.parent.left == n) {
+                n = n.parent;
+            }
+
+            return n.parent;
+        }
+    }
+    private final int degree;
+    private int size;
+    private Node<E> root;
+    private Node<E> firstNode;
+    private Node<E> lastNode;
+    private long modCount;
+
+    public TreeList(final int degree) {
+        checkDegree(degree);
+        this.degree = degree;
+        Node<E> n = new Node<E>(degree);
+        firstNode = n;
+        lastNode = n;
+        root = n;
+    }
+
+    public TreeList() {
+        this(DEFAULT_DEGREE);
+    }
+
+    @Override
+    public boolean add(E e) {
+        if (lastNode.size() == degree) {
+            Node<E> newNode = new Node<E>(degree);
+            newNode.add(e);
+            newNode.parent = lastNode;
+            lastNode.right = newNode;
+            lastNode = newNode;
+            fixAfterInsertion(newNode.parent);
+        } else {
+            lastNode.add(e);
+        }
+
+        ++size;
+        ++modCount;
+        return true;
+    }
+
+    @Override
+    public void addFirst(E e) {
+        if (firstNode.size() == degree) {
+            Node<E> newNode = new Node<E>(degree);
+            newNode.add(e);
+            newNode.parent = firstNode;
+            firstNode.left = newNode;
+            firstNode = newNode;
+            fixAfterInsertion(newNode.parent);
+        } else {
+            firstNode.add(0, e);
+        }
+
+        updateLeftCounters(firstNode, 1);
+        ++modCount;
+        ++size;
+    }
+
+    @Override
+    public void addLast(E e) {
+        if (lastNode.size() == degree) {
+            Node<E> newNode = new Node<E>(degree);
+            newNode.add(e);
+            newNode.parent = lastNode;
+            lastNode.right = newNode;
