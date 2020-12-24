@@ -412,3 +412,61 @@ public class TreeList<E>
             } else if (index >= n.leftCount + n.size()) {
                 index -= n.leftCount + n.size();
                 n = n.right;
+            } else {
+                return (E) n.array[index - n.leftCount];
+            }
+        }
+    }
+
+    @Override
+    public E set(int index, E element) {
+        Node<E> n = root;
+
+        for (;;) {
+            if (index < n.leftCount) {
+                n = n.left;
+            } else if (index >= n.leftCount + n.size()) {
+                index -= n.leftCount + n.size();
+                n = n.right;
+            } else {
+                break;
+            }
+        }
+
+        final int indx = index + n.first - n.leftCount;
+        E ret = (E) n.array[indx];
+        n.array[indx] = element;
+        return ret;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public void clear() {
+        size = 0;
+        root.left = null;
+        root.right = null;
+        root.leftCount = 0;
+        root.clear();
+        firstNode = root;
+        lastNode = root;
+        ++modCount;
+    }
+
+    @Override
+    public boolean offerFirst(E e) {
+        addFirst(e);
+        return true;
+    }
+
+    @Override
+    public boolean offerLast(E e) {
+        addLast(e);
+        return true;
+    }
+
+    @Override
+    public E removeFirst() {
