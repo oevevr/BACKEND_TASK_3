@@ -470,3 +470,76 @@ public class TreeList<E>
 
     @Override
     public E removeFirst() {
+        if (size == 0) {
+            throw new NoSuchElementException("Removing from empty TreeList.");
+        }
+
+        if (firstNode.size() == 0) {
+            System.out.println("Fail!");
+            System.out.println("first: " + firstNode.first);
+            System.out.println("last:  " + firstNode.last);
+        }
+
+        E element = firstNode.remove(0);
+        updateLeftCounters(firstNode, -1);
+
+        if (firstNode.size() == 0) {
+            Node<E> removedNode = removeImpl(firstNode);
+            fixAfterDeletion(removedNode);
+            firstNode = (removedNode.parent == null
+                    ? root
+                    : removedNode.parent.min());
+        }
+
+        --size;
+        ++modCount;
+        return element;
+    }
+
+    @Override
+    public E removeLast() {
+        if (size == 0) {
+            throw new NoSuchElementException("Removing from empty TreeList.");
+        }
+
+        E element = lastNode.remove(lastNode.size() - 1);
+
+        if (lastNode.size() == 0) {
+            Node<E> removedNode = removeImpl(lastNode);
+            fixAfterDeletion(removedNode);
+            lastNode = removedNode.parent;
+        }
+
+        --size;
+        ++modCount;
+        return element;
+    }
+
+    @Override
+    public E remove(int index) {
+        Node<E> n = root;
+
+        for (;;) {
+            if (index < n.leftCount) {
+                n = n.left;
+            } else if (index >= n.leftCount + n.size()) {
+                index -= n.leftCount + n.size();
+                n = n.right;
+            } else {
+                break;
+            }
+        }
+
+        E removedElement = n.remove(index - n.leftCount);
+
+        if (n.size() == 0) {
+            Node<E> removedNode = removeImpl(n);
+            fixAfterDeletion(removedNode);
+            updateLeftCounters(removedNode, -1);
+        } else {
+            updateLeftCounters(n, -1);
+        }
+
+        --size;
+        ++modCount;
+        return removedElement;
