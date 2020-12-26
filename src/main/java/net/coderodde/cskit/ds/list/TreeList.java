@@ -543,3 +543,83 @@ public class TreeList<E>
         --size;
         ++modCount;
         return removedElement;
+    }
+
+    @Override
+    public E pollFirst() {
+        if (size == 0) {
+            return null;
+        }
+
+        return (E) firstNode.array[firstNode.first];
+    }
+
+    @Override
+    public E pollLast() {
+        if (size == 0) {
+            return null;
+        }
+
+        return (E) lastNode.array[lastNode.last];
+    }
+
+    @Override
+    public E getFirst() {
+        if (size == 0) {
+            throw new NoSuchElementException(
+                    "Reading the head of an empty list.");
+        }
+
+        return (E) firstNode.array[firstNode.first];
+    }
+
+    @Override
+    public E getLast() {
+        if (size == 0) {
+            throw new NoSuchElementException(
+                    "Reading the tail of an empty list.");
+        }
+
+        return (E) lastNode.array[lastNode.last];
+    }
+
+    @Override
+    public E peekFirst() {
+        if (size == 0) {
+            return null;
+        }
+
+        return (E) firstNode.array[firstNode.first];
+    }
+
+    @Override
+    public E peekLast() {
+        if (size == 0) {
+            return null;
+        }
+
+        return (E) lastNode.array[lastNode.last];
+    }
+
+    @Override
+    public boolean removeFirstOccurrence(Object o) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean removeLastOccurrence(Object o) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean offer(E e) {
+        add(e);
+        return true;
+    }
+
+    @Override
+    public E remove() {
+        return removeFirst();
+    }
+
+    @Override
