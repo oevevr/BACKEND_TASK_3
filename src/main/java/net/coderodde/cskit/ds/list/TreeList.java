@@ -623,3 +623,74 @@ public class TreeList<E>
     }
 
     @Override
+    public E poll() {
+        return size == 0 ? null : (E) firstNode.array[firstNode.first];
+    }
+
+    @Override
+    public E element() {
+        if (size == 0) {
+            throw new NoSuchElementException(
+                    "Reading the head of an empty list.");
+        }
+
+        return (E) firstNode.array[firstNode.first];
+    }
+
+    @Override
+    public E peek() {
+        return size == 0 ? null : (E) firstNode.array[firstNode.first];
+    }
+
+    @Override
+    public void push(E e) {
+        addFirst(e);
+    }
+
+    @Override
+    public E pop() {
+        if (size == 0) {
+            throw new NoSuchElementException("Popping from an empty list.");
+        }
+
+        return removeFirst();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new AscendingListIterator(0);
+    }
+
+    @Override
+    public Iterator<E> descendingIterator() {
+        return new DescendingIterator();
+    }
+
+    @Override
+    public ListIterator<E> listIterator(int index) {
+        return new AscendingListIterator(index);
+    }
+
+    @Override
+    public ListIterator<E> listIterator() {
+        return new AscendingListIterator(0);
+    }
+
+    /**
+     * Checks all of the AVL-tree invariants.
+     *
+     * @return <tt>true</tt> if this is a valid AVL-tree, <tt>false</tt>
+     * otherwise.
+     */
+    public boolean isHealthy() {
+        return !hasCycles()
+                && heightFieldsOK()
+                && isBalanced()
+                && isWellIndexed();
+    }
+
+    private boolean hasCycles() {
+        return hasCycles(root, new HashSet<Node<E>>());
+    }
+
+    private boolean heightFieldsOK() {
