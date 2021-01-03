@@ -694,3 +694,88 @@ public class TreeList<E>
     }
 
     private boolean heightFieldsOK() {
+        if (root == null) {
+            return true;
+        }
+
+        int h = checkHeight(root);
+
+        if (h != root.height) {
+            if (DEBUG_MSG) {
+                System.err.println("DEBUG: root's actual height is " + h
+                        + ", recorded: " + root.height);
+            }
+
+            return false;
+        }
+
+        return checkHeight(root) == root.height;
+    }
+
+    private boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isWellIndexed() {
+        if (size == 0) {
+            return true;
+        }
+
+        int left = countLeft(root.left);
+        boolean leftOk = root.leftCount == left;
+
+        if (leftOk == false) {
+            if (DEBUG_MSG) {
+                System.err.println("Root's actual left count is "
+                        + left + ", recorded " + root.leftCount);
+            }
+        }
+
+        boolean rightOk = true;
+
+        if (root.right != null) {
+            int right = countLeft(root.right.left);
+
+            if (right != root.right.leftCount) {
+                rightOk = false;
+
+                if (DEBUG_MSG) {
+                    System.err.println("Root's right node's actual left count "
+                            + "is " + right + ", recorded "
+                            + root.right.leftCount);
+                }
+            }
+        }
+
+        return leftOk && rightOk;
+    }
+
+    private int checkHeight(Node<E> e) {
+        if (e == null) {
+            return -1;
+        }
+
+        int l = checkHeight(e.left);
+
+        if (l == Integer.MIN_VALUE) {
+            return l;
+        }
+
+        int r = checkHeight(e.right);
+
+        if (r == Integer.MIN_VALUE) {
+            return r;
+        }
+
+        int h = Math.max(l, r) + 1;
+
+        if (h != e.height) {
+            return Integer.MIN_VALUE;
+        } else {
+            return h;
+        }
+    }
+
+    private boolean isBalanced(Node<E> e) {
+        if (e == null) {
+            return true;
