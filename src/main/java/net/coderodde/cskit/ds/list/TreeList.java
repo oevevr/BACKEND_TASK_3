@@ -779,3 +779,80 @@ public class TreeList<E>
     private boolean isBalanced(Node<E> e) {
         if (e == null) {
             return true;
+        }
+
+        if (Math.abs(h(e.left) - h(e.right)) > 1) {
+            System.out.println("Disbalanced tree.");
+            return false;
+        }
+
+        if (isBalanced(e.left) == false) {
+            System.out.println("Disbalanced tree.");
+            return false;
+        }
+
+        if (isBalanced(e.right) == false) {
+            System.out.println("Disbalanced tree.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private int countLeft(Node<E> e) {
+        if (e == null) {
+            return 0;
+        }
+
+        int l;
+        int r;
+
+        if ((l = countLeft(e.left)) != e.leftCount) {
+            System.out.print("Broken left counter:: ");
+            System.out.println("Counted: " + l + ", recorded: " + e.leftCount);
+            return Integer.MIN_VALUE;
+        }
+
+        if ((r = countLeft(e.right)) == Integer.MIN_VALUE) {
+            System.out.println("Broken left counter II.");
+            return Integer.MIN_VALUE;
+        }
+
+        return l + r + e.size();
+    }
+
+    private boolean hasCycles(Node<E> e, HashSet<Node<E>> set) {
+        if (e == null) {
+            return false;
+        }
+
+        if (set.contains(e)) {
+            if (DEBUG_MSG) {
+                System.err.println("DEBUG: This TreeList contains cycles!");
+            }
+
+            return true;
+        }
+
+        set.add(e);
+
+        if (hasCycles(e.left, set)) {
+            return true;
+        }
+
+        if (hasCycles(e.right, set)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void checkDegree(final int degree) {
+        if (degree < 2) {
+            throw new IllegalArgumentException("Invalid degree: " + degree);
+        }
+    }
+
+    private int h(Node<E> node) {
+        if (node == null) {
+            return -1;
