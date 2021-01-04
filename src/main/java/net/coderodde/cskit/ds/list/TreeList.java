@@ -931,3 +931,73 @@ public class TreeList<E>
      *
      * @return the new root of a balanced subtree.
      */
+    private Node<E> rightLeftRotate(Node<E> e) {
+        Node<E> ee = e.right;
+        e.right = rightRotate(ee);
+        return leftRotate(e);
+    }
+
+    /**
+     * Fixes the tree invariant after inserting a node.
+     *
+     * @param e the lowest node that may be unbalanced.
+     */
+    private void fixAfterInsertion(Node<E> e) {
+        while (e != null) {
+            if (h(e.left) == h(e.right) + 2) {
+                Node<E> p = e.parent;
+                Node<E> subroot =
+                        (h(e.left.left) >= h(e.left.right))
+                        ? rightRotate(e)
+                        : leftRightRotate(e);
+
+                if (p == null) {
+                    root = subroot;
+                } else if (p.left == e) {
+                    p.left = subroot;
+                } else {
+                    p.right = subroot;
+                }
+
+                if (p != null) {
+                    p.height = Math.max(h(p.left), h(p.right)) + 1;
+                }
+
+                return;
+            } else if (h(e.left) + 2 == h(e.right)) {
+                Node<E> p = e.parent;
+                Node<E> subroot =
+                        (h(e.right.right) >= h(e.right.left))
+                        ? leftRotate(e)
+                        : rightLeftRotate(e);
+
+                if (p == null) {
+                    root = subroot;
+                } else if (p.left == e) {
+                    p.left = subroot;
+                } else {
+                    p.right = subroot;
+                }
+
+                if (p != null) {
+                    p.height = Math.max(h(p.left), h(p.right)) + 1;
+                }
+
+                return;
+            }
+
+            e.height = Math.max(h(e.left), h(e.right)) + 1;
+            e = e.parent;
+        }
+    }
+
+    /**
+     * Fixes the tree after deleting the node.
+     *
+     * @param e the lowest node that may be unbalanced.
+     */
+    private void fixAfterDeletion(Node<E> e) {
+        while (e != null) {
+            if (h(e.left) == h(e.right) + 2) {
+                Node<E> p = e.parent;
+                Node<E> subroot =
