@@ -856,3 +856,78 @@ public class TreeList<E>
     private int h(Node<E> node) {
         if (node == null) {
             return -1;
+        }
+
+        return Math.max(h(node.left), h(node.right)) + 1;
+    }
+
+    /**
+     * The left rotation of a tree node.
+     *
+     * @param e the unbalanced node.
+     *
+     * @return the new root of a balanced subtree.
+     */
+    private Node<E> leftRotate(Node<E> e) {
+        Node<E> n = e.right;
+        n.parent = e.parent;
+        e.parent = n;
+        e.right = n.left;
+        n.left = e;
+
+        if (e.right != null) {
+            e.right.parent = e;
+        }
+
+        e.height = Math.max(h(e.left), h(e.right)) + 1;
+        n.height = Math.max(h(n.left), h(n.right)) + 1;
+
+        n.leftCount += e.leftCount + e.size();
+        return n;
+    }
+
+    /**
+     * The right rotation of a tree node.
+     *
+     * @param e the unbalanced node.
+     *
+     * @return the new root of a balanced subtree.
+     */
+    private Node<E> rightRotate(Node<E> e) {
+        Node<E> n = e.left;
+        n.parent = e.parent;
+        e.parent = n;
+        e.left = n.right;
+        n.right = e;
+
+        if (e.left != null) {
+            e.left.parent = e;
+        }
+
+        e.height = Math.max(h(e.left), h(e.right)) + 1;
+        n.height = Math.max(h(n.left), h(n.right)) + 1;
+
+        e.leftCount -= n.leftCount + n.size();
+        return n;
+    }
+
+    /**
+     * The left/right rotation of a tree node.
+     *
+     * @param e the unbalanced node.
+     *
+     * @return the new root of a balanced subtree.
+     */
+    private Node<E> leftRightRotate(Node<E> e) {
+        Node<E> ee = e.left;
+        e.left = leftRotate(ee);
+        return rightRotate(e);
+    }
+
+    /**
+     * The right/left rotation of a tree node.
+     *
+     * @param e the unbalanced node.
+     *
+     * @return the new root of a balanced subtree.
+     */
