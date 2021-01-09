@@ -1230,3 +1230,59 @@ public class TreeList<E>
 
         @Override
         public void add(E e) {
+            checkModCount();
+            ++expectedModCount;
+            TreeList.this.add(totalIndex, e);
+        }
+
+        private void checkModCount() {
+            if (this.expectedModCount != TreeList.this.modCount) {
+                throw new ConcurrentModificationException(
+                        "This TreeList is modified while iterating.");
+            }
+        }
+    }
+
+    private class DescendingIterator implements Iterator<E> {
+
+        private Node<E> currentNode = TreeList.this.lastNode;
+        private int currentIndex = currentNode.size();
+        private int totalIndex = TreeList.this.size();
+        private boolean removed = false;
+
+        @Override
+        public boolean hasNext() {
+            return totalIndex > 0;
+        }
+
+        @Override
+        public E next() {
+            if (hasNext() == false) {
+                throw new NoSuchElementException("No next element available.");
+            }
+
+            --totalIndex;
+            --currentIndex;
+            removed = false;
+
+            if (currentIndex == -1) {
+                currentNode = currentNode.predecessor();
+                currentIndex = currentNode.size() - 1;
+            }
+
+            return (E) currentNode.array[currentNode.first + currentIndex];
+        }
+
+        @Override
+        public void remove() {
+            if (removed) {
+                throw new NoSuchElementException(
+                        "An element is tried to be removed second time."
+                        );
+            }
+
+            TreeList.this.remove(totalIndex);
+            removed = true;
+        }
+    }
+}
