@@ -1164,3 +1164,69 @@ public class TreeList<E>
             this.currentIndex = index;
             this.totalIndex = initialTotalIndex;
         }
+
+        @Override
+        public boolean hasNext() {
+            checkModCount();
+            return totalIndex < TreeList.this.size;
+        }
+
+        @Override
+        public E next() {
+            checkModCount();
+
+            if (currentIndex == currentNode.size()) {
+                currentIndex = 0;
+                currentNode = currentNode.successor();
+            }
+
+            ++totalIndex;
+            return (E) currentNode.array[currentIndex++];
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            checkModCount();
+            return totalIndex > 0;
+        }
+
+        @Override
+        public E previous() {
+            checkModCount();
+
+            if (currentIndex == 0) {
+                currentNode = currentNode.predecessor();
+                currentIndex = currentNode.size();
+            }
+
+            --totalIndex;
+            return (E) currentNode.array[--currentIndex];
+        }
+
+        @Override
+        public int nextIndex() {
+            checkModCount();
+            return totalIndex;
+        }
+
+        @Override
+        public int previousIndex() {
+            checkModCount();
+            return totalIndex - 1;
+        }
+
+        @Override
+        public void remove() {
+            checkModCount();
+            ++expectedModCount;
+            TreeList.this.remove(totalIndex);
+        }
+
+        @Override
+        public void set(E e) {
+            checkModCount();
+            currentNode.array[currentIndex] = e;
+        }
+
+        @Override
+        public void add(E e) {
