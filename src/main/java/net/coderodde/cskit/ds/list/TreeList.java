@@ -1073,3 +1073,94 @@ public class TreeList<E>
             Node<E> child = e.left != null ? e.left : e.right;
             Node<E> p = e.parent;
             child.parent = p;
+
+            if (p == null) {
+                root = child;
+                return e;
+            }
+
+            if (e == p.left) {
+                p.left = child;
+            } else {
+                p.right = child;
+            }
+
+            return e;
+        }
+
+        // Two children.
+        Node<E> successor = e.right.min();
+
+        e.array = successor.array;
+        e.first = successor.first;
+        e.last = successor.last;
+
+        Node<E> child = successor.right;
+        Node<E> p = successor.parent;
+
+        if (p.left == successor) {
+            p.left = child;
+        } else {
+            p.right = child;
+        }
+
+        if (child != null) {
+            child.parent = p;
+        }
+
+        return successor;
+    }
+
+    private void updateLeftCounters(Node<E> from, int delta) {
+        while (from != null) {
+            if (from.parent != null && from.parent.left == from) {
+                from.parent.leftCount += delta;
+            }
+
+            from = from.parent;
+        }
+    }
+
+    private void updateLeftCounters(Node<E> from, int delta, Node<E> until) {
+        while (from != null && from != until) {
+            if (from.parent != null && from.parent.left == from) {
+                from.parent.leftCount += delta;
+            }
+
+            from = from.parent;
+        }
+    }
+
+    private class AscendingListIterator implements ListIterator<E> {
+
+        private long expectedModCount = TreeList.this.modCount;
+        private Node<E> currentNode = TreeList.this.firstNode;
+        private int currentIndex;
+        private int totalIndex;
+
+        AscendingListIterator(int index) {
+            if (TreeList.this.size == 0) {
+                return;
+            }
+
+            Node<E> node = root;
+            int initialTotalIndex = 0;
+
+            for (;;) {
+                if (index < node.leftCount) {
+                    node = node.left;
+                } else if (index >= node.leftCount + node.size()) {
+                    index -= node.leftCount + node.size();
+                    initialTotalIndex += node.leftCount + node.size();
+                    node = node.right;
+                } else {
+                    index -= node.leftCount;
+                    initialTotalIndex += index;
+                    break;
+                }
+            }
+
+            this.currentNode = node;
+            this.currentIndex = index;
+            this.totalIndex = initialTotalIndex;
+        }
