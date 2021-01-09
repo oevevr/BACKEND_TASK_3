@@ -1001,3 +1001,75 @@ public class TreeList<E>
             if (h(e.left) == h(e.right) + 2) {
                 Node<E> p = e.parent;
                 Node<E> subroot =
+                        (h(e.left.left) >= h(e.left.right))
+                        ? rightRotate(e)
+                        : leftRightRotate(e);
+
+                if (p == null) {
+                    root = subroot;
+                } else if (p.left == e) {
+                    p.left = subroot;
+                } else {
+                    p.right = subroot;
+                }
+
+                if (p != null) {
+                    p.height = Math.max(h(p.left), h(p.right)) + 1;
+                }
+            } else if (h(e.left) + 2 == h(e.right)) {
+                Node<E> p = e.parent;
+                Node<E> subroot =
+                        (h(e.right.right) >= h(e.right.left))
+                        ? leftRotate(e)
+                        : rightLeftRotate(e);
+
+                if (p == null) {
+                    root = subroot;
+                } else if (p.left == e) {
+                    p.left = subroot;
+                } else {
+                    p.right = subroot;
+                }
+
+                if (p != null) {
+                    p.height = Math.max(h(p.left), h(p.right)) + 1;
+                }
+            }
+
+            e.height = Math.max(h(e.left), h(e.right)) + 1;
+            e = e.parent;
+        }
+    }
+
+    /**
+     * Removes a node from the tree without balancing it.
+     *
+     * @param e the node to remove.
+     *
+     * @return the actual node removed.
+     */
+    private Node<E> removeImpl(Node<E> e) {
+        if (e.left == null && e.right == null) {
+            // No children.
+            Node<E> p = e.parent;
+
+            if (p == null) {
+                // e is root.
+                return e;
+            }
+
+            if (e == p.left) {
+                p.left = null;
+                p.leftCount = 0;
+            } else {
+                p.right = null;
+            }
+
+            return e;
+        }
+
+        if (e.left == null || e.right == null) {
+            // One child.
+            Node<E> child = e.left != null ? e.left : e.right;
+            Node<E> p = e.parent;
+            child.parent = p;
