@@ -9,4 +9,6 @@ import net.coderodde.cskit.ds.pq.PriorityQueue;
  * This class implements the binary minimum heap (a priority queue type).
  *
  * @author Rodion Efremov
- * @ve
+ * @version 1.618 (11.12.2013)
+ */
+public class BinaryHeap<E, W extends Comparabl
