@@ -17,4 +17,10 @@ implements PriorityQueue<E, W> {
     private static final float LOAD_FACTOR = 1.05f;
     private static final int DEFAULT_CAPACITY = 1024;
 
-    @O
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    publ
