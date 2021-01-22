@@ -11,4 +11,7 @@ import net.coderodde.cskit.ds.pq.PriorityQueue;
  * @author Rodion Efremov
  * @version 1.618 (11.12.2013)
  */
-public class BinaryHeap<E, W extends Comparabl
+public class BinaryHeap<E, W extends Comparable<? super W>>
+implements PriorityQueue<E, W> {
+
+    private static final float L
