@@ -14,4 +14,7 @@ import net.coderodde.cskit.ds.pq.PriorityQueue;
 public class BinaryHeap<E, W extends Comparable<? super W>>
 implements PriorityQueue<E, W> {
 
-    private static final float L
+    private static final float LOAD_FACTOR = 1.05f;
+    private static final int DEFAULT_CAPACITY = 1024;
+
+    @O
