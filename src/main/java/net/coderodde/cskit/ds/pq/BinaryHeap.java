@@ -23,4 +23,9 @@ implements PriorityQueue<E, W> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
     publ
