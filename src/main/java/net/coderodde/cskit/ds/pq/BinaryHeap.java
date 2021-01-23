@@ -29,4 +29,9 @@ implements PriorityQueue<E, W> {
 
     @Override
     public PriorityQueue<E, W> newInstance() {
-        return new BinaryHeap<E, W>(nodeArray.
+        return new BinaryHeap<E, W>(nodeArray.length);
+    }
+
+    private static class HeapNode<E, W> {
+        E element;
+  
