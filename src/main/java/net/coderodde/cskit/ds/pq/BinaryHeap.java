@@ -28,4 +28,5 @@ implements PriorityQueue<E, W> {
     }
 
     @Override
-    publ
+    public PriorityQueue<E, W> newInstance() {
+        return new BinaryHeap<E, W>(nodeArray.
