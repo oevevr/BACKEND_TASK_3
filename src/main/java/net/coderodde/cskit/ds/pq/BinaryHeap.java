@@ -39,4 +39,9 @@ implements PriorityQueue<E, W> {
 
         HeapNode(E element, W priority) {
             this.element = element;
-            this.priority = priorit
+            this.priority = priority;
+        }
+    }
+
+    /**
+     * The amount of elements in this heap
