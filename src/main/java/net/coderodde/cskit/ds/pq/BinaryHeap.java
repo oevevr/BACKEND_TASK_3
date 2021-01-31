@@ -37,4 +37,6 @@ implements PriorityQueue<E, W> {
         W priority;
         int index;
 
-        HeapNode(E element, W priority) 
+        HeapNode(E element, W priority) {
+            this.element = element;
+            this.priority = priorit
