@@ -34,4 +34,7 @@ implements PriorityQueue<E, W> {
 
     private static class HeapNode<E, W> {
         E element;
-  
+        W priority;
+        int index;
+
+        HeapNode(E element, W priority) 
