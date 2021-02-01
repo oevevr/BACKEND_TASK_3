@@ -44,4 +44,7 @@ implements PriorityQueue<E, W> {
     }
 
     /**
-     * The amount of elements in this heap
+     * The amount of elements in this heap.
+     */
+    private int size;
+    private HeapNode<E, W>[] no
