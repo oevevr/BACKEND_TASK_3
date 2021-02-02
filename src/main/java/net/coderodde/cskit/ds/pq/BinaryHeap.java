@@ -47,4 +47,8 @@ implements PriorityQueue<E, W> {
      * The amount of elements in this heap.
      */
     private int size;
-    private HeapNode<E, W>[] no
+    private HeapNode<E, W>[] nodeArray;
+    private Map<E, HeapNode<E, W>> map;
+
+    /**
+     * Constructs a b
