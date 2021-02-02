@@ -51,4 +51,6 @@ implements PriorityQueue<E, W> {
     private Map<E, HeapNode<E, W>> map;
 
     /**
-     * Constructs a b
+     * Constructs a binary heap with initial capacity <code>capacity</code>.
+     *
+     * @para
