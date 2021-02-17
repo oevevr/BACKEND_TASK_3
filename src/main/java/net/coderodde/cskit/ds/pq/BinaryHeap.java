@@ -53,4 +53,6 @@ implements PriorityQueue<E, W> {
     /**
      * Constructs a binary heap with initial capacity <code>capacity</code>.
      *
-     * @para
+     * @param capacity the initial capacity of this heap.
+     */
+    public BinaryHeap(
