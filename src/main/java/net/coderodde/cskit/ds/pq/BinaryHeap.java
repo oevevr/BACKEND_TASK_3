@@ -55,4 +55,6 @@ implements PriorityQueue<E, W> {
      *
      * @param capacity the initial capacity of this heap.
      */
-    public BinaryHeap(
+    public BinaryHeap(int capacity) {
+        capacity = checkCapacity(capacity);
+        this.nodeArray = new He
