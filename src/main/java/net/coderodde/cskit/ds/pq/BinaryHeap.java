@@ -57,4 +57,5 @@ implements PriorityQueue<E, W> {
      */
     public BinaryHeap(int capacity) {
         capacity = checkCapacity(capacity);
-        this.nodeArray = new He
+        this.nodeArray = new HeapNode[capacity];
+        this.map = new HashMap<E, HeapNode<E, W>>(capacity, LOAD_FACTO
