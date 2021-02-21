@@ -64,4 +64,9 @@ implements PriorityQueue<E, W> {
     /**
      * Construct a binary heap.
      */
-    public BinaryHeap
+    public BinaryHeap() {
+        this(DEFAULT_CAPACITY);
+    }
+
+    /**
+     * Inserts an element if not already
