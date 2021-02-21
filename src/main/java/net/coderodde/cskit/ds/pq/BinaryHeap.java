@@ -75,4 +75,7 @@ implements PriorityQueue<E, W> {
      * @param priority the priority of the element.
      */
     @Override
-    public void insert(E e, W pr
+    public void insert(E e, W priority) {
+        if (map.containsKey(e)) {
+            return;
+        }
