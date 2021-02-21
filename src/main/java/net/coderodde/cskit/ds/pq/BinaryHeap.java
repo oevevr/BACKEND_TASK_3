@@ -72,4 +72,7 @@ implements PriorityQueue<E, W> {
      * Inserts an element if not already present.
      *
      * @param e the element to insert.
-     * @param priority th
+     * @param priority the priority of the element.
+     */
+    @Override
+    public void insert(E e, W pr
