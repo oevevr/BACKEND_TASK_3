@@ -69,4 +69,7 @@ implements PriorityQueue<E, W> {
     }
 
     /**
-     * Inserts an element if not already
+     * Inserts an element if not already present.
+     *
+     * @param e the element to insert.
+     * @param priority th
