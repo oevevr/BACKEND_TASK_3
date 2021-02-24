@@ -84,4 +84,5 @@ implements PriorityQueue<E, W> {
             extendArray();
         }
 
-   
+        int index = size;
+        HeapNode<E, W> node = new HeapNode<E, W>(e, pri
