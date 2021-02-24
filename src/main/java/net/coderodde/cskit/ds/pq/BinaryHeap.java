@@ -79,3 +79,9 @@ implements PriorityQueue<E, W> {
         if (map.containsKey(e)) {
             return;
         }
+
+        if (size == nodeArray.length) {
+            extendArray();
+        }
+
+   
