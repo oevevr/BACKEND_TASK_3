@@ -85,4 +85,6 @@ implements PriorityQueue<E, W> {
         }
 
         int index = size;
-        HeapNode<E, W> node = new HeapNode<E, W>(e, pri
+        HeapNode<E, W> node = new HeapNode<E, W>(e, priority);
+
+        // Sift up the node containing the input element until min-he
