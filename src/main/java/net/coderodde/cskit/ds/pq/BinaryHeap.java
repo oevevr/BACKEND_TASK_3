@@ -90,4 +90,5 @@ implements PriorityQueue<E, W> {
         // Sift up the node containing the input element until min-heap property
         // is arranged.
         while (index > 0) {
-  
+            int parent = (index - 1) >>> 1;
+            HeapNode<E, W> p = nodeArray
