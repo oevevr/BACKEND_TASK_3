@@ -91,4 +91,8 @@ implements PriorityQueue<E, W> {
         // is arranged.
         while (index > 0) {
             int parent = (index - 1) >>> 1;
-            HeapNode<E, W> p = nodeArray
+            HeapNode<E, W> p = nodeArray[parent];
+
+            if (priority.compareTo(p.priority) >= 0) {
+                break;
+ 
