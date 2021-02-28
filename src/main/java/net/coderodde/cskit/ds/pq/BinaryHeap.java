@@ -95,4 +95,7 @@ implements PriorityQueue<E, W> {
 
             if (priority.compareTo(p.priority) >= 0) {
                 break;
- 
+            }
+
+            nodeArray[index] = p;
+            p.index = index;
