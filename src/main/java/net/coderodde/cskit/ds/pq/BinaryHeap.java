@@ -103,4 +103,9 @@ implements PriorityQueue<E, W> {
         }
 
         nodeArray[index] = node;
-        no
+        node.index = index;
+        map.put(e, node);
+        ++size;
+    }
+
+    @Override
