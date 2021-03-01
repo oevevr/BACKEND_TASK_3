@@ -99,3 +99,8 @@ implements PriorityQueue<E, W> {
 
             nodeArray[index] = p;
             p.index = index;
+            index = parent;
+        }
+
+        nodeArray[index] = node;
+        no
