@@ -109,3 +109,5 @@ implements PriorityQueue<E, W> {
     }
 
     @Override
+    public void decreasePriority(E e, W newPriority) {
+   
