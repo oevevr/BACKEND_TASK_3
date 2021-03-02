@@ -110,4 +110,6 @@ implements PriorityQueue<E, W> {
 
     @Override
     public void decreasePriority(E e, W newPriority) {
-   
+        HeapNode<E, W> node = map.get(e);
+
+        if (node == null || node.pri
