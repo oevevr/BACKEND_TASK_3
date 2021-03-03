@@ -116,4 +116,6 @@ implements PriorityQueue<E, W> {
             return;
         }
 
-       
+        node.priority = newPriority;
+        int index = node.index;
+ 
