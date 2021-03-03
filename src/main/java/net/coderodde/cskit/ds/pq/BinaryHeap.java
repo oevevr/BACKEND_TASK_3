@@ -112,4 +112,8 @@ implements PriorityQueue<E, W> {
     public void decreasePriority(E e, W newPriority) {
         HeapNode<E, W> node = map.get(e);
 
-        if (node == null || node.pri
+        if (node == null || node.priority.compareTo(newPriority) <= 0) {
+            return;
+        }
+
+       
