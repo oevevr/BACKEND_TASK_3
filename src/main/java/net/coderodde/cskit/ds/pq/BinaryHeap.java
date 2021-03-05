@@ -118,4 +118,7 @@ implements PriorityQueue<E, W> {
 
         node.priority = newPriority;
         int index = node.index;
- 
+        int parentIndex = (index - 1) >> 1;
+
+        for (;;) {
+            if
