@@ -121,4 +121,6 @@ implements PriorityQueue<E, W> {
         int parentIndex = (index - 1) >> 1;
 
         for (;;) {
-            if
+            if (parentIndex >= 0
+                    && nodeArray[parentIndex]
+  
