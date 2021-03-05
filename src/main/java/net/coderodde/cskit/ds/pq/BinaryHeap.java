@@ -123,4 +123,5 @@ implements PriorityQueue<E, W> {
         for (;;) {
             if (parentIndex >= 0
                     && nodeArray[parentIndex]
-  
+                      .priority.compareTo(node.priority) > 0) {
+     
