@@ -129,4 +129,6 @@ implements PriorityQueue<E, W> {
                 index = parentIndex;
                 parentIndex = (index - 1) >> 1;
             } else {
-                nodeArr
+                nodeArray[index] = node;
+                node.index = index;
+                retur
