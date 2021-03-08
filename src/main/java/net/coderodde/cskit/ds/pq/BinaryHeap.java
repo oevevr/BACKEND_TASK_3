@@ -131,4 +131,11 @@ implements PriorityQueue<E, W> {
             } else {
                 nodeArray[index] = node;
                 node.index = index;
-                retur
+                return;
+            }
+        }
+    }
+
+    @Override
+    public E min() {
+        if (size
