@@ -138,4 +138,5 @@ implements PriorityQueue<E, W> {
 
     @Override
     public E min() {
-        if (size
+        if (size == 0) {
+            throw new NoSuchElementException("Reading from a
