@@ -139,4 +139,11 @@ implements PriorityQueue<E, W> {
     @Override
     public E min() {
         if (size == 0) {
-            throw new NoSuchElementException("Reading from a
+            throw new NoSuchElementException("Reading from an empty heap.");
+        }
+
+        return nodeArray[0].element;
+    }
+
+    @Override
+    public 
