@@ -146,4 +146,6 @@ implements PriorityQueue<E, W> {
     }
 
     @Override
-    public 
+    public E extractMinimum() {
+        if (size == 0) {
+            throw new NoSu
