@@ -153,4 +153,7 @@ implements PriorityQueue<E, W> {
 
         E element = nodeArray[0].element;
         map.remove(element);
-        HeapNode
+        HeapNode<E, W> node = nodeArray[--size];
+        nodeArray[size] = null;
+
+        int 
