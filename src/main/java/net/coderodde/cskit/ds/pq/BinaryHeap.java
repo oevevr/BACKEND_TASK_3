@@ -148,4 +148,7 @@ implements PriorityQueue<E, W> {
     @Override
     public E extractMinimum() {
         if (size == 0) {
-            throw new NoSu
+            throw new NoSuchElementException("Extracting from an empty queue.");
+        }
+
+        E element = n
