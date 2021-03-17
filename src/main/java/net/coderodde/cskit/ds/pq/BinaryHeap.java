@@ -151,4 +151,6 @@ implements PriorityQueue<E, W> {
             throw new NoSuchElementException("Extracting from an empty queue.");
         }
 
-        E element = n
+        E element = nodeArray[0].element;
+        map.remove(element);
+        HeapNode
