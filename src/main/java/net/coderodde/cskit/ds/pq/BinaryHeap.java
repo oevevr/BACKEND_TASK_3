@@ -156,4 +156,7 @@ implements PriorityQueue<E, W> {
         HeapNode<E, W> node = nodeArray[--size];
         nodeArray[size] = null;
 
-        int 
+        int nodeIndex = 0;
+        int leftChildIndex = 1;
+        int rightChildIndex = 2;
+
