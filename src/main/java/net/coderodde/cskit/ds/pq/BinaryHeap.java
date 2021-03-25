@@ -163,4 +163,7 @@ implements PriorityQueue<E, W> {
         for (;;) {
             int minChildIndex;
 
-            if (leftChildInd
+            if (leftChildIndex < size) {
+                minChildIndex = leftChildIndex;
+            } else {
+     
