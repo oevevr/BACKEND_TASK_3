@@ -160,3 +160,7 @@ implements PriorityQueue<E, W> {
         int leftChildIndex = 1;
         int rightChildIndex = 2;
 
+        for (;;) {
+            int minChildIndex;
+
+            if (leftChildInd
