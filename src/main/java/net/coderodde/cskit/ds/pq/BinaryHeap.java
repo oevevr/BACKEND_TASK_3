@@ -167,4 +167,9 @@ implements PriorityQueue<E, W> {
                 minChildIndex = leftChildIndex;
             } else {
                 nodeArray[nodeIndex] = node;
-                node.index = nodeInde
+                node.index = nodeIndex;
+                return element;
+            }
+
+            if (rightChildIndex < size
+          
