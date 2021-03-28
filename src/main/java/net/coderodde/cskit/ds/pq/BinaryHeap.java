@@ -172,4 +172,5 @@ implements PriorityQueue<E, W> {
             }
 
             if (rightChildIndex < size
-          
+                    && nodeArray[leftChildIndex].priority
+                     
