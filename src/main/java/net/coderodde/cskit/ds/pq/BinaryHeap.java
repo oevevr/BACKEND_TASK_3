@@ -178,3 +178,4 @@ implements PriorityQueue<E, W> {
             }
 
             if (node.priority
+                    .compareTo(nodeArray[minChildIndex].priori
