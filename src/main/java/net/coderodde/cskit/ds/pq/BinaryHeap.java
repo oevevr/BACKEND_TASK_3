@@ -173,4 +173,5 @@ implements PriorityQueue<E, W> {
 
             if (rightChildIndex < size
                     && nodeArray[leftChildIndex].priority
-                     
+                      .compareTo(nodeArray[rightChildIndex].priority) > 0) {
+                minChildIndex 
