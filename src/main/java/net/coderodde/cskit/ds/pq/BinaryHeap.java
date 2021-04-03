@@ -180,4 +180,6 @@ implements PriorityQueue<E, W> {
             if (node.priority
                     .compareTo(nodeArray[minChildIndex].priority) > 0) {
                 nodeArray[nodeIndex] = nodeArray[minChildIndex];
-       
+                nodeArray[nodeIndex].index = nodeIndex;
+
+                nodeIndex = minCh
