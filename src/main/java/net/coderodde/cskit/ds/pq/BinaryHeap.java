@@ -182,4 +182,6 @@ implements PriorityQueue<E, W> {
                 nodeArray[nodeIndex] = nodeArray[minChildIndex];
                 nodeArray[nodeIndex].index = nodeIndex;
 
-                nodeIndex = minCh
+                nodeIndex = minChildIndex;
+                leftChildIndex = (nodeIndex << 1) + 1;
+                rig
