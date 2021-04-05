@@ -184,4 +184,6 @@ implements PriorityQueue<E, W> {
 
                 nodeIndex = minChildIndex;
                 leftChildIndex = (nodeIndex << 1) + 1;
-                rig
+                rightChildIndex = leftChildIndex + 1;
+            } else {
+                nodeArray[n
