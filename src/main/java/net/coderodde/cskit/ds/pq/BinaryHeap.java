@@ -188,4 +188,10 @@ implements PriorityQueue<E, W> {
             } else {
                 nodeArray[nodeIndex] = node;
                 node.index = nodeIndex;
-                retu
+                return element;
+            }
+        }
+    }
+
+    @Override
+    public void clear() {
