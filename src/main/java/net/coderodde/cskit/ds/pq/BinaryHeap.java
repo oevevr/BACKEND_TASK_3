@@ -186,4 +186,6 @@ implements PriorityQueue<E, W> {
                 leftChildIndex = (nodeIndex << 1) + 1;
                 rightChildIndex = leftChildIndex + 1;
             } else {
-                nodeArray[n
+                nodeArray[nodeIndex] = node;
+                node.index = nodeIndex;
+                retu
