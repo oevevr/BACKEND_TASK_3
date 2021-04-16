@@ -195,3 +195,8 @@ implements PriorityQueue<E, W> {
 
     @Override
     public void clear() {
+        size = 0;
+    }
+
+    @Override
+    public boolean contains(E el
