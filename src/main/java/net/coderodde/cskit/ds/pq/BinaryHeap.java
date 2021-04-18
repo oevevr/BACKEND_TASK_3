@@ -199,4 +199,9 @@ implements PriorityQueue<E, W> {
     }
 
     @Override
-    public boolean contains(E el
+    public boolean contains(E element) {
+        return map.containsKey(element);
+    }
+
+    @Override
+    public W 
