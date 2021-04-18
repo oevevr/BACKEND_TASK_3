@@ -204,4 +204,5 @@ implements PriorityQueue<E, W> {
     }
 
     @Override
-    public W 
+    public W getPriority(E element) {
+        if (map.containsKey(element) == false) 
