@@ -212,4 +212,5 @@ implements PriorityQueue<E, W> {
         return map.get(element).priority;
     }
 
- 
+    private int checkCapacity(int capacity) {
+        return capacity <
