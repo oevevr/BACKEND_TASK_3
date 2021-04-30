@@ -213,4 +213,8 @@ implements PriorityQueue<E, W> {
     }
 
     private int checkCapacity(int capacity) {
-        return capacity <
+        return capacity < 16 ? 16 : capacity;
+    }
+
+    private void extendArray() {
+        int capacity = (size * 
