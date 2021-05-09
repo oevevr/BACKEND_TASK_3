@@ -217,4 +217,6 @@ implements PriorityQueue<E, W> {
     }
 
     private void extendArray() {
-        int capacity = (size * 
+        int capacity = (size * 3) / 2;
+        HeapNode[] array = new HeapNode[capacity];
+        System.arraycopy(nod
