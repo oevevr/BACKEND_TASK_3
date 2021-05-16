@@ -100,3 +100,86 @@ implements PriorityQueue<E, W>{
             cut(x, y);
             cascadingCut(y);
         }
+
+        if (x.priority.compareTo(minimumNode.priority) < 0) {
+            minimumNode = x;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int size() {
+        return size;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public E min() {
+        if (size == 0) {
+            throw new NoSuchElementException(
+                    "Trying to read the minimum element from an empty " +
+                    "Fibonacci heap."
+                    );
+        }
+
+        return minimumNode.datum;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public E extractMinimum() {
+        if (isEmpty()) {
+            throw new NoSuchElementException(
+                    "Trying to extract from an empty Fibonacci heap."
+                    );
+        }
+
+        Node<E, W> z = minimumNode;
+
+        if (z != null) {
+            int numKids = z.degree;
+            Node<E, W> x = z.child;
+            Node<E, W> tmpRight;
+
+            while (numKids > 0) {
+                tmpRight = x.right;
+
+                x.left.right = x.right;
+                x.right.left = x.left;
+
+                x.left = minimumNode;
+                x.right = minimumNode.right;
+                minimumNode.right = x;
+                x.right.left = x;
+
+                x.parent = null;
+                x = tmpRight;
+                numKids--;
+            }
+
+            z.left.right = z.right;
+            z.right.left = z.left;
+
+            if (z == z.right) {
+                minimumNode = null;
+            } else {
+                minimumNode = z.right;
+                consolidate();
+            }
+
+            size--;
+        }
