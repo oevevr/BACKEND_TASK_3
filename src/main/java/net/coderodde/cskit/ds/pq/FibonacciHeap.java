@@ -183,3 +183,70 @@ implements PriorityQueue<E, W>{
 
             size--;
         }
+
+        map.remove(z.datum);
+        return z.datum;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear() {
+        minimumNode = null;
+        map.clear();
+        size = 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean contains(E element) {
+        return map.containsKey(element);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PriorityQueue<E, W> newInstance() {
+        return new FibonacciHeap<E, W>(this.map.size());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public W getPriority(E element) {
+        if (map.containsKey(element) == false) {
+            return null;
+        }
+
+        return map.get(element).priority;
+    }
+
+    private void consolidate() {
+        int arraySize = ((int) Math.floor(Math.log(size) / LOG_PHI)) + 1;
+        List<Node<E, W>> array = new ArrayList<Node<E, W>>(arraySize);
+
+        for (int i = 0; i < arraySize; ++i) {
+            array.add(null);
+        }
+
+        int numberOfRoots = 0;
+        Node<E, W> x = minimumNode;
+
+        if (x != null) {
+            ++numberOfRoots;
+            x = x.right;
+
+            while (x != minimumNode) {
+                ++numberOfRoots;
+                x = x.right;
+            }
+        }
+
+        while (numberOfRoots > 0) {
+            int degree = x.degree;
+            Node<E, W> next = x.right;
