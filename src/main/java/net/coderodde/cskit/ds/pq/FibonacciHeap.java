@@ -250,3 +250,84 @@ implements PriorityQueue<E, W>{
         while (numberOfRoots > 0) {
             int degree = x.degree;
             Node<E, W> next = x.right;
+
+            for (;;) {
+                Node<E, W> y = array.get(degree);
+
+                if (y == null) {
+                    break;
+                }
+
+                if (x.priority.compareTo(y.priority) > 0) {
+                    Node<E, W> tmp = y;
+                    y = x;
+                    x = tmp;
+                }
+
+                link(y, x);
+                array.set(degree, null);
+                degree++;
+            }
+
+            array.set(degree, x);
+            x = next;
+            numberOfRoots--;
+        }
+
+        minimumNode = null;
+
+        for (Node<E, W> y : array) {
+            if (y == null) {
+                continue;
+            }
+
+            if (minimumNode != null) {
+                y.left.right = y.right;
+                y.right.left = y.left;
+
+                y.left = minimumNode;
+                y.right = minimumNode.right;
+                minimumNode.right = y;
+                y.right.left = y;
+
+                if (y.priority.compareTo(minimumNode.priority) < 0) {
+                    minimumNode = y;
+                }
+            } else {
+                minimumNode = y;
+            }
+        }
+    }
+
+    private void link(Node<E, W> y, Node<E, W> x) {
+        y.left.right = y.right;
+        y.right.left = y.left;
+
+        y.parent = x;
+
+        if (x.child == null) {
+            x.child = y;
+            y.right = y;
+            y.left = y;
+        } else {
+            y.left = x.child;
+            y.right = x.child.right;
+            x.child.right = y;
+            y.right.left = y;
+        }
+
+        ++x.degree;
+
+        y.marked = false;
+    }
+
+    private void cut(Node<E, W> x, Node<E, W> y) {
+        x.left.right = x.right;
+        x.right.left = x.left;
+        y.degree--;
+
+        if (y.child == x) {
+            y.child = x.right;
+        }
+
+        if (y.degree == 0) {
