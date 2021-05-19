@@ -331,3 +331,28 @@ implements PriorityQueue<E, W>{
         }
 
         if (y.degree == 0) {
+            y.child = null;
+        }
+
+        x.left = minimumNode;
+        x.right = minimumNode.right;
+        minimumNode.right = x;
+        x.right.left = x;
+
+        x.parent = null;
+        x.marked = false;
+    }
+
+    private void cascadingCut(Node<E, W> y) {
+        Node<E, W> z = y.parent;
+
+        if (z != null) {
+            if (y.marked == false) {
+                y.marked = true;
+            } else {
+                cut(y, z);
+                cascadingCut(z);
+            }
+        }
+    }
+}
