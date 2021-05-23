@@ -12,4 +12,6 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * Inserts a new element into this priority queue.
      *
      * @param e the element to insert.
-     * @param priority the
+     * @param priority the initial priority of the element.
+     */
+    public void insert
