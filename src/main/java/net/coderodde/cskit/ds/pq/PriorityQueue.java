@@ -9,4 +9,7 @@ package net.coderodde.cskit.ds.pq;
 public interface PriorityQueue<E, W extends Comparable<? super W>> {
 
     /**
-     * Inserts a new element into this priority q
+     * Inserts a new element into this priority queue.
+     *
+     * @param e the element to insert.
+     * @param priority the
