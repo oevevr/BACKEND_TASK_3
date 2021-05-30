@@ -18,4 +18,6 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
 
     /**
      * Decreases the priority of the specified element.
-     
+     *
+     * @param e the element to decrease.
+     * @param newPriority t
