@@ -22,4 +22,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * @param e the element to decrease.
      * @param newPriority the new priority of the element.
      */
-    public void decreasePriority(E
+    public void decreasePriority(E e, W newPriority);
+
+    /**
+     * Returns the size of this
