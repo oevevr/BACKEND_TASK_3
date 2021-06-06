@@ -25,4 +25,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
     public void decreasePriority(E e, W newPriority);
 
     /**
-     * Returns the size of this
+     * Returns the size of this queue.
+     *
+     * @return the size of this queue.
+ 
