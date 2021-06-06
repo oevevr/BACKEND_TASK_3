@@ -32,4 +32,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
     public int size();
 
     /**
-     * Returns <code>true</code
+     * Returns <code>true</code> if this queue is empty, <code>false</code>
+     * otherwise.
+     */
+    public boolean
