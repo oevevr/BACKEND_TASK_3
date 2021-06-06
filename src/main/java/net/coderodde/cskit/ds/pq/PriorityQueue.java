@@ -28,4 +28,8 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * Returns the size of this queue.
      *
      * @return the size of this queue.
- 
+     */
+    public int size();
+
+    /**
+     * Returns <code>true</code
