@@ -38,4 +38,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
     public boolean isEmpty();
 
     /**
-     * Retrieves but does not remove a top element
+     * Retrieves but does not remove a top element.
+     *
+     * @return the top element (with the least priority token).
+ 
