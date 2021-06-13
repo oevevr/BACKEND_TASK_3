@@ -41,4 +41,8 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * Retrieves but does not remove a top element.
      *
      * @return the top element (with the least priority token).
- 
+     */
+    public E min();
+
+    /**
+     * Removes the top element from this que
