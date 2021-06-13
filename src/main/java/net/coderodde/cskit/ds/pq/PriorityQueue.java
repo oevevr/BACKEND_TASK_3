@@ -35,4 +35,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * Returns <code>true</code> if this queue is empty, <code>false</code>
      * otherwise.
      */
-    public boolean
+    public boolean isEmpty();
+
+    /**
+     * Retrieves but does not remove a top element
