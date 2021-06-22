@@ -49,4 +49,9 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      *
      * @return the top element of this queue.
      */
-    pu
+    public E extractMinimum();
+
+    /**
+     * Clears this priority queue.
+     */
+    p
