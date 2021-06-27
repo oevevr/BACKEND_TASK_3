@@ -54,4 +54,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
     /**
      * Clears this priority queue.
      */
-    p
+    public void clear();
+
+    /**
+     * Queries whether <code>eleme
