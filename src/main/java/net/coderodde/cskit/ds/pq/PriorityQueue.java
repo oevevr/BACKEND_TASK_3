@@ -57,4 +57,6 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
     public void clear();
 
     /**
-     * Queries whether <code>eleme
+     * Queries whether <code>element</code> is already in this queue.
+     *
+     * @param element the element
