@@ -59,4 +59,5 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
     /**
      * Queries whether <code>element</code> is already in this queue.
      *
-     * @param element the element
+     * @param element the element to query.
+     * @return <code>true</code> if the element is in this queue
