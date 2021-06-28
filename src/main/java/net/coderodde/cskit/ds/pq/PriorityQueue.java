@@ -63,4 +63,7 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * @return <code>true</code> if the element is in this queue,
      * <code>false</code> otherwise.
      */
-    public boolean cont
+    public boolean contains(E element);
+
+    /**
+     * Returns the current priority of an element
