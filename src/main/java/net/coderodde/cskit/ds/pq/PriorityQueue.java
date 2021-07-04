@@ -69,4 +69,6 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
      * Returns the current priority of an element.
      *
      * @param element the element to query.
-     * @r
+     * @return the priority of an element.
+     */
+    public W getPriority(E ele
