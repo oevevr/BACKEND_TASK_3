@@ -75,4 +75,6 @@ public interface PriorityQueue<E, W extends Comparable<? super W>> {
 
     /**
      * Spawns another empty queue of same type.
-     
+     */
+    public PriorityQueue<E, W> newInstance();
+}
