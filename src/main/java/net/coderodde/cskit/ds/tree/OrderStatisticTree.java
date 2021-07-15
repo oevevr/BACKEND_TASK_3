@@ -102,3 +102,90 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
         @Override
         public V setValue(V value) {
             V old = this.value;
+            this.value = value;
+            return old;
+        }
+
+        /**
+         * Tests whether this node equals <code>o</code>.
+         *
+         * @param o the object to test against.
+         *
+         * @return <code>true</code> if nodes equal each other,
+         * <code>false</code> otherwise.
+         */
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Node)) {
+                return false;
+            }
+
+            Node<K, V> e1 = this;
+            Node<K, V> e2 = (Node<K, V>) o;
+
+            return (e1.key.equals(e2.key) && e1.value.equals(e2.value));
+        }
+
+        /**
+         * Retrieves the hash code of this node.
+         *
+         * @return the hash code of this node.
+         */
+        @Override
+        public int hashCode() {
+            return key.hashCode() ^ (value == null ? 0 : value.hashCode());
+        }
+
+        /**
+         * Returns the minimum entry of this (sub-)tree.
+         *
+         * @return the minimum entry of this entry.
+         */
+        private Node<K, V> min() {
+            Node<K, V> e = this;
+
+            while (e.left != null) {
+                e = e.left;
+            }
+
+            return e;
+        }
+
+        /**
+         * Returns the successor entry if one exists, and
+         * <code>null</code> if there is no such.
+         *
+         * @return the successor entry or <code>null</code>.
+         */
+        private Node<K, V> next() {
+            Node<K, V> e = this;
+
+            if (e.right != null) {
+                e = e.right;
+
+                while (e.left != null) {
+                    e = e.left;
+                }
+
+                return e;
+            }
+
+            while (e.parent != null && e.parent.right == e) {
+                e = e.parent;
+            }
+
+            if (e.parent == null) {
+                return null;
+            }
+
+            return e.parent;
+        }
+    }
+
+    /**
+     * The root node of this tree.
+     */
+    private Node<K, V> root;
+
+    /**
+     * The amount of key/value - mappings (nodes) in this tree.
