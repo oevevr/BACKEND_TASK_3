@@ -189,3 +189,91 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
 
     /**
      * The amount of key/value - mappings (nodes) in this tree.
+     */
+    private int size;
+
+    /**
+     * The modification count.
+     */
+    private long modCount;
+
+    /**
+     * Constructs an empty tree.
+     */
+    public OrderStatisticTree() {}
+
+    /**
+     * Constructs a tree populated with the contents of <code>m</code>.
+     *
+     * @param m the map to populate this tree with.
+     */
+    public OrderStatisticTree(Map<? extends K, ? extends V> m) {
+        for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
+            this.put(e.getKey(), e.getValue());
+        }
+    }
+
+    /**
+     * Returns <code>true</code> if this tree is empty; <code>false</code>
+     * otherwise.
+     *
+     * @return <code>true</code> if this tree is empty; <code>false</code>
+     * otherwise.
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * Retrieves the size of this tree.
+     *
+     * @return the size of this tree.
+     */
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Clears this tree.
+     */
+    public void clear() {
+        modCount++;
+        root = null;
+        size = 0;
+    }
+
+    /**
+     * Returns <code>true</code> if this tree contains the specified key,
+     * <code>false</code> otherwise.
+     *
+     * @param key the key to query.
+     *
+     * @return <code>true</code> if this tree contains the key,
+     * <code>false</code>.
+     */
+    public boolean containsKey(Object o) {
+        K key = (K) o;
+        Node<K, V> e = root;
+        int cmp;
+
+        while (e != null) {
+            if ((cmp = key.compareTo(e.key)) < 0) {
+                e = e.left;
+            } else if (cmp > 0) {
+                e = e.right;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns <code>true</code> if this tree contains the specified value,
+     * <code>false</code> otherwise.
+     *
+     * @param value the value to query.
+     *
+     * @return <code>true</code> if this tree contains the specified value,
+     * <code>false</code> otherwise.
