@@ -277,3 +277,85 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
      *
      * @return <code>true</code> if this tree contains the specified value,
      * <code>false</code> otherwise.
+     */
+    @Override
+    public boolean containsValue(Object value) {
+        if (root == null) {
+            return false;
+        }
+
+        Node<K, V> e = root;
+        e = e.min();
+
+        while (e != null) {
+            if (e.value.equals(value)) {
+                return true;
+            }
+
+            e = e.next();
+        }
+
+        return false;
+    }
+
+    /**
+     * Associates <tt>key</tt> with <tt>value</tt>. If <tt>key</tt> is already
+     * present in the tree, its old value is overwritten by <tt>value</tt>. Runs
+     * in logarithmic time.
+     *
+     * @param key the key.
+     * @param value the value.
+     * @return the old value for <tt>key</tt>, or <tt>null</tt>, if no such.
+     */
+    public V put(K key, V value) {
+        if (key == null) {
+            throw new NullPointerException("'key' is null.");
+        }
+
+        modCount++;
+
+        Node<K, V> e = new Node<K, V>(key, value);
+
+        if (root == null) {
+            root = e;
+            size = 1;
+            return null;
+        }
+
+        Node<K, V> x = root;
+        Node<K, V> p = null;
+        int cmp;
+
+        while (x != null) {
+            p = x;
+
+            if ((cmp = e.key.compareTo(x.key)) < 0) {
+                x = x.left;
+            } else if (cmp > 0) {
+                x = x.right;
+            } else {
+                V old = x.value;
+                x.value = value;
+                return old;
+            }
+        }
+
+        e.parent = p;
+
+        if (e.key.compareTo(p.key) < 0) {
+            p.left = e;
+            p.count = 1;
+        } else {
+            p.right = e;
+        }
+        Node<K, V> tmp = p.parent;
+        Node<K, V> tmpLo = p;
+
+        // Update the counters.
+        while (tmp != null) {
+            if (tmp.left == tmpLo) {
+                tmp.count++;
+            }
+
+            tmpLo = tmp;
+            tmp = tmp.parent;
