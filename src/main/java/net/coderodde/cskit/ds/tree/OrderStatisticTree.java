@@ -359,3 +359,72 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
 
             tmpLo = tmp;
             tmp = tmp.parent;
+        }
+
+        size++;
+
+        while (p != null) {
+            if (h(p.left) == h(p.right) + 2) {
+                Node<K, V> pp = p.parent;
+                Node<K, V> subroot =
+                        (h(p.left.left) >= h(p.left.right)
+                        ? rightRotate(p)
+                        : leftRightRotate(p));
+
+                if (pp == null) {
+                    root = subroot;
+                } else if (pp.left == p) {
+                    pp.left = subroot;
+                } else {
+                    pp.right = subroot;
+                }
+
+                if (pp != null) {
+                    pp.h = Math.max(h(pp.left), h(pp.right)) + 1;
+                }
+
+                return null;
+            } else if (h(p.left) + 2 == h(p.right)) {
+                Node<K, V> pp = p.parent;
+                Node<K, V> subroot =
+                        (h(p.right.right) >= h(p.right.left)
+                        ? leftRotate(p)
+                        : rightLeftRotate(p));
+
+                if (pp == null) {
+                    root = subroot;
+                } else if (pp.left == p) {
+                    pp.left = subroot;
+                } else {
+                    pp.right = subroot;
+                }
+
+
+                if (pp != null) {
+                    pp.h = Math.max(h(pp.left), h(pp.right)) + 1;
+                }
+
+                return null;
+            }
+
+            p.h = Math.max(h(p.left), h(p.right)) + 1;
+            p = p.parent;
+        }
+
+        return null;
+    }
+
+    /**
+     * Puts every key/value - mapping from <code>m</code> to this tree.
+     *
+     * @param m the map to add.
+     */
+    @Override
+    public void putAll(Map<? extends K, ? extends V> m) {
+        for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
+            this.put(e.getKey(), e.getValue());
+        }
+    }
+
+    /**
+     * Removes a mapping with key <tt>key</tt> from this tree. Runs in
