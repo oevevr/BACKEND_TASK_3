@@ -428,3 +428,76 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
 
     /**
      * Removes a mapping with key <tt>key</tt> from this tree. Runs in
+     * logarithmic time.
+     *
+     * @param key the key of a node.
+     *
+     * @return the value associated with <tt>key</tt> or null, if there was no
+     * entries in the tree with key <tt>key</tt>.
+     */
+    @Override
+    public V remove(Object o) {
+        if (size == 0) {
+            return null;
+        }
+
+        K key = (K) o;
+        modCount++;
+        Node<K, V> e = root;
+        int cmp;
+
+        while (e != null) {
+            if ((cmp = e.key.compareTo(key)) > 0) {
+                e = e.left;
+            } else if (cmp < 0) {
+                e = e.right;
+            } else {
+                V old = e.value;
+                e = removeImpl(e);
+                balanceAfterRemoval(e);
+                return old;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Gets the value associated with <tt>key</tt>. Runs in logarithmic time.
+     *
+     * @param key the key.
+     *
+     * @return the value associated with <tt>key</tt>.
+     */
+    @Override
+    public V get(Object o) {
+        K key = (K) o;
+        Node<K, V> e = root;
+        int cmp;
+
+        while (e != null) {
+            if ((cmp = key.compareTo(e.key)) < 0) {
+                e = e.left;
+            } else if (cmp > 0) {
+                e = e.right;
+            } else {
+                return e.value;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Gets the entry with ith smallest key. Runs in logarithmic time.
+     *
+     * @param i the index of the node, by in-order.
+     *
+     * @return an entry if i is within range, or <tt>null</tt> otherwise.
+     */
+    public Node<K, V> entryAt(int i) {
+        if (i < 0 || i >= size) {
+            return null;
+        }
+
+        int save = i;
