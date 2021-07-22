@@ -501,3 +501,90 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
         }
 
         int save = i;
+        Node<K, V> e = root;
+
+        for (;;) {
+            if (i < e.count) {
+                e = e.left;
+            } else if (i > e.count) {
+                i -= e.count + 1;
+                e = e.right;
+            } else {
+                return e;
+            }
+        }
+    }
+
+    /**
+     * Returns the rank of a key, or <tt>-1</tt> if there is no such key in the
+     * tree.
+     *
+     * @param key the key to rank.
+     *
+     * @return the rank of key.
+     */
+    public int rankOf(K key) {
+        int cmp;
+        int counter = 0;
+        Node<K, V> e = root;
+
+        for (;;) {
+            if ((cmp = e.key.compareTo(key)) > 0) {
+                e = e.left;
+            } else if (cmp < 0) {
+                counter += e.count + 1;
+                e = e.right;
+            } else if (e == null) {
+                return -1;
+            } else {
+                return e.count + counter;
+            }
+        }
+    }
+
+    /**
+     * Retrieves the hash code of this <code>OrderedStatisticTree</code>.
+     *
+     * @return the hash code of this tree.
+     */
+    @Override
+    public int hashCode() {
+        if (root == null) {
+            return 0;
+        }
+
+        Node<K, V> e = root.min();
+        int sum = 0;
+
+        while (e != null) {
+            sum += e.hashCode();
+            e = e.next();
+        }
+
+        return sum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof OrderStatisticTree)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public Set<K> keySet() {
+        return new KeySet();
+    }
+
+    @Override
+    public Collection<V> values() {
+        throw new UnsupportedOperationException(
+                "Value view not yet implemented");
+    }
+
+    @Override
+    public Set<Map.Entry<K, V>> entrySet() {
+        return new EntrySet();
+    }
