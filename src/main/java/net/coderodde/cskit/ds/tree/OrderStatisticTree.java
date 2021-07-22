@@ -588,3 +588,81 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
     public Set<Map.Entry<K, V>> entrySet() {
         return new EntrySet();
     }
+
+    private class KeySet implements Set<K> {
+
+        @Override
+        public int size() {
+            return OrderStatisticTree.this.size;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return OrderStatisticTree.this.size == 0;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return OrderStatisticTree.this.containsKey(o);
+        }
+
+        @Override
+        public Iterator<K> iterator() {
+            return new KeyIterator();
+        }
+
+        @Override
+        public Object[] toArray() {
+            Object[] array = new Object[OrderStatisticTree.this.size];
+
+            if (root == null) {
+                return array;
+            }
+
+            Node<K, V> e = root.min();
+
+            for (int i = 0; i < array.length; ++i, e = e.next()) {
+                array[i] = e.key;
+            }
+
+            return array;
+        }
+
+        @Override
+        public <T> T[] toArray(T[] a) {
+            final int len = Math.min(OrderStatisticTree.this.size, a.length);
+
+            if (root == null) {
+                if (a.length > 0) {
+                    a[0] = null;
+                }
+
+                return a;
+            }
+
+            Node<K, V> e = root.min();
+
+            for (int i = 0; i < len; ++i, e = e.next()) {
+                a[i] = (T) e.key;
+            }
+
+            return a;
+        }
+
+        @Override
+        public boolean add(K e) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            boolean removed = OrderStatisticTree.this.containsKey(o);
+            OrderStatisticTree.this.remove(o);
+            return removed;
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            for (Object o : c) {
+                if (OrderStatisticTree.this.containsKey(o) == false) {
+                    return false;
