@@ -757,3 +757,76 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
 
             for (int i = 0; e != null; ++i, e = e.next()) {
                 array[i] = e;
+            }
+
+            return array;
+        }
+
+        @Override
+        public <T> T[] toArray(T[] a) {
+            final int max = Math.min(a.length, OrderStatisticTree.this.size);
+
+            if (root == null) {
+                return a;
+            }
+
+            Node<K, V> e = root.min();
+
+            for (int i = 0; i < max; ++i, e = e.next()) {
+                a[i] = (T) e;
+            }
+
+            if (a.length > max) {
+                a[max] = null;
+            }
+
+            return a;
+        }
+
+        @Override
+        public boolean add(Map.Entry<K, V> e) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            boolean ret = OrderStatisticTree.this.containsKey(o);
+            OrderStatisticTree.this.remove(o);
+            return ret;
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            for (Object o : c) {
+                Map.Entry<K, V> e = (Map.Entry<K, V>) o;
+
+                if (OrderStatisticTree.this.containsKey(e.getKey()) == false) {
+                    return false;
+                }
+
+                if (OrderStatisticTree.this
+                        .get(e.getKey()).equals(e.getValue()) == false) {
+                    return false;
+                }
+
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends Map.Entry<K, V>> c) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            if (root == null) {
+                return false;
+            }
+
+            Iterator<K> iterator = OrderStatisticTree.this.iterator();
+            boolean modified = false;
+
+            while (iterator.hasNext()) {
+                K key = iterator.next();
