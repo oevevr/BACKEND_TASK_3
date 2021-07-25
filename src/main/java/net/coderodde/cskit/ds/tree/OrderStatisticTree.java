@@ -830,3 +830,75 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
 
             while (iterator.hasNext()) {
                 K key = iterator.next();
+
+                if (c.contains(key) == false) {
+                    iterator.remove();
+                    modified = true;
+                }
+            }
+
+            return modified;
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            boolean modified = false;
+
+            for (Object o : c) {
+                Map.Entry<K, V> e = (Map.Entry<K, V>) o;
+                V value = OrderStatisticTree.this.get(e.getKey());
+
+                if (value.equals(e.getValue())) {
+                    OrderStatisticTree.this.remove(e.getKey());
+                    modified = true;
+                }
+            }
+
+            return modified;
+        }
+
+        @Override
+        public void clear() {
+            OrderStatisticTree.this.clear();
+        }
+
+        private class EntryIterator implements Iterator<Map.Entry<K, V>> {
+
+            private Node<K, V> entry = (root == null ? null : root.min());
+            private Node<K, V> lastReturned;
+            private final long expectedModCount =
+                    OrderStatisticTree.this.modCount;
+
+            @Override
+            public boolean hasNext() {
+                checkModCount();
+                return entry != null;
+            }
+
+            @Override
+            public Map.Entry<K, V> next() {
+                checkModCount();
+                lastReturned = entry;
+                entry = entry.next();
+                return lastReturned;
+            }
+
+            @Override
+            public void remove() {
+                checkModCount();
+
+                if (lastReturned == null) {
+                    throw new NoSuchElementException("No entry to remove.");
+                }
+
+                lastReturned = removeImpl(lastReturned);
+                balanceAfterRemoval(lastReturned);
+                lastReturned = null;
+            }
+
+            private void checkModCount() {
+                if (expectedModCount != OrderStatisticTree.this.modCount) {
+                    throw new ConcurrentModificationException(
+                            "The tree is modified while iterating entries.");
+                }
+            }
