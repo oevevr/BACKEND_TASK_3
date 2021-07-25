@@ -666,3 +666,94 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
             for (Object o : c) {
                 if (OrderStatisticTree.this.containsKey(o) == false) {
                     return false;
+                }
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends K> c) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            Iterator<K> iterator = new KeyIterator();
+            boolean modified = false;
+
+            while (iterator.hasNext()) {
+                K key = iterator.next();
+
+                if (c.contains(key) == false) {
+                    iterator.remove();
+                }
+            }
+
+            return modified;
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            boolean modified = false;
+
+            for (Object o : c) {
+                if (OrderStatisticTree.this.containsKey(o)) {
+                    modified = true;
+                }
+
+                OrderStatisticTree.this.remove(o);
+            }
+
+            return modified;
+        }
+
+        @Override
+        public void clear() {
+            OrderStatisticTree.this.clear();
+        }
+    }
+
+    /**
+     * This class implements the set over this tree's entries.
+     */
+    private class EntrySet implements Set<Map.Entry<K, V>> {
+
+        @Override
+        public int size() {
+            return OrderStatisticTree.this.size;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return OrderStatisticTree.this.size == 0;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            if (!(o instanceof Node)) {
+                return false;
+            }
+
+            Node<K, V> e = (Node<K, V>) o;
+            V value = OrderStatisticTree.this.get(e.key);
+            return value.equals(e.value);
+        }
+
+        @Override
+        public Iterator<Map.Entry<K, V>> iterator() {
+            return new EntryIterator();
+        }
+
+        @Override
+        public Object[] toArray() {
+            Object[] array = new Object[OrderStatisticTree.this.size];
+
+            if (root == null) {
+                return array;
+            }
+
+            Node<K, V> e = root.min();
+
+            for (int i = 0; e != null; ++i, e = e.next()) {
+                array[i] = e;
