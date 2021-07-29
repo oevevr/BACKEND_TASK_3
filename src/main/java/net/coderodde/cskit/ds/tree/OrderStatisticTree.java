@@ -902,3 +902,73 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
                             "The tree is modified while iterating entries.");
                 }
             }
+        }
+    }
+
+    @Override
+    public Iterator<K> iterator() {
+        return new KeyIterator();
+    }
+
+    /**
+     * Checks all of the AVL-tree invariants.
+     *
+     * @return <tt>true</tt> if this is a valid AVL-tree, <tt>false</tt>
+     * otherwise.
+     */
+    public boolean isHealthy() {
+        return !hasCycles()
+                && heightFieldsOK()
+                && isBalanced()
+                && isWellIndexed();
+    }
+
+    private boolean hasCycles() {
+        return hasCycles(root, new java.util.HashSet<Node<K, V>>());
+    }
+
+    private boolean heightFieldsOK() {
+        if (root == null) {
+            return true;
+        }
+
+        return checkHeight(root) == root.h;
+    }
+
+    private boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isWellIndexed() {
+        if (size == 0) {
+            return true;
+        }
+
+        boolean leftOk = root.count == countLeft(root.left);
+        boolean rightOk = (root.right != null)
+                         ? root.right.count == countLeft(root.right.left) :
+                         true;
+
+        return leftOk && rightOk;
+    }
+
+    private int checkHeight(Node<K, V> e) {
+        if (e == null) {
+            return -1;
+        }
+
+        int l = checkHeight(e.left);
+
+        if (l == Integer.MIN_VALUE) {
+            return l;
+        }
+
+        int r = checkHeight(e.right);
+
+        if (r == Integer.MIN_VALUE) {
+            return r;
+        }
+
+        int h = Math.max(l, r) + 1;
+
+        if (h != e.h) {
