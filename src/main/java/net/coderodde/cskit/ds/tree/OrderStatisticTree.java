@@ -972,3 +972,85 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
         int h = Math.max(l, r) + 1;
 
         if (h != e.h) {
+            return Integer.MIN_VALUE;
+        } else {
+            return h;
+        }
+    }
+
+    private boolean isBalanced(Node<K, V> e) {
+        if (e == null) {
+            return true;
+        }
+
+        if (Math.abs(h(e.left) - h(e.right)) > 1) {
+            return false;
+        }
+
+        if (isBalanced(e.left) == false) {
+            return false;
+        }
+
+        if (isBalanced(e.right) == false) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private int countLeft(Node<K, V> e) {
+        if (e == null) {
+            return 0;
+        }
+
+        int l;
+        int r;
+
+        if ((l = countLeft(e.left)) != e.count) {
+            return Integer.MIN_VALUE;
+        }
+
+        if ((r = countLeft(e.right)) == Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+
+        return l + r + 1;
+    }
+
+    private boolean hasCycles(Node<K, V> e, java.util.HashSet<Node<K, V>> set) {
+        if (e == null) {
+            return false;
+        }
+
+        if (set.contains(e)) {
+            return true;
+        }
+
+        set.add(e);
+
+        if (hasCycles(e.left, set)) {
+            return true;
+        }
+
+        if (hasCycles(e.right, set)) {
+            return true;
+        }
+
+        set.remove(e);
+        return false;
+    }
+
+    private void balanceAfterRemoval(Node<K, V> e) {
+        Node<K, V> p = e.parent;
+
+        while (p != null) {
+
+            Node<K, V> subroot;
+            Node<K, V> pp = p.parent;
+            boolean left = (pp == null || pp.left == p);
+
+            if (h(p.left) == h(p.right) + 2) {
+                if (h(p.left.left) < h(p.left.right)) {
+                    subroot = leftRightRotate(p);
+                } else {
+                    subroot = rightRotate(p);
