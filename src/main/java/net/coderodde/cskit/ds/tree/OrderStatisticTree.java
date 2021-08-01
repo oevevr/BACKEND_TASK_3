@@ -1054,3 +1054,76 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
                     subroot = leftRightRotate(p);
                 } else {
                     subroot = rightRotate(p);
+                }
+            } else if (h(p.left) + 2 == h(p.right)) {
+                if (h(p.right.right) < h(p.right.left)) {
+                    subroot = rightLeftRotate(p); //?
+                } else {
+                    subroot = leftRotate(p);
+                }
+            } else {
+                p.h = Math.max(h(p.left), h(p.right)) + 1;
+                p = p.parent;
+                continue;
+            }
+
+            if (p == root) {
+                root = subroot;
+                return;
+            }
+
+            if (left) {
+                pp.left = subroot;
+            } else {
+                pp.right = subroot;
+            }
+
+            p = pp;
+        }
+    }
+
+    private class KeyIterator implements Iterator<K> {
+
+        private long expectedModCount = OrderStatisticTree.this.modCount;
+        private Node<K, V> entry = OrderStatisticTree.this.root.min();
+        private Node<K, V> lastReturned = null;
+
+        @Override
+        public boolean hasNext() {
+            checkModCount();
+            return entry != null;
+        }
+
+        @Override
+        public K next() {
+            checkModCount();
+            lastReturned = entry;
+            entry = entry.next();
+            return lastReturned.getKey();
+        }
+
+        @Override
+        public void remove() {
+            checkModCount();
+
+            if (lastReturned == null) {
+                throw new NoSuchElementException(
+                        "Trying to remove an element twice.");
+            }
+
+            lastReturned = removeImpl(lastReturned);
+            balanceAfterRemoval(lastReturned);
+            lastReturned = null;
+        }
+
+        private void checkModCount() {
+            if (expectedModCount != OrderStatisticTree.this.modCount) {
+                throw new ConcurrentModificationException(
+                        "Concurrent modification detected.");
+            }
+        }
+    }
+
+    /**
+     * Returns the height of an argument node or -1, if <tt>e</tt> is null.
+     *
