@@ -1127,3 +1127,69 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
     /**
      * Returns the height of an argument node or -1, if <tt>e</tt> is null.
      *
+     * @param e the node to measure.
+     * @return the height of <tt>e</tt> or -1, if <tt>e</tt> is null.
+     */
+    private int h(Node<K, V> e) {
+        return e != null ? e.h : -1;
+    }
+
+    /**
+     * The left rotation of a tree node.
+     *
+     * @param e the disbalanced node.
+     * @return the new root of a balanced subtree.
+     */
+    private Node<K, V> leftRotate(Node<K, V> e) {
+        Node<K, V> ee = e.right;
+        ee.parent = e.parent;
+        e.parent = ee;
+        e.right = ee.left;
+        ee.left = e;
+
+        if (e.right != null) {
+            e.right.parent = e;
+        }
+
+        e.h = Math.max(h(e.left), h(e.right)) + 1;
+        ee.h = Math.max(h(ee.left), h(ee.right)) + 1;
+
+        ee.count += e.count + 1;
+        return ee;
+    }
+
+    /**
+     * The right rotation of a tree node.
+     *
+     * @param e the disbalanced node.
+     * @return the new root of a balanced subtree.
+     */
+    private Node<K, V> rightRotate(Node<K, V> e) {
+        Node<K, V> ee = e.left;
+        ee.parent = e.parent;
+        e.parent = ee;
+        e.left = ee.right;
+        ee.right = e;
+
+        if (e.left != null) {
+            e.left.parent = e;
+        }
+
+        e.h = Math.max(h(e.left), h(e.right)) + 1;
+        ee.h = Math.max(h(ee.left), h(ee.right)) + 1;
+
+        e.count -= ee.count + 1;
+        return ee;
+    }
+
+    /**
+     * The left/right rotation of a tree node.
+     *
+     * @param e the disbalanced node.
+     * @return the new root of a balanced subtree.
+     */
+    private Node<K, V> leftRightRotate(Node<K, V> e) {
+        Node<K, V> ee = e.left;
+        e.left = leftRotate(ee);
+        return rightRotate(e);
+    }
