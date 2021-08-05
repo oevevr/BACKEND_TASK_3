@@ -1193,3 +1193,80 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
         e.left = leftRotate(ee);
         return rightRotate(e);
     }
+
+    /**
+     * The right/left rotation of a tree node.
+     *
+     * @param e the disbalanced node.
+     * @return the new root of a balanced subtree.
+     */
+    private Node<K, V> rightLeftRotate(Node<K, V> e) {
+        Node<K, V> ee = e.right;
+        e.right = rightRotate(ee);
+        return leftRotate(e);
+    }
+
+    /**
+     * Removes a node from the tree without balancing the tree.
+     *
+     * @param e the node to remove.
+     * @return the actual node removed.
+     */
+    private Node<K, V> removeImpl(Node<K, V> e) {
+        --size;
+
+        if (e.left == null && e.right == null) {
+            // The case where the removed node has no children.
+            Node<K, V> p = e.parent;
+
+            if (p == null) {
+                root = null;
+                return e;
+            }
+
+            if (e == p.left) {
+                p.left = null;
+                p.count = 0;
+            } else {
+                p.right = null;
+            }
+
+            Node<K, V> pp = p.parent;
+
+            while (pp != null) {
+                if (pp.left == p) {
+                    pp.count--;
+                }
+
+                p = pp;
+                pp = pp.parent;
+            }
+
+            return e;
+        }
+
+        if (e.left == null || e.right == null) {
+            // Case: only one child.
+            Node<K, V> child = e.left != null ? e.left : e.right;
+            Node<K, V> p = e.parent;
+            child.parent = p;
+
+            if (p == null) {
+                root = child;
+                return e;
+            }
+
+            if (e == p.left) {
+                p.left = child;
+            } else {
+                p.right = child;
+            }
+
+            while (p != null) {
+                if (p.left == child) {
+                    p.count--;
+                }
+
+                child = p;
+                p = p.parent;
+            }
