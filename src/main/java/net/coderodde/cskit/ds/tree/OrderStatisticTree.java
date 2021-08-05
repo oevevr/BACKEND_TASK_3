@@ -1270,3 +1270,38 @@ public class OrderStatisticTree<K extends Comparable<? super K>, V>
                 child = p;
                 p = p.parent;
             }
+
+            return e;
+        }
+
+        // Case: two children.
+        Node<K, V> successor = e.right.min();
+        e.key = successor.key;
+        e.value = successor.value;
+        Node<K, V> child = successor.right;
+        Node<K, V> p = successor.parent;
+
+        if (p.left == successor) {
+            p.left = child;
+        } else {
+            p.right = child;
+        }
+
+        if (child != null) {
+            child.parent = p;
+        }
+
+        Node<K, V> pLo = child;
+
+        while (p != null) {
+            if (p.left == pLo) {
+                p.count--;
+            }
+
+            pLo = p;
+            p = p.parent;
+        }
+
+        return successor;
+    }
+}
