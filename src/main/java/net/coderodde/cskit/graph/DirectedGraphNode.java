@@ -127,3 +127,75 @@ AllIterable<DirectedGraphNode> {
         private final long expectedModCount = DirectedGraphNode.this.modCount;
         private DirectedGraphNode lastReturned;
         private Iterator<DirectedGraphNode> iterator =
+                DirectedGraphNode.this.out.iterator();
+
+        @Override
+        public boolean hasNext() {
+            checkModCount(expectedModCount,
+                          DirectedGraphNode.this.modCount,
+                          "Concurrent modification encountered.");
+            return iterator.hasNext();
+        }
+
+        @Override
+        public DirectedGraphNode next() {
+            checkModCount(expectedModCount,
+                          DirectedGraphNode.this.modCount,
+                          "Concurrent modification encountered.");
+            return lastReturned = iterator.next();
+        }
+
+        @Override
+        public void remove() {
+            checkModCount(expectedModCount,
+                          DirectedGraphNode.this.modCount,
+                          "Concurrent modification encountered.");
+            if (lastReturned == null) {
+                throw new NoSuchElementException("No recently returned node.");
+            }
+
+            lastReturned.in.remove(DirectedGraphNode.this);
+            iterator.remove();
+            lastReturned = null;
+        }
+    }
+
+    /**
+     * This class implements an iterator over this node's parents.
+     */
+    private class ParentIterator implements Iterator<DirectedGraphNode> {
+
+        private long expectedModCount = DirectedGraphNode.this.modCount;
+        private DirectedGraphNode lastReturned;
+        private Iterator<DirectedGraphNode> iterator =
+                DirectedGraphNode.this.in.iterator();
+
+        @Override
+        public boolean hasNext() {
+            checkModCount(expectedModCount,
+                          DirectedGraphNode.this.modCount,
+                          "Concurrent modification encountered.");
+            return iterator.hasNext();
+        }
+
+        @Override
+        public DirectedGraphNode next() {
+            checkModCount(expectedModCount,
+                          DirectedGraphNode.this.modCount,
+                          "Concurrent modification encountered.");
+            return lastReturned = iterator.next();
+        }
+
+        @Override
+        public void remove() {
+            checkModCount(expectedModCount,
+                          DirectedGraphNode.this.modCount,
+                          "Concurrent modification encountered.");
+            if (lastReturned == null) {
+                throw new NoSuchElementException("No recently returned node.");
+            }
+
+            lastReturned.out.remove(DirectedGraphNode.this);
+            iterator.remove();
+            lastReturned = null;
+        }
