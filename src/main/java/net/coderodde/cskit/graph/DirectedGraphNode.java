@@ -50,3 +50,80 @@ AllIterable<DirectedGraphNode> {
      * Constructs a new <code>DirectedGraphNode</code>.
      *
      * @param name the name of this node.
+     * @param capacity the initial capacity of each of the adjacency lists.
+     * @param loadFactor the load factor of each of the adjacency lists.
+     */
+    public DirectedGraphNode(String name, int capacity, float loadFactor) {
+        this.name = checkNotNull(name, "A node must have a non-null name.");
+        this.in = new LinkedHashSet<DirectedGraphNode>(capacity, loadFactor);
+        this.out = new LinkedHashSet<DirectedGraphNode>(capacity, loadFactor);
+    }
+
+    public DirectedGraphNode(String name, int capacity) {
+        this(name, capacity, DEFAULT_LOAD_FACTOR);
+    }
+
+    public DirectedGraphNode(String name) {
+        this(name, DEFAULT_INITIAL_CAPACITY);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "[Node: " + name + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this.name.equals(((DirectedGraphNode) o).name);
+    }
+
+    public void addChild(DirectedGraphNode child) {
+        if (this.out.contains(child) == false) {
+            modCount++;
+            this.out.add(child);
+            child.in.add(this);
+        }
+    }
+
+    public boolean hasChild(DirectedGraphNode candidate) {
+        return this.out.contains(candidate);
+    }
+
+    public void removeChild(DirectedGraphNode child) {
+        modCount++;
+        this.out.remove(child);
+        child.in.remove(this);
+    }
+
+    @Override
+    public Iterator<DirectedGraphNode> iterator() {
+        return new ChildIterator();
+    }
+
+    @Override
+    public Iterable<DirectedGraphNode> parentIterable() {
+        return new ParentIterable();
+    }
+
+    @Override
+    public Iterable<DirectedGraphNode> allIterable() {
+        return new AllIterable();
+    }
+
+    /**
+     * This class implements an iterator over this node's parents.
+     */
+    private class ChildIterator implements Iterator<DirectedGraphNode> {
+
+        private final long expectedModCount = DirectedGraphNode.this.modCount;
+        private DirectedGraphNode lastReturned;
+        private Iterator<DirectedGraphNode> iterator =
