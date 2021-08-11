@@ -199,3 +199,55 @@ AllIterable<DirectedGraphNode> {
             iterator.remove();
             lastReturned = null;
         }
+    }
+
+    private class AllIterator implements Iterator<DirectedGraphNode> {
+
+        private ChildIterator childIterator = new ChildIterator();
+        private ParentIterator parentIterator = new ParentIterator();
+
+        @Override
+        public boolean hasNext() {
+            return childIterator.hasNext() || parentIterator.hasNext();
+        }
+
+        @Override
+        public DirectedGraphNode next() {
+            return childIterator.hasNext() ?
+                   childIterator.next() :
+                   parentIterator.next();
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException(
+                    "Compound iterator does not support remove()."
+                    );
+        }
+    }
+
+    /**
+     * This class solely wraps an iterator over this node's parents.
+     */
+    private class ParentIterable implements Iterable<DirectedGraphNode> {
+
+        @Override
+        public Iterator<DirectedGraphNode> iterator() {
+            return new ParentIterator();
+        }
+
+    }
+
+    /**
+     * This class solely wraps an iterator over this node's parents and
+     * children.
+     */
+    private class AllIterable implements Iterable<DirectedGraphNode> {
+
+        @Override
+        public Iterator<DirectedGraphNode> iterator() {
+            return new AllIterator();
+        }
+
+    }
+}
