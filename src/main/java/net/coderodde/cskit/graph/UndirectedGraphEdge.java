@@ -9,4 +9,8 @@ import java.util.Comparator;
  */
 public class UndirectedGraphEdge {
 
-    private UndirectedGraphN
+    private UndirectedGraphNode a;
+    private UndirectedGraphNode b;
+    double w;
+
+    public UndirectedG
