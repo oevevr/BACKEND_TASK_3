@@ -14,4 +14,9 @@ public class UndirectedGraphEdge {
     double w;
 
     public UndirectedGraphEdge(UndirectedGraphNode a,
-                               UndirectedGraphN
+                               UndirectedGraphNode b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    
