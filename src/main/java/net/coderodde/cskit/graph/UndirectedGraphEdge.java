@@ -13,4 +13,5 @@ public class UndirectedGraphEdge {
     private UndirectedGraphNode b;
     double w;
 
-    public UndirectedG
+    public UndirectedGraphEdge(UndirectedGraphNode a,
+                               UndirectedGraphN
