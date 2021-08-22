@@ -28,4 +28,8 @@ public class UndirectedGraphEdge {
     }
 
     public UndirectedGraphNode getA() {
-        
+        return a;
+    }
+
+    public UndirectedGraphNode getB() {
+        return b;
