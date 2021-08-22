@@ -33,3 +33,8 @@ public class UndirectedGraphEdge {
 
     public UndirectedGraphNode getB() {
         return b;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        UndirectedGraphE
