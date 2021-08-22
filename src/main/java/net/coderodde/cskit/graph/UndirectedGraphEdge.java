@@ -23,4 +23,9 @@ public class UndirectedGraphEdge {
         return w;
     }
 
-    public void setWeigh
+    public void setWeight(double w) {
+        this.w = w;
+    }
+
+    public UndirectedGraphNode getA() {
+        
