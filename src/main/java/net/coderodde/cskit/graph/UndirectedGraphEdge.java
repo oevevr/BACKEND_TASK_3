@@ -39,4 +39,6 @@ public class UndirectedGraphEdge {
     public boolean equals(Object o) {
         UndirectedGraphEdge edge = (UndirectedGraphEdge) o;
         return (edge.a.getName().equals(this.a.getName())
-                && edge.b.getName().equals(this.b.get
+                && edge.b.getName().equals(this.b.getName()))
+                || (edge.a.getName().equals(this.b.getName())
+   
