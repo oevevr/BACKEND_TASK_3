@@ -41,4 +41,8 @@ public class UndirectedGraphEdge {
         return (edge.a.getName().equals(this.a.getName())
                 && edge.b.getName().equals(this.b.getName()))
                 || (edge.a.getName().equals(this.b.getName())
+                && (edge.b.getName().equals(this.a.getName())));
+    }
+
+    @Override
    
