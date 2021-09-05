@@ -45,4 +45,6 @@ public class UndirectedGraphEdge {
     }
 
     @Override
-   
+    public int hashCode() {
+        return a.hashCode() ^ b.hashCode();
+  
