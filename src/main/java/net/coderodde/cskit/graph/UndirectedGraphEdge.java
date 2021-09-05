@@ -47,4 +47,7 @@ public class UndirectedGraphEdge {
     @Override
     public int hashCode() {
         return a.hashCode() ^ b.hashCode();
-  
+    }
+
+    public static final class AscendingComparator
+    implements
