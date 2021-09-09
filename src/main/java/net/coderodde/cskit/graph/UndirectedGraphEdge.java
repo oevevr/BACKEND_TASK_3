@@ -50,4 +50,7 @@ public class UndirectedGraphEdge {
     }
 
     public static final class AscendingComparator
-    implements
+    implements Comparator<UndirectedGraphEdge> {
+
+        @Override
+        public int 
