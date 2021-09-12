@@ -59,4 +59,10 @@ public class UndirectedGraphEdge {
             } else if (o1.w > o2.w) {
                 return 1;
             } else {
-                return
+                return 0;
+            }
+        }
+    }
+
+    public static final class DescendingComparator
+   
