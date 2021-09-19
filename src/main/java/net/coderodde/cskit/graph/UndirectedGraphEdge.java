@@ -65,4 +65,7 @@ public class UndirectedGraphEdge {
     }
 
     public static final class DescendingComparator
-   
+    implements Comparator<UndirectedGraphEdge> {
+
+        @Override
+        public i
