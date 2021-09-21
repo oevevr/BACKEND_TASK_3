@@ -68,4 +68,5 @@ public class UndirectedGraphEdge {
     implements Comparator<UndirectedGraphEdge> {
 
         @Override
-        public i
+        public int compare(UndirectedGraphEdge o1, UndirectedGraphEdge o2) {
+            if (o1.w
