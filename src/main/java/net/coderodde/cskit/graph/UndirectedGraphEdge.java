@@ -69,4 +69,6 @@ public class UndirectedGraphEdge {
 
         @Override
         public int compare(UndirectedGraphEdge o1, UndirectedGraphEdge o2) {
-            if (o1.w
+            if (o1.w > o2.w) {
+                return -1;
+            } else if (o1.w < o
