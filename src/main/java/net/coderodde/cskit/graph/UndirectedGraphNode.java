@@ -5,3 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import static net.coderodde.cskit.Utilities.checkNotNull;
+
+/**
+ * This class defines nodes of undirected graphs.
+ *
+ * @author Rodion Ef
