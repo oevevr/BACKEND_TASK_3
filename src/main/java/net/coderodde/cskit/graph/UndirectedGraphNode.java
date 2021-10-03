@@ -16,4 +16,8 @@ public class UndirectedGraphNode
 implements Iterable<UndirectedGraphNode> {
 
     private Set<UndirectedGraphNode> adj =
-            new LinkedHashSet<UndirectedGrap
+            new LinkedHashSet<UndirectedGraphNode>();
+
+    private final String name;
+
+    public UndirectedGraphNode(String name)
