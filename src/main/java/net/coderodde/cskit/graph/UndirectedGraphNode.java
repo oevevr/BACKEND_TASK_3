@@ -13,3 +13,6 @@ import static net.coderodde.cskit.Utilities.checkNotNull;
  * @version 1.618033 (28.12.2013)
  */
 public class UndirectedGraphNode
+implements Iterable<UndirectedGraphNode> {
+
+    private Set<Und
