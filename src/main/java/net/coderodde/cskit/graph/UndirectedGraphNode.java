@@ -9,4 +9,7 @@ import static net.coderodde.cskit.Utilities.checkNotNull;
 /**
  * This class defines nodes of undirected graphs.
  *
- * @author Rodion Ef
+ * @author Rodion Efremov
+ * @version 1.618033 (28.12.2013)
+ */
+public class UndirectedGraphNode
