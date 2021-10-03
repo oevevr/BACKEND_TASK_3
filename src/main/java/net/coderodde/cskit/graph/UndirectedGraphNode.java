@@ -15,4 +15,5 @@ import static net.coderodde.cskit.Utilities.checkNotNull;
 public class UndirectedGraphNode
 implements Iterable<UndirectedGraphNode> {
 
-    private Set<Und
+    private Set<UndirectedGraphNode> adj =
+            new LinkedHashSet<UndirectedGrap
