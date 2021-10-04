@@ -20,4 +20,6 @@ implements Iterable<UndirectedGraphNode> {
 
     private final String name;
 
-    public UndirectedGraphNode(String name)
+    public UndirectedGraphNode(String name) {
+        checkNotNull(name, "Undirected nodes must have a name.");
+        this.n
