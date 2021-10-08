@@ -22,4 +22,11 @@ implements Iterable<UndirectedGraphNode> {
 
     public UndirectedGraphNode(String name) {
         checkNotNull(name, "Undirected nodes must have a name.");
-        this.n
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    
