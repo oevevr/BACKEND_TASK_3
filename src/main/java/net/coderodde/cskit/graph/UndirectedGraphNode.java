@@ -29,4 +29,6 @@ implements Iterable<UndirectedGraphNode> {
         return name;
     }
 
-    
+    @Override
+    public boolean equals(Object o) {
+        return ((UndirectedG
