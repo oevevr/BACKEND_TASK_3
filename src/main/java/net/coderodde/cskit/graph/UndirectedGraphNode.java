@@ -31,4 +31,8 @@ implements Iterable<UndirectedGraphNode> {
 
     @Override
     public boolean equals(Object o) {
-        return ((UndirectedG
+        return ((UndirectedGraphNode) o).getName().equals(this.getName());
+    }
+
+    @Override
+    pu
