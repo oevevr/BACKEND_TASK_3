@@ -35,4 +35,8 @@ implements Iterable<UndirectedGraphNode> {
     }
 
     @Override
-    pu
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    public voi
