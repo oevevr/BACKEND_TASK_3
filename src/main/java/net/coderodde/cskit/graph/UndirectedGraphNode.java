@@ -42,4 +42,10 @@ implements Iterable<UndirectedGraphNode> {
     public void connect(UndirectedGraphNode other) {
         if (this == other) {
             return;
-        
+        }
+
+        adj.add(other);
+        other.adj.add(this);
+    }
+
+    public boolean h
