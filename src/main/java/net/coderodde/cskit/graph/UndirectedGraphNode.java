@@ -39,4 +39,7 @@ implements Iterable<UndirectedGraphNode> {
         return name.hashCode();
     }
 
-    public voi
+    public void connect(UndirectedGraphNode other) {
+        if (this == other) {
+            return;
+        
