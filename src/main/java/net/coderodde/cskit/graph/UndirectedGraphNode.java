@@ -48,4 +48,5 @@ implements Iterable<UndirectedGraphNode> {
         other.adj.add(this);
     }
 
-    public boolean h
+    public boolean hasConnectionTo(UndirectedGraphNode other) {
+        return this.adj.contain
