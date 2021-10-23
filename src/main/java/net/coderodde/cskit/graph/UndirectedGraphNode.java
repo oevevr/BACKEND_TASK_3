@@ -54,3 +54,7 @@ implements Iterable<UndirectedGraphNode> {
 
     @Override
     public Iterator<UndirectedGraphNode> iterator() {
+        return new AllIterator();
+    }
+
+    private class AllIterator implement
