@@ -60,4 +60,6 @@ implements Iterable<UndirectedGraphNode> {
     private class AllIterator implements Iterator<UndirectedGraphNode> {
 
         private Iterator<UndirectedGraphNode> iterator =
- 
+                UndirectedGraphNode.this.adj.iterator();
+
+        private Undirected
