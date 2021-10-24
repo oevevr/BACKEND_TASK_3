@@ -57,4 +57,7 @@ implements Iterable<UndirectedGraphNode> {
         return new AllIterator();
     }
 
-    private class AllIterator implement
+    private class AllIterator implements Iterator<UndirectedGraphNode> {
+
+        private Iterator<UndirectedGraphNode> iterator =
+ 
