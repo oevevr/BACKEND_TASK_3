@@ -70,4 +70,8 @@ implements Iterable<UndirectedGraphNode> {
         }
 
         @Override
-        public UndirectedGraphNode next
+        public UndirectedGraphNode next() {
+            return lastReturned = iterator.next();
+        }
+
+        @Ove
