@@ -62,4 +62,8 @@ implements Iterable<UndirectedGraphNode> {
         private Iterator<UndirectedGraphNode> iterator =
                 UndirectedGraphNode.this.adj.iterator();
 
-        private Undirected
+        private UndirectedGraphNode lastReturned;
+
+        @Override
+        public boolean hasNext() {
+            return it
