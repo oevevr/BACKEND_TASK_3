@@ -66,4 +66,8 @@ implements Iterable<UndirectedGraphNode> {
 
         @Override
         public boolean hasNext() {
-            return it
+            return iterator.hasNext();
+        }
+
+        @Override
+        public UndirectedGraphNode next
