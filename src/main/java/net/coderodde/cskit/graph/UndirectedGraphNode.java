@@ -77,4 +77,5 @@ implements Iterable<UndirectedGraphNode> {
         @Override
         public void remove() {
             if (lastReturned == null) {
- 
+                throw new NoSuchElementException(
+                        "Ite
