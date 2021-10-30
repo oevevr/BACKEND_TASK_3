@@ -74,4 +74,7 @@ implements Iterable<UndirectedGraphNode> {
             return lastReturned = iterator.next();
         }
 
-        @Ove
+        @Override
+        public void remove() {
+            if (lastReturned == null) {
+ 
