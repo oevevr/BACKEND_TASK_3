@@ -78,4 +78,8 @@ implements Iterable<UndirectedGraphNode> {
         public void remove() {
             if (lastReturned == null) {
                 throw new NoSuchElementException(
-                        "Ite
+                        "Iterator does not point anywhere."
+                        );
+            }
+
+   
