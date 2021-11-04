@@ -83,4 +83,8 @@ implements Iterable<UndirectedGraphNode> {
             }
 
             iterator.remove();
-            lastReturned.adj.remove(UndirectedGr
+            lastReturned.adj.remove(UndirectedGraphNode.this);
+            lastReturned = null;
+        }
+    }
+}
