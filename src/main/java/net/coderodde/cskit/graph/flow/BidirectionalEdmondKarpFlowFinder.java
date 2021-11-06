@@ -116,3 +116,60 @@ public class BidirectionalEdmondKarpFlowFinder extends FlowFinder {
                                          parentMapB.keySet()) == false) {
                     DirectedGraphNode touchNode =
                             findTouchNode(levelA,
+                                          levelB,
+                                          parentMapA,
+                                          parentMapB,
+                                          distanceMapA,
+                                          distanceMapB);
+                    return tracebackPathBidirectional(touchNode,
+                                                      parentMapA,
+                                                      parentMapB);
+                }
+
+                lastA = queueA.getLast();
+            }
+
+            levelA.remove(current);
+            queueA.removeFirst();
+
+            // Expand the backwards search.
+            current = queueB.getFirst();
+
+            for (DirectedGraphNode u : current.allIterable()) {
+                if (parentMapB.containsKey(u)) {
+                    continue;
+                }
+
+                if (residualEdgeWeight(u, current, f, c) > 0.0) {
+                    queueB.addLast(u);
+                    levelB.add(u);
+                    parentMapB.put(u, current);
+                    distanceMapB.put(u, distanceMapB.get(current) + 1);
+                }
+            }
+
+            if (lastB.equals(current)) {
+                if (Collections.disjoint(levelB,
+                                         parentMapA.keySet()) == false) {
+                    DirectedGraphNode touchNode =
+                            findTouchNode(levelA,
+                                          levelB,
+                                          parentMapA,
+                                          parentMapB,
+                                          distanceMapA,
+                                          distanceMapB);
+                    return tracebackPathBidirectional(touchNode,
+                                                      parentMapA,
+                                                      parentMapB);
+                }
+
+                lastB = queueB.getLast();
+            }
+
+            levelB.remove(current);
+            queueB.removeFirst();
+        }
+
+        return java.util.Collections.<DirectedGraphNode>emptyList();
+    }
+}
