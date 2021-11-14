@@ -13,4 +13,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
 
 /**
- * This class implements the Edmond-Ka
+ * This class implements the Edmond-Karp maximum-flow algorithm.
+ *
+ * @author Rodion Efremov
+ * @version 1.61
