@@ -20,4 +20,5 @@ import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
  */
 public class EdmondKarpFlowFinder extends FlowFinder {
 
-   
+    @Override
+    public Pair<DirectedGraphWeightFunction, Double> find(D
