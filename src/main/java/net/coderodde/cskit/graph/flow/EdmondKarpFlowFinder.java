@@ -22,4 +22,5 @@ public class EdmondKarpFlowFinder extends FlowFinder {
 
     @Override
     public Pair<DirectedGraphWeightFunction, Double> find(DirectedGraphNode source,
-                                         
+                                             DirectedGraphNode sink,
+                                             DirectedGraphWeightFu
