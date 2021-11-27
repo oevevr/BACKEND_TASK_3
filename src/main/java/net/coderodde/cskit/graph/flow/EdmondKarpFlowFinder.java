@@ -25,4 +25,7 @@ public class EdmondKarpFlowFinder extends FlowFinder {
                                              DirectedGraphNode sink,
                                              DirectedGraphWeightFunction c) {
         double flow = 0.0;
-        DirectedGraphWeightFunction f = new DirectedGraph
+        DirectedGraphWeightFunction f = new DirectedGraphWeightFunction(); // The flow map.
+        List<DirectedGraphNode> path = null;
+
+       
