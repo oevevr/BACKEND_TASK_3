@@ -29,4 +29,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
         List<DirectedGraphNode> path = null;
 
         while ((path = findAugmentingPath(source, sink, c, f)).size() > 1) {
-        
+            double df = findMinimumEdgeAndRemove(path, c, f);
+            flow += df;
+       
