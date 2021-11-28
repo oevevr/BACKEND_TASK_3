@@ -36,4 +36,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
         return new Pair<DirectedGraphWeightFunction, Double>(f, flow);
     }
 
+    /**
+     * This method is essentially breadth-first search over the residual graph.
  
