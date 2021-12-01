@@ -38,4 +38,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
 
     /**
      * This method is essentially breadth-first search over the residual graph.
- 
+     *
+     * @param source the source node.
+     * @param sink the sink node.
