@@ -41,3 +41,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
      *
      * @param source the source node.
      * @param sink the sink node.
+     * @param c the capacity map.
+     * @param f the flow map.
+     *
