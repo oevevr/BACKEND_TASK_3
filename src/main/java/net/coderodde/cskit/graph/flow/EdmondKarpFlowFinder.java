@@ -46,4 +46,5 @@ public class EdmondKarpFlowFinder extends FlowFinder {
      *
      * @return an augmenting path.
      */
-    private List<DirectedGraphNode>
+    private List<DirectedGraphNode> findAugmentingPath(DirectedGraphNode source,
+                    
