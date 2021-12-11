@@ -44,3 +44,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
      * @param c the capacity map.
      * @param f the flow map.
      *
+     * @return an augmenting path.
+     */
+    private List<DirectedGraphNode>
