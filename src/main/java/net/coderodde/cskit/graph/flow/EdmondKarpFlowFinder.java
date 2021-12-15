@@ -50,4 +50,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
                                                        DirectedGraphNode sink,
                                                        DirectedGraphWeightFunction c,
                                                        DirectedGraphWeightFunction f) {
-        Deque<DirectedGraphNode> queue = new LinkedList<DirectedGr
+        Deque<DirectedGraphNode> queue = new LinkedList<DirectedGraphNode>();
+        Map<DirectedGraphNode, DirectedGraphNode> parentMap =
+        
