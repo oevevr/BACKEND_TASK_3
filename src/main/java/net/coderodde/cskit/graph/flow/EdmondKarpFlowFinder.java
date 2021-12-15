@@ -49,4 +49,5 @@ public class EdmondKarpFlowFinder extends FlowFinder {
     private List<DirectedGraphNode> findAugmentingPath(DirectedGraphNode source,
                                                        DirectedGraphNode sink,
                                                        DirectedGraphWeightFunction c,
-                                                       DirectedGraph
+                                                       DirectedGraphWeightFunction f) {
+        Deque<DirectedGraphNode> queue = new LinkedList<DirectedGr
