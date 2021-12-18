@@ -58,4 +58,7 @@ public class EdmondKarpFlowFinder extends FlowFinder {
         parentMap.put(source, null);
 
         while (queue.isEmpty() == false) {
-            DirectedGraphNode cu
+            DirectedGraphNode current = queue.removeFirst();
+
+            if (current.equals(sink)) {
+                r
