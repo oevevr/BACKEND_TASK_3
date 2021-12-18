@@ -54,4 +54,7 @@ public class EdmondKarpFlowFinder extends FlowFinder {
         Map<DirectedGraphNode, DirectedGraphNode> parentMap =
                    new HashMap<DirectedGraphNode, DirectedGraphNode>();
 
-        q
+        queue.add(source);
+        parentMap.put(source, null);
+
+ 
