@@ -61,4 +61,7 @@ public class EdmondKarpFlowFinder extends FlowFinder {
             DirectedGraphNode current = queue.removeFirst();
 
             if (current.equals(sink)) {
-                r
+                return Utilities.tracebackPath(current, parentMap);
+            }
+
+         
