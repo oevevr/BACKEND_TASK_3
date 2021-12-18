@@ -57,4 +57,5 @@ public class EdmondKarpFlowFinder extends FlowFinder {
         queue.add(source);
         parentMap.put(source, null);
 
- 
+        while (queue.isEmpty() == false) {
+            DirectedGraphNode cu
