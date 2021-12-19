@@ -69,4 +69,5 @@ public class EdmondKarpFlowFinder extends FlowFinder {
                     continue;
                 }
 
-     
+                if (residualEdgeWeight(current, u, f, c) > 0.0) {
+                  
