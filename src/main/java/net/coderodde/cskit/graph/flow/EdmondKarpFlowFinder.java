@@ -64,4 +64,5 @@ public class EdmondKarpFlowFinder extends FlowFinder {
                 return Utilities.tracebackPath(current, parentMap);
             }
 
-         
+            for (DirectedGraphNode u : current.allIterable()) {
+                
