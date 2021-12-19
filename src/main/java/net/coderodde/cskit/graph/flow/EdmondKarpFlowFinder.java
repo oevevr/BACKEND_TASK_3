@@ -65,4 +65,8 @@ public class EdmondKarpFlowFinder extends FlowFinder {
             }
 
             for (DirectedGraphNode u : current.allIterable()) {
-                
+                if (parentMap.containsKey(u)) {
+                    continue;
+                }
+
+     
