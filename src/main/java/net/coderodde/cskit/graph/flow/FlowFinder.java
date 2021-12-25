@@ -54,3 +54,70 @@ public abstract class FlowFinder {
         for (DirectedGraphNode u : graph) {
             u.removeChild(u);
         }
+    }
+
+    public static final DirectedGraphNode
+            createSuperSource(DirectedGraphWeightFunction w,
+                              DirectedGraphNode... sources) {
+        DirectedGraphNode superSource = new DirectedGraphNode("Super source");
+
+        for (DirectedGraphNode source : sources) {
+            superSource.addChild(source);
+            w.put(superSource, source, Double.POSITIVE_INFINITY);
+        }
+
+        return superSource;
+    }
+
+    public static final DirectedGraphNode
+            createSuperSink(DirectedGraphWeightFunction w,
+                            DirectedGraphNode... sinks) {
+        DirectedGraphNode superSink = new DirectedGraphNode("Super sink");
+
+        for (DirectedGraphNode sink : sinks) {
+            sink.addChild(superSink);
+            w.put(sink, superSink, Double.POSITIVE_INFINITY);
+        }
+
+        return superSink;
+    }
+
+    public static final void pruneSource(DirectedGraphNode source) {
+        Iterator<DirectedGraphNode> iterator =
+                source.parentIterable().iterator();
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
+    }
+
+    public static final void pruneSink(DirectedGraphNode sink) {
+        Iterator<DirectedGraphNode> iterator =
+                sink.iterator();
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
+    }
+
+    protected double findMinimumEdgeAndRemove(List<DirectedGraphNode> path,
+                                            DirectedGraphWeightFunction c,
+                                            DirectedGraphWeightFunction f) {
+        double min = Double.POSITIVE_INFINITY;
+
+        for (int i = 0; i < path.size() - 1; ++i) {
+            if (min > residualEdgeWeight(path.get(i), path.get(i + 1), f, c)) {
+                min = residualEdgeWeight(path.get(i), path.get(i + 1), f, c);
+            }
+        }
+
+        for (int i = 0; i < path.size() - 1; ++i) {
+            DirectedGraphNode from = path.get(i);
+            DirectedGraphNode to = path.get(i + 1);
+            f.put(from, to, f.get(from, to) + min);
+        }
+
+        return min;
+    }
