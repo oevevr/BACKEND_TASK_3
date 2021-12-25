@@ -76,4 +76,6 @@ public class EdmondKarpFlowFinder extends FlowFinder {
             }
         }
 
-        return java.util.Collection
+        return java.util.Collections.<DirectedGraphNode>emptyList();
+    }
+}
