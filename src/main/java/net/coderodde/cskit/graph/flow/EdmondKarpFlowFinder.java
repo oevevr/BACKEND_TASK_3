@@ -72,4 +72,8 @@ public class EdmondKarpFlowFinder extends FlowFinder {
                 if (residualEdgeWeight(current, u, f, c) > 0.0) {
                     parentMap.put(u, current);
                     queue.addLast(u);
-     
+                }
+            }
+        }
+
+        return java.util.Collection
