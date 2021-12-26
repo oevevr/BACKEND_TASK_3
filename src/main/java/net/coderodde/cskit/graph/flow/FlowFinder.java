@@ -121,3 +121,66 @@ public abstract class FlowFinder {
 
         return min;
     }
+
+    protected double residualEdgeWeight(DirectedGraphNode from,
+                                        DirectedGraphNode to,
+                                        DirectedGraphWeightFunction f,
+                                        DirectedGraphWeightFunction c) {
+        if (from.hasChild(to)) {
+            return c.get(from, to) - f.get(from, to);
+        } else if (to.hasChild(from)) {
+            return f.get(to, from);
+        } else {
+            return 0.0;
+        }
+    }
+
+    protected void initializePreflow(List<DirectedGraphNode> network,
+                                     DirectedGraphNode source,
+                                     Map<DirectedGraphNode, Integer> h,
+                                     Map<DirectedGraphNode, Double> e,
+                                     DirectedGraphWeightFunction f,
+                                     DirectedGraphWeightFunction c) {
+        for (DirectedGraphNode u : network) {
+            h.put(u, 0);
+            e.put(u, 0.0);
+        }
+/*
+        for (DirectedGraphNode from : network) {
+            for (DirectedGraphNode to : from) {
+                f.put(from, to, 0.0);
+            }
+        }*/
+
+        h.put(source, network.size());
+
+        for (DirectedGraphNode u : source) {
+            f.put(source, u, c.get(source, u));
+            e.put(u, c.get(source, u));
+            e.put(source, e.get(source) - c.get(source, u));
+        }
+    }
+
+    protected void relabel(DirectedGraphNode u,
+                           Map<DirectedGraphNode, Integer> h,
+                           DirectedGraphWeightFunction f,
+                           DirectedGraphWeightFunction c) {
+        int minh = Integer.MAX_VALUE;
+
+        for (DirectedGraphNode v : u.allIterable()) {
+            if (residualEdgeWeight(u, v, f, c) > 0.0) {
+                if (minh > h.get(v)) {
+                    minh = h.get(v);
+                }
+            }
+        }
+
+        h.put(u, minh + 1);
+    }
+
+    protected void push(DirectedGraphNode from,
+                        DirectedGraphNode to,
+                        DirectedGraphWeightFunction f,
+                        DirectedGraphWeightFunction c,
+                        Map<DirectedGraphNode, Double> e) {
+        double delta = Math.min(e.get(from),
