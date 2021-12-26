@@ -184,3 +184,18 @@ public abstract class FlowFinder {
                         DirectedGraphWeightFunction c,
                         Map<DirectedGraphNode, Double> e) {
         double delta = Math.min(e.get(from),
+                                residualEdgeWeight(from, to, f, c));
+
+        f.put(from, to, f.get(from, to) + delta);
+        f.put(to, from, f.get(to, from) - delta);
+/*
+        if (from.hasChild(to)) {
+            f.put(from, to, f.get(from, to) + delta);
+        } else {
+            f.put(to, from, f.get(to, from) - delta);
+        }*/
+
+        e.put(from, e.get(from) - delta);
+        e.put(to, e.get(to) + delta);
+    }
+}
