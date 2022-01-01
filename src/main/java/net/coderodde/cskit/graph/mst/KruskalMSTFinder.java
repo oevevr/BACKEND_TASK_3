@@ -53,3 +53,65 @@ public class KruskalMSTFinder extends MinimumSpanningTreeFinder {
 
         Set<UndirectedGraphNode> CLOSED =
                 new HashSet<UndirectedGraphNode>(graph.size());
+
+        for (UndirectedGraphEdge e : edgeList) {
+            if (CLOSED.size() >= set.size()) {
+                break;
+            }
+
+            if (ds.find(e.getA()).equals(ds.find(e.getB())) == false) {
+                ds.union(e.getA(), e.getB());
+                mst.add(e);
+                weight += e.getWeight();
+                CLOSED.add(e.getA());
+                CLOSED.add(e.getB());
+            }
+        }
+
+        return new Pair<List<UndirectedGraphEdge>, Double>(mst, weight);
+    }
+
+    private List<UndirectedGraphEdge>
+            checkPrerequisites(List<UndirectedGraphNode> graph,
+                                    UndirectedGraphWeightFunction w) {
+        checkNotNull(graph, "'graph' is null.");
+        checkNotNull(w, "'w' is null.");
+
+        set.clear();
+        map.clear();
+
+        if (graph.isEmpty()) {
+            return null;
+        }
+
+        set.addAll(expandGraph(graph));
+
+        for (UndirectedGraphNode u : set) {
+            map.put(u, new DisjointSet<UndirectedGraphNode>());
+        }
+
+        List<UndirectedGraphEdge> edgeList =
+                new ArrayList<UndirectedGraphEdge>();
+
+        Set<UndirectedGraphEdge> edgeSet =
+                new HashSet<UndirectedGraphEdge>();
+
+        for (UndirectedGraphNode u : set) {
+            for (UndirectedGraphNode v : u) {
+                UndirectedGraphEdge edge = new UndirectedGraphEdge(u, v);
+
+                if (edgeSet.contains(edge) == false) {
+                    edge.setWeight(w.get(u, v));
+                    edgeSet.add(edge);
+                    edgeList.add(edge);
+                }
+            }
+        }
+
+        Collections.sort(
+                edgeList,
+                new UndirectedGraphEdge.AscendingComparator());
+
+        return edgeList;
+    }
+}
