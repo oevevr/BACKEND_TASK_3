@@ -13,4 +13,7 @@ import net.coderodde.cskit.ds.pq.BinaryHeap;
 import net.coderodde.cskit.ds.pq.PriorityQueue;
 import net.coderodde.cskit.graph.UndirectedGraphEdge;
 import net.coderodde.cskit.graph.UndirectedGraphNode;
-import net.coderodde.cskit.graph.UndirectedGraphWeightFunctio
+import net.coderodde.cskit.graph.UndirectedGraphWeightFunction;
+
+/**
+ * This class implements Prim's algorithm for fi
