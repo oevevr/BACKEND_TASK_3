@@ -19,4 +19,6 @@ import net.coderodde.cskit.graph.UndirectedGraphWeightFunction;
  * This class implements Prim's algorithm for finding minimum spanning trees.
  *
  * @author Rodion Efremov
- * @versi
+ * @version 1.618033 (6.1.2014)
+ */
+public class PrimMSTFinder extend
