@@ -16,4 +16,7 @@ import net.coderodde.cskit.graph.UndirectedGraphNode;
 import net.coderodde.cskit.graph.UndirectedGraphWeightFunction;
 
 /**
- * This class implements Prim's algorithm for fi
+ * This class implements Prim's algorithm for finding minimum spanning trees.
+ *
+ * @author Rodion Efremov
+ * @versi
