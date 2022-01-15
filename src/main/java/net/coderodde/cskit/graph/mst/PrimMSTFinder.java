@@ -21,4 +21,6 @@ import net.coderodde.cskit.graph.UndirectedGraphWeightFunction;
  * @author Rodion Efremov
  * @version 1.618033 (6.1.2014)
  */
-public class PrimMSTFinder extend
+public class PrimMSTFinder extends MinimumSpanningTreeFinder {
+
+    private PriorityQueue<UndirectedGraphNode,
