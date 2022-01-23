@@ -28,4 +28,5 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
     private Set<UndirectedGraphNode> set =
             new HashSet<UndirectedGraphNode>();
 
-    private Map<UndirectedGraphNode, Und
+    private Map<UndirectedGraphNode, UndirectedGraphNode> parent =
+    new HashMap<UndirectedGraphNode, UndirectedGraphN
