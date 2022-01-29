@@ -33,4 +33,8 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
 
 
     public PrimMSTFinder(PriorityQueue<UndirectedGraphNode, Double> Q) {
-        this.Q = Q.n
+        this.Q = Q.newInstance();
+    }
+
+    public PrimMSTFinder() {
+        this.Q = new BinaryHe
