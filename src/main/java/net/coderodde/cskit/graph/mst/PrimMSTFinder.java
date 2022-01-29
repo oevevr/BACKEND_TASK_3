@@ -29,4 +29,8 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
             new HashSet<UndirectedGraphNode>();
 
     private Map<UndirectedGraphNode, UndirectedGraphNode> parent =
-    new HashMap<UndirectedGraphNode, UndirectedGraphN
+    new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
+
+
+    public PrimMSTFinder(PriorityQueue<UndirectedGraphNode, Double> Q) {
+        this.Q = Q.n
