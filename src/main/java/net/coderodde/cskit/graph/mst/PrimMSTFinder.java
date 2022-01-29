@@ -37,4 +37,8 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
     }
 
     public PrimMSTFinder() {
-        this.Q = new BinaryHe
+        this.Q = new BinaryHeap<UndirectedGraphNode, Double>();
+    }
+
+    @Override
+    public Pair<List<Und
