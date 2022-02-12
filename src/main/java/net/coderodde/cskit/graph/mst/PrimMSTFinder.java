@@ -43,4 +43,5 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
     @Override
     public Pair<List<UndirectedGraphEdge>, Double>
             find(List<UndirectedGraphNode> graph,
-   
+                 UndirectedGraphWeightFunction w) {
+        check
