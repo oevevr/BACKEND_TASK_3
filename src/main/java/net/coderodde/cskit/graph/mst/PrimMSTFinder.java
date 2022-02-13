@@ -57,4 +57,5 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
         Q.clear();
         parent.clear();
 
-     
+        for (UndirectedGraphNode u : set) {
+            Q.insert(u, Double.POSITIVE
