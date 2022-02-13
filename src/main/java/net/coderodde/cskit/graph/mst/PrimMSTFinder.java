@@ -52,4 +52,9 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
         }
 
         set.clear();
-        set.addAll(expandGr
+        set.addAll(expandGraph(graph));
+
+        Q.clear();
+        parent.clear();
+
+     
