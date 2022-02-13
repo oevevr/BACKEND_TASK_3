@@ -48,4 +48,8 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
         checkNotNull(w, "Weigth function 'w' is null.");
 
         if (graph.isEmpty()) {
-            return nul
+            return null;
+        }
+
+        set.clear();
+        set.addAll(expandGr
