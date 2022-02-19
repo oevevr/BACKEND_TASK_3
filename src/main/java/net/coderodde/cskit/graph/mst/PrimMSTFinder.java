@@ -62,4 +62,6 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
             parent.put(u, null);
         }
 
-        Q.de
+        Q.decreasePriority(graph.get(0), 0.0);
+
+        while (Q.isEmpty() == false) {
