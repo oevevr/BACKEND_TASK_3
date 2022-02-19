@@ -65,3 +65,6 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
         Q.decreasePriority(graph.get(0), 0.0);
 
         while (Q.isEmpty() == false) {
+            UndirectedGraphNode u = Q.extractMinimum();
+
+            for (UndirectedGrap
