@@ -70,4 +70,9 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
             for (UndirectedGraphNode v : u) {
                 if (Q.contains(v) && w.get(u, v) < Q.getPriority(v)) {
                     parent.put(v, u);
-                    Q.d
+                    Q.decreasePriority(v, w.get(u, v));
+                }
+            }
+        }
+
+  
