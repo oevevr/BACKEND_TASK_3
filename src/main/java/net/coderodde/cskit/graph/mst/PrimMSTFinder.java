@@ -76,4 +76,6 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
         }
 
         List<UndirectedGraphEdge> edges =
-                new ArrayList<
+                new ArrayList<UndirectedGraphEdge>(set.size() - 1);
+
+        Double cost = 0.0;
