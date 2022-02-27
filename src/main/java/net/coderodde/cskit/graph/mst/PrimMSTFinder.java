@@ -81,4 +81,7 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
         Double cost = 0.0;
 
         for (UndirectedGraphNode u : set) {
-            UndirectedGraphNode v = parent.get
+            UndirectedGraphNode v = parent.get(u);
+
+            if (v != null) {
+                double edgeCost = w
