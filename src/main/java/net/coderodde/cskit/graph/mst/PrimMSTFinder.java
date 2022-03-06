@@ -92,4 +92,6 @@ public class PrimMSTFinder extends MinimumSpanningTreeFinder {
             }
         }
 
-        return new Pair<List
+        return new Pair<List<UndirectedGraphEdge>, Double>(edges, cost);
+    }
+}
