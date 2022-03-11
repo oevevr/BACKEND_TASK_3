@@ -7,4 +7,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
 
 /**
- * This class implements <tt>A*</
+ * This class implements <tt>A*</tt>-search algorithm.
+ *
+ * @author Rodion Efremov
+ * @version 1.618
