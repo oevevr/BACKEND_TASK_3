@@ -10,4 +10,8 @@ import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
  * This class implements <tt>A*</tt>-search algorithm.
  *
  * @author Rodion Efremov
- * @version 1.618
+ * @version 1.618 (16.12.2013)
+ */
+public class AStarFinder extends GeneralPathFinder {
+
+    p
