@@ -14,4 +14,6 @@ import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
  */
 public class AStarFinder extends GeneralPathFinder {
 
-    p
+    private HeuristicFunction h;
+
+    public AStarFinder(PriorityQue
