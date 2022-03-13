@@ -17,4 +17,9 @@ public class AStarFinder extends GeneralPathFinder {
     private HeuristicFunction h;
 
     public AStarFinder(PriorityQueue<DirectedGraphNode, Double> OPEN,
-                       H
+                       HeuristicFunction h) {
+        super(OPEN);
+        this.h = h;
+    }
+
+    @Overr
