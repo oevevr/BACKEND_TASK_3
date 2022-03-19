@@ -25,4 +25,7 @@ public class AStarFinder extends GeneralPathFinder {
     @Override
     public List<DirectedGraphNode> find(DirectedGraphNode source,
                                         DirectedGraphNode target,
-                                        DirectedGraphWe
+                                        DirectedGraphWeightFunction w) {
+        h.setTarget(target);
+        OPEN.clear();
+        CLOSE
