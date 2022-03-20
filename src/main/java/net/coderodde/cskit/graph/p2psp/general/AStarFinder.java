@@ -32,4 +32,5 @@ public class AStarFinder extends GeneralPathFinder {
         GSCORE_MAP.clear();
         PARENT_MAP.clear();
 
-  
+        OPEN.insert(source, h.get(source));
+        PARENT_MAP.put(source
