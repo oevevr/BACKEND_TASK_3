@@ -28,4 +28,8 @@ public class AStarFinder extends GeneralPathFinder {
                                         DirectedGraphWeightFunction w) {
         h.setTarget(target);
         OPEN.clear();
-        CLOSE
+        CLOSED.clear();
+        GSCORE_MAP.clear();
+        PARENT_MAP.clear();
+
+  
