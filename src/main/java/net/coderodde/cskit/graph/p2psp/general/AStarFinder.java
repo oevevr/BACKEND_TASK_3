@@ -37,4 +37,7 @@ public class AStarFinder extends GeneralPathFinder {
         GSCORE_MAP.put(source, 0.0);
 
         while (OPEN.isEmpty() == false) {
-            DirectedGraphNode current = OPEN.extractMinimum()
+            DirectedGraphNode current = OPEN.extractMinimum();
+
+            if (current.equals(target)) {
+                return traceback
