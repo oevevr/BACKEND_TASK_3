@@ -40,4 +40,9 @@ public class AStarFinder extends GeneralPathFinder {
             DirectedGraphNode current = OPEN.extractMinimum();
 
             if (current.equals(target)) {
-                return traceback
+                return tracebackPath(current, PARENT_MAP);
+            }
+
+            CLOSED.add(current);
+
+        
