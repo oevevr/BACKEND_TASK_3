@@ -46,4 +46,8 @@ public class AStarFinder extends GeneralPathFinder {
             CLOSED.add(current);
 
             for (DirectedGraphNode child : current) {
-                if (CLOSED.contains(child
+                if (CLOSED.contains(child)) {
+                    continue;
+                }
+
+                double tmpg
