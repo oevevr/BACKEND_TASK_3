@@ -50,4 +50,6 @@ public class AStarFinder extends GeneralPathFinder {
                     continue;
                 }
 
-                double tmpg
+                double tmpg = GSCORE_MAP.get(current) + w.get(current, child);
+
+                i
