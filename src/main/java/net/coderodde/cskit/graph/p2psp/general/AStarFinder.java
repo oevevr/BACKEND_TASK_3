@@ -53,4 +53,6 @@ public class AStarFinder extends GeneralPathFinder {
                 double tmpg = GSCORE_MAP.get(current) + w.get(current, child);
 
                 if (GSCORE_MAP.containsKey(child) == false) {
-                    OPEN.insert(ch
+                    OPEN.insert(child, tmpg + h.get(child));
+                    GSCORE_MAP.put(child, tmpg);
+            
