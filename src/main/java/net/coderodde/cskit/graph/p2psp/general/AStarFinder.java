@@ -58,3 +58,5 @@ public class AStarFinder extends GeneralPathFinder {
                     PARENT_MAP.put(child, current);
                 } else if (tmpg < GSCORE_MAP.get(child)) {
                     OPEN.decreasePriority(child, tmpg + h.get(child));
+                    GSCORE_MAP.put(child, tmpg);
+                    PARENT_MAP.put(
