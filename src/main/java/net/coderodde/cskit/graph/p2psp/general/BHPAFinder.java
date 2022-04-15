@@ -36,3 +36,80 @@ public class BHPAFinder extends GeneralPathFinder {
 
         OPEN2 = OPEN.newInstance();
         CLOSED2 = new HashSet<DirectedGraphNode>();
+        GSCORE_MAP2 = new HashMap<DirectedGraphNode, Double>();
+        PARENT_MAP2 = new HashMap<DirectedGraphNode, DirectedGraphNode>();
+    }
+
+    @Override
+    public List<DirectedGraphNode> find(DirectedGraphNode source,
+                                        DirectedGraphNode target,
+                                        DirectedGraphWeightFunction w) {
+        h.setTarget(target);
+        OPEN.clear();
+        CLOSED.clear();
+        GSCORE_MAP.clear();
+        PARENT_MAP.clear();
+
+        h2.setTarget(source);
+        OPEN2.clear();
+        CLOSED2.clear();
+        GSCORE_MAP2.clear();
+        PARENT_MAP2.clear();
+
+        OPEN.insert(source, h.get(source));
+        PARENT_MAP.put(source, null);
+        GSCORE_MAP.put(source, 0.0);
+
+        OPEN2.insert(target, h2.get(target));
+        PARENT_MAP2.put(target, null);
+        GSCORE_MAP2.put(target, 0.0);
+
+        double m = Double.POSITIVE_INFINITY;
+        DirectedGraphNode touch = null;
+
+        while ((OPEN.isEmpty() == false) && (OPEN2.isEmpty() == false)) {
+            if (touch != null) {
+                double f1 = GSCORE_MAP.get(OPEN.min()) + h.get(OPEN.min());
+                double f2 = GSCORE_MAP2.get(OPEN2.min()) + h2.get(OPEN2.min());
+
+                if (m <= Math.max(f1, f2)) {
+                    return tracebackPathBidirectional(touch,
+                                                      PARENT_MAP,
+                                                      PARENT_MAP2);
+                }
+            }
+
+            DirectedGraphNode current = OPEN.extractMinimum();
+            CLOSED.add(current);
+
+            for (DirectedGraphNode child : current) {
+                if (CLOSED.contains(child)) {
+                    continue;
+                }
+
+                double tmpg = GSCORE_MAP.get(current) + w.get(current, child);
+
+                if (GSCORE_MAP.containsKey(child) == false) {
+                    OPEN.insert(child, tmpg + h.get(child));
+                    GSCORE_MAP.put(child, tmpg);
+                    PARENT_MAP.put(child, current);
+
+                    if (CLOSED2.contains(child)) {
+                        if (m > tmpg + GSCORE_MAP2.get(child)) {
+                            m = tmpg + GSCORE_MAP2.get(child);
+                            touch = child;
+                        }
+                    }
+                } else if (tmpg < GSCORE_MAP.get(child)) {
+                    OPEN.decreasePriority(child, tmpg + h.get(child));
+                    GSCORE_MAP.put(child, tmpg);
+                    PARENT_MAP.put(child, current);
+
+                    if (CLOSED2.contains(child)) {
+                        if (m > tmpg + GSCORE_MAP2.get(child)) {
+                            m = tmpg + GSCORE_MAP2.get(child);
+                            touch = child;
+                        }
+                    }
+                }
+            }
