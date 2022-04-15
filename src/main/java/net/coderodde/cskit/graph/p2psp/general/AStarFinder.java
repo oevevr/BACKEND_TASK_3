@@ -64,4 +64,6 @@ public class AStarFinder extends GeneralPathFinder {
             }
         }
 
-        return java.util.Col
+        return java.util.Collections.<DirectedGraphNode>emptyList();
+    }
+}
