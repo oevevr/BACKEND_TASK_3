@@ -33,3 +33,84 @@ public class BidirectionalDijkstraFinder extends GeneralPathFinder {
         CLOSEDB = new HashSet<DirectedGraphNode>();
         GSCOREB = new HashMap<DirectedGraphNode, Double>();
         PARENTB = new HashMap<DirectedGraphNode, DirectedGraphNode>();
+    }
+
+    @Override
+    public List<DirectedGraphNode> find(DirectedGraphNode source,
+                                        DirectedGraphNode target,
+                                        DirectedGraphWeightFunction w) {
+
+        PriorityQueue<DirectedGraphNode, Double> OPENA    = OPEN;
+        Set<DirectedGraphNode> CLOSEDA                    = CLOSED;
+        Map<DirectedGraphNode, Double> GSCOREA            = GSCORE_MAP;
+        Map<DirectedGraphNode, DirectedGraphNode> PARENTA = PARENT_MAP;
+
+        OPENA.clear();
+        OPENB.clear();
+        CLOSEDA.clear();
+        CLOSEDB.clear();
+        GSCOREA.clear();
+        GSCOREB.clear();
+        PARENTA.clear();
+        PARENTB.clear();
+
+        OPENA.insert(source, 0.0);
+        OPENB.insert(target, 0.0);
+
+        GSCOREA.put(source, 0.0);
+        GSCOREB.put(target, 0.0);
+
+        PARENTA.put(source, null);
+        PARENTB.put(target, null);
+
+        DirectedGraphNode touch = null;
+        double m = Double.POSITIVE_INFINITY;
+
+        while ((OPENA.isEmpty() == false) && (OPENB.isEmpty() == false)) {
+
+            if (m < GSCOREA.get(OPENA.min()) + GSCOREB.get(OPENB.min())) {
+                return tracebackPathBidirectional(touch, PARENTA, PARENTB);
+            }
+
+            DirectedGraphNode current = OPENA.extractMinimum();
+            CLOSEDA.add(current);
+
+            for (DirectedGraphNode child : current) {
+                if (CLOSEDA.contains(child)) {
+                    continue;
+                }
+
+                double tmpg = GSCOREA.get(current) + w.get(current, child);
+
+                if (GSCOREA.containsKey(child) == false) {
+                    OPENA.insert(child, tmpg);
+                    GSCOREA.put(child, tmpg);
+                    PARENTA.put(child, current);
+
+                    if (CLOSEDB.contains(child)) {
+                        if (m > tmpg + GSCOREB.get(child)) {
+                            m = tmpg + GSCOREB.get(child);
+                            touch = child;
+                        }
+                    }
+                } else if (tmpg < GSCOREA.get(child)) {
+                    OPENA.decreasePriority(child, tmpg);
+                    GSCOREA.put(child, tmpg);
+                    PARENTA.put(child, current);
+
+                    if (CLOSEDB.contains(child)) {
+                        if (m > tmpg + GSCOREB.get(child)) {
+                            m = tmpg + GSCOREB.get(child);
+                            touch = child;
+                        }
+                    }
+                }
+            }
+
+            current = OPENB.extractMinimum();
+            CLOSEDB.add(current);
+
+            for (DirectedGraphNode parent : current.parentIterable()) {
+                if (CLOSEDB.contains(parent)) {
+                    continue;
+                }
