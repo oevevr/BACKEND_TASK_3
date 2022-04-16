@@ -113,3 +113,45 @@ public class BHPAFinder extends GeneralPathFinder {
                     }
                 }
             }
+
+            current = OPEN2.extractMinimum();
+            CLOSED2.add(current);
+
+            for (DirectedGraphNode parent : current.parentIterable()) {
+                if (CLOSED2.contains(parent)) {
+                    continue;
+                }
+
+                double tmpg = GSCORE_MAP2.get(current) + w.get(parent, current);
+
+                if (GSCORE_MAP2.containsKey(parent) == false) {
+                    OPEN2.insert(parent, tmpg + h2.get(parent));
+                    GSCORE_MAP2.put(parent, tmpg);
+                    PARENT_MAP2.put(parent, current);
+
+                    if (CLOSED.contains(parent)) {
+                        if (m > tmpg + GSCORE_MAP.get(parent)) {
+                            m = tmpg + GSCORE_MAP.get(parent);
+                            touch = parent;
+                        }
+                    }
+                } else if (tmpg < GSCORE_MAP2.get(parent)) {
+                    OPEN2.decreasePriority(parent, tmpg + h2.get(parent));
+                    GSCORE_MAP2.put(parent, tmpg);
+                    PARENT_MAP2.put(parent, current);
+
+                    if (CLOSED.contains(parent)) {
+                        if (m > tmpg + GSCORE_MAP.get(parent)) {
+                            m = tmpg + GSCORE_MAP.get(parent);
+                            touch = parent;
+                        }
+                    }
+                }
+            }
+        }
+
+        return touch == null ?
+                java.util.Collections.<DirectedGraphNode>emptyList() :
+                tracebackPathBidirectional(touch, PARENT_MAP, PARENT_MAP2);
+    }
+}
