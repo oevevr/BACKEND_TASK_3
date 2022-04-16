@@ -114,3 +114,39 @@ public class BidirectionalDijkstraFinder extends GeneralPathFinder {
                 if (CLOSEDB.contains(parent)) {
                     continue;
                 }
+
+                double tmpg = GSCOREB.get(current) + w.get(parent, current);
+
+                if (GSCOREB.containsKey(parent) == false) {
+                    OPENB.insert(parent, tmpg);
+                    GSCOREB.put(parent, tmpg);
+                    PARENTB.put(parent, current);
+
+                    if (CLOSEDA.contains(parent)) {
+                        if (m > tmpg + GSCOREA.get(parent)) {
+                            m = tmpg + GSCOREA.get(parent);
+                            touch = parent;
+                        }
+                    }
+                } else if (tmpg < GSCOREB.get(parent)) {
+                    OPENB.decreasePriority(parent, tmpg);
+                    GSCOREB.put(parent, tmpg);
+                    PARENTB.put(parent, current);
+
+                    if (CLOSEDA.contains(parent)) {
+                        if (m > tmpg + GSCOREA.get(parent)) {
+                            m = tmpg + GSCOREA.get(parent);
+                            touch = parent;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (touch == null) {
+            return java.util.Collections.<DirectedGraphNode>emptyList();
+        }
+
+        return tracebackPathBidirectional(touch, PARENTA, PARENTB);
+    }
+}
