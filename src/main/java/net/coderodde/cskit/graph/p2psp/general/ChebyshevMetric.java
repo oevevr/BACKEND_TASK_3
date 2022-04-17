@@ -11,4 +11,6 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  */
 public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicFunction {
 
- 
+    private double[] p;
+
+    public ChebyshevMetric(CoordinateMap m
