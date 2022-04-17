@@ -15,4 +15,8 @@ public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicF
 
     public ChebyshevMetric(CoordinateMap map, DirectedGraphNode target) {
         super(map, target);
-        this.p
+        this.p = map.get(target);
+    }
+
+    @Override
+    public void setTarget(DirectedGr
