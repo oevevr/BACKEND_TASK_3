@@ -26,4 +26,7 @@ public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicF
 
     @Override
     public double get(DirectedGraphNode u) {
-       
+        double[] q = map.get(u);
+        double max = Double.MIN_VALUE;
+
+        
