@@ -29,4 +29,5 @@ public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicF
         double[] q = map.get(u);
         double max = Double.MIN_VALUE;
 
-        
+        for (int i = 0; i < q.length; ++i) {
+            double tmp = Math.abs(
