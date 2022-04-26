@@ -42,4 +42,7 @@ public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicF
 
     @Override
     public double get(double[] p, double[] q) {
-        doub
+        double max = Double.MIN_VALUE;
+
+        for (int i = 0; i < q.length; ++i) {
+   
