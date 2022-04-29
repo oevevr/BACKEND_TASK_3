@@ -48,4 +48,8 @@ public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicF
             double tmp = Math.abs(p[i] - q[i]);
 
             if (max < tmp) {
-    
+                max = tmp;
+            }
+        }
+
+        return max;
