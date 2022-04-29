@@ -53,3 +53,5 @@ public class ChebyshevMetric<W extends Comparable<? super W>> extends HeuristicF
         }
 
         return max;
+    }
+}
