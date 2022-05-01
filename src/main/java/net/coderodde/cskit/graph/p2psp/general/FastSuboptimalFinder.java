@@ -135,3 +135,27 @@ public class FastSuboptimalFinder extends GeneralPathFinder {
                             touch = parent;
                         }
                     }
+                } else if (tmpg < GSCORE_MAP2.get(parent)) {
+                    OPEN2.decreasePriority(parent, tmpg + h2.get(parent));
+                    GSCORE_MAP2.put(parent, tmpg);
+                    PARENT_MAP2.put(parent, current);
+
+                    if (CLOSED.contains(parent)) {
+                        if (m > tmpg + GSCORE_MAP.get(parent)) {
+                            m = tmpg + GSCORE_MAP.get(parent);
+                            touch = parent;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (touch != null) {
+            return tracebackPathBidirectional(touch,
+                                              PARENT_MAP,
+                                              PARENT_MAP2);
+        }
+
+        return java.util.Collections.<DirectedGraphNode>emptyList();
+    }
+}
