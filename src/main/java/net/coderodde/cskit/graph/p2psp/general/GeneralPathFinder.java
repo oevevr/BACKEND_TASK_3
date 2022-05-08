@@ -11,3 +11,4 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
 
 /**
+ * This interface defines the common API for general shortest path algorit
