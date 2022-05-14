@@ -18,4 +18,6 @@ import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
  */
 public abstract class GeneralPathFinder {
 
-    protected PriorityQueue<DirectedGraphNode,
+    protected PriorityQueue<DirectedGraphNode, Double> OPEN;
+    protected Set<DirectedGraphNode> CLOSED;
+    protected Map<Di
