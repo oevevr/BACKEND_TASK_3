@@ -16,4 +16,6 @@ import net.coderodde.cskit.graph.DirectedGraphWeightFunction;
  * @author Rodion Efremov
  * @version 1.618
  */
-public abstract class Ge
+public abstract class GeneralPathFinder {
+
+    protected PriorityQueue<DirectedGraphNode,
