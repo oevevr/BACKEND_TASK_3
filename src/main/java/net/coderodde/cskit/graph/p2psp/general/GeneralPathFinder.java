@@ -20,4 +20,5 @@ public abstract class GeneralPathFinder {
 
     protected PriorityQueue<DirectedGraphNode, Double> OPEN;
     protected Set<DirectedGraphNode> CLOSED;
-    protected Map<Di
+    protected Map<DirectedGraphNode, Double> GSCORE_MAP;
+    protected Map<DirectedGraph
