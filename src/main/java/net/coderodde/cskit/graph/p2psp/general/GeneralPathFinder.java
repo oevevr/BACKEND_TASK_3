@@ -25,4 +25,6 @@ public abstract class GeneralPathFinder {
     protected DirectedGraphNode source;
     protected DirectedGraphNode target;
 
-    public GeneralPathFinde
+    public GeneralPathFinder(PriorityQueue<DirectedGraphNode, Double> OPEN) {
+        this.OPEN = OPEN;
+   
