@@ -28,4 +28,5 @@ public abstract class GeneralPathFinder {
     public GeneralPathFinder(PriorityQueue<DirectedGraphNode, Double> OPEN) {
         this.OPEN = OPEN;
         this.CLOSED = new HashSet<DirectedGraphNode>();
-        thi
+        this.GSCORE_MAP = new HashMap<DirectedGraphNode, Double>();
+        th
