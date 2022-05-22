@@ -29,4 +29,4 @@ public abstract class GeneralPathFinder {
         this.OPEN = OPEN;
         this.CLOSED = new HashSet<DirectedGraphNode>();
         this.GSCORE_MAP = new HashMap<DirectedGraphNode, Double>();
-        th
+        this.PARENT_MAP = new HashMap<DirectedGraphNode, DirectedGraph
