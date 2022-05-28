@@ -32,4 +32,5 @@ public abstract class GeneralPathFinder {
         this.PARENT_MAP = new HashMap<DirectedGraphNode, DirectedGraphNode>();
     }
 
-    public abstract List<DirectedGraphNode> find(DirectedGraphN
+    public abstract List<DirectedGraphNode> find(DirectedGraphNode source,
+                                                 DirectedGraphNod
