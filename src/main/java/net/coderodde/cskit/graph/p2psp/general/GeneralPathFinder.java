@@ -34,4 +34,5 @@ public abstract class GeneralPathFinder {
 
     public abstract List<DirectedGraphNode> find(DirectedGraphNode source,
                                                  DirectedGraphNode target,
-                                                 DirectedGraphWeightFunction
+                                                 DirectedGraphWeightFunction w);
+}
