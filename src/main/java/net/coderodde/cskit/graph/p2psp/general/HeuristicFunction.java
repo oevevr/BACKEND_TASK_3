@@ -8,4 +8,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  * @author Rodion Efremov
  * @version 1.618 (16.12.2013)
  */
-public abstract clas
+public abstract class HeuristicFunction {
+
+    protected CoordinateMap map;
+    protec
