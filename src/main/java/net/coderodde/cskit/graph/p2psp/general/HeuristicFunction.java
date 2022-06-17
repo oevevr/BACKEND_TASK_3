@@ -11,4 +11,6 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 public abstract class HeuristicFunction {
 
     protected CoordinateMap map;
-    protec
+    protected DirectedGraphNode target;
+
+    public HeuristicFunction
