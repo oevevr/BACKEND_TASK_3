@@ -13,4 +13,6 @@ public abstract class HeuristicFunction {
     protected CoordinateMap map;
     protected DirectedGraphNode target;
 
-    public HeuristicFunction
+    public HeuristicFunction(CoordinateMap map, DirectedGraphNode target) {
+        this.map = map;
+        t
