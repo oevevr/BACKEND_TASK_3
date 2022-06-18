@@ -15,4 +15,7 @@ public abstract class HeuristicFunction {
 
     public HeuristicFunction(CoordinateMap map, DirectedGraphNode target) {
         this.map = map;
-        t
+        this.target = target;
+    }
+
+    public void setTarget(DirectedGraphNode target)
