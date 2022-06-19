@@ -22,4 +22,8 @@ public abstract class HeuristicFunction {
         this.target = target;
     }
 
-    public CoordinateMap getCoordinat
+    public CoordinateMap getCoordinateMap() {
+        return map;
+    }
+
+    public void setCoordinateMap(Coordin
