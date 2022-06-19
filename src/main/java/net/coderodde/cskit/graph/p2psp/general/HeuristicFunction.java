@@ -26,4 +26,9 @@ public abstract class HeuristicFunction {
         return map;
     }
 
-    public void setCoordinateMap(Coordin
+    public void setCoordinateMap(CoordinateMap map) {
+        this.map = map;
+    }
+
+    /**
+     * Gets an 
