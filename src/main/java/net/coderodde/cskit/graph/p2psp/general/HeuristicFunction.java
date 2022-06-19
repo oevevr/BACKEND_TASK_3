@@ -31,4 +31,5 @@ public abstract class HeuristicFunction {
     }
 
     /**
-     * Gets an 
+     * Gets an (optimistic) estimate for the distance from <code>u</code> to
+     * pre-specified target no
