@@ -32,4 +32,8 @@ public abstract class HeuristicFunction {
 
     /**
      * Gets an (optimistic) estimate for the distance from <code>u</code> to
-     * pre-specified target no
+     * pre-specified target node.
+     *
+     * @param u the node to estimate.
+     */
+    public abstrac
