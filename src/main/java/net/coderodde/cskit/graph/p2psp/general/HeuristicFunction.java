@@ -36,4 +36,7 @@ public abstract class HeuristicFunction {
      *
      * @param u the node to estimate.
      */
-    public abstrac
+    public abstract double get(DirectedGraphNode u);
+
+    /**
+     * Gets an estimate from <code>from</code> t
