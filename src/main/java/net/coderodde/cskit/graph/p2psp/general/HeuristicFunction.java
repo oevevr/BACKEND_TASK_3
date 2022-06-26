@@ -45,3 +45,5 @@ public abstract class HeuristicFunction {
      * @param to the goal node.
      * @return an estimate between the two nodes.
      */
+    public abstract double get(double[] p, double[] q);
+}
