@@ -42,4 +42,6 @@ public abstract class HeuristicFunction {
      * Gets an estimate from <code>from</code> to <code>to</code>.
      *
      * @param from the start node.
-     * @param to t
+     * @param to the goal node.
+     * @return an estimate between the two nodes.
+     */
