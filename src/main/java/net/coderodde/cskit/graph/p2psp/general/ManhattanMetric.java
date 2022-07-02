@@ -7,4 +7,8 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  * -search.
  *
  * @author Rodion Efremov
- * @ve
+ * @version 1.618 (16.12.2013)
+ */
+public class ManhattanMetric extends HeuristicFunction {
+
+ 
