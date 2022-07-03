@@ -15,4 +15,8 @@ public class ManhattanMetric extends HeuristicFunction {
 
     public ManhattanMetric(CoordinateMap map, DirectedGraphNode target) {
         super(map, target);
-        this.
+        this.p = map.get(target);
+    }
+
+    @Override
+    public double get(DirectedGraphNo
