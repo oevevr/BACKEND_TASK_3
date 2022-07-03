@@ -11,4 +11,6 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  */
 public class ManhattanMetric extends HeuristicFunction {
 
- 
+    private double[] p;
+
+    public ManhattanMetric(CoordinateMap map,
