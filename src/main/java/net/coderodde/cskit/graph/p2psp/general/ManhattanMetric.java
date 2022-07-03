@@ -13,4 +13,6 @@ public class ManhattanMetric extends HeuristicFunction {
 
     private double[] p;
 
-    public ManhattanMetric(CoordinateMap map,
+    public ManhattanMetric(CoordinateMap map, DirectedGraphNode target) {
+        super(map, target);
+        this.
