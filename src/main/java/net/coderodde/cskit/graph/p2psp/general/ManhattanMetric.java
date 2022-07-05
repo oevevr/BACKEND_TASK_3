@@ -19,4 +19,8 @@ public class ManhattanMetric extends HeuristicFunction {
     }
 
     @Override
-    public double get(DirectedGraphNo
+    public double get(DirectedGraphNode u) {
+        double[] q = map.get(u);
+        double sum = 0.0;
+
+        for (int i 
