@@ -27,4 +27,8 @@ public class ManhattanMetric extends HeuristicFunction {
             sum += Math.abs(p[i] - q[i]);
         }
 
-      
+        return sum;
+    }
+
+    @Override
+    public void setTarget(DirectedGraphNod
