@@ -36,4 +36,6 @@ public class ManhattanMetric extends HeuristicFunction {
         this.target = u;
     }
 
-    @
+    @Override
+    public double get(double[] p, double[] q) {
+        double 
