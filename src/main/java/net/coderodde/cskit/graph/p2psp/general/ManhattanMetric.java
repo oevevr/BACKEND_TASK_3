@@ -38,4 +38,7 @@ public class ManhattanMetric extends HeuristicFunction {
 
     @Override
     public double get(double[] p, double[] q) {
-        double 
+        double sum = 0.0;
+
+        for (int i = 0; i < q.length; ++i) {
+     
