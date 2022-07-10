@@ -41,4 +41,9 @@ public class ManhattanMetric extends HeuristicFunction {
         double sum = 0.0;
 
         for (int i = 0; i < q.length; ++i) {
-     
+            sum += Math.abs(p[i] - q[i]);
+        }
+
+        return sum;
+    }
+}
