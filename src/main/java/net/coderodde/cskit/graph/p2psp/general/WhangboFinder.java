@@ -138,3 +138,84 @@ public class WhangboFinder extends GeneralPathFinder {
 
                             if (touch == null) {
                                 separator = child;
+                            }
+
+                            touch = child;
+                            OPENL1.decreasePriority(child, tmpg + l1(child));
+                            OPENL2.decreasePriority(child, GSCORE_MAP2.get(child) + l2(child));
+                        }
+                    }
+                }
+            }
+
+            current = OPEN2.extractMinimum();
+            CLOSED2.add(current);
+
+            for (DirectedGraphNode parent : current.parentIterable()) {
+                if (CLOSED2.contains(parent)) {
+                    continue;
+                }
+
+                double tmpg = GSCORE_MAP2.get(current) + w.get(parent, current);
+
+                if (GSCORE_MAP2.containsKey(parent) == false) {
+                    OPEN2.insert(parent, tmpg);
+                    GSCORE_MAP2.put(parent, tmpg);
+                    PARENT_MAP2.put(parent, current);
+
+                    if (CLOSED.contains(parent)) {
+                        if (m > tmpg + GSCORE_MAP.get(parent)) {
+                            m = tmpg + GSCORE_MAP.get(parent);
+
+                            if (touch == null) {
+                                separator = parent;
+                            }
+
+                            touch = parent;
+                            OPENL1.insert(parent, GSCORE_MAP.get(parent) + l1(parent));
+                            OPENL2.insert(parent, tmpg + l2(parent));
+                        }
+                    }
+                } else if (tmpg < GSCORE_MAP2.get(parent)) {
+                    OPEN2.decreasePriority(parent, tmpg);
+                    GSCORE_MAP2.put(parent, tmpg);
+                    PARENT_MAP2.put(parent, current);
+
+                    if (CLOSED.contains(parent)) {
+                        if (m > tmpg + GSCORE_MAP.get(parent)) {
+                            m = tmpg + GSCORE_MAP.get(parent);
+
+                            if (touch == null) {
+                                separator = parent;
+                            }
+
+                            touch = parent;
+                            OPENL1.decreasePriority(parent, GSCORE_MAP.get(parent) + l1(parent));
+                            OPENL2.decreasePriority(parent, tmpg + l2(parent));
+                        }
+                    }
+                }
+            }
+        }
+
+        if (touch != null) {
+            return tracebackPathBidirectional(touch,
+                                              PARENT_MAP,
+                                              PARENT_MAP2);
+        }
+
+        return java.util.Collections.<DirectedGraphNode>emptyList();
+    }
+
+    private double l1(DirectedGraphNode node) {
+        CoordinateMap cm = h.getCoordinateMap();
+        double[] s = cm.get(source);
+        double[] p = cm.get(separator);
+        double[] x = cm.get(node);
+
+        for (int i = 0; i < x.length; ++i) {
+            x[i] -= p[i];
+        }
+
+        for (int i = 0; i < s.length; ++i) {
+            s[i] -= p[i];
