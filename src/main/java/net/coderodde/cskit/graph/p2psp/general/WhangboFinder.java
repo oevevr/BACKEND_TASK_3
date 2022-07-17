@@ -219,3 +219,49 @@ public class WhangboFinder extends GeneralPathFinder {
 
         for (int i = 0; i < s.length; ++i) {
             s[i] -= p[i];
+        }
+
+        double dotProduct = 0.0;
+
+        for (int i = 0; i < s.length; ++i) {
+            dotProduct += x[i] * s[i];
+        }
+
+        double len = 0.0;
+
+        for (int i = 0; i < s.length; ++i) {
+            len += s[i] * s[i];
+        }
+
+        return dotProduct / Math.sqrt(len);
+    }
+
+    private double l2(DirectedGraphNode node) {
+        CoordinateMap cm = h2.getCoordinateMap();
+        double[] t = cm.get(target);
+        double[] p = cm.get(separator);
+        double[] x = cm.get(node);
+
+        for (int i = 0; i < x.length; ++i) {
+            x[i] -= p[i];
+        }
+
+        for (int i = 0; i < t.length; ++i) {
+            t[i] -= p[i];
+        }
+
+        double dotProduct = 0.0;
+
+        for (int i = 0; i < t.length; ++i) {
+            dotProduct += x[i] * t[i];
+        }
+
+        double len = 0.0;
+
+        for (int i = 0; i < t.length; ++i) {
+            len += t[i] * t[i];
+        }
+
+        return dotProduct / Math.sqrt(len);
+    }
+}
