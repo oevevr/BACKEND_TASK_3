@@ -7,4 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import static net.coderodde.cskit.Utilities.tracebackPathBidirectional;
-import net.coderodde.cskit.graph.DirectedGraph
+import net.coderodde.cskit.graph.DirectedGraphNode;
+
+/**
+ * This class implements bidirectional breadth-first search algorithm.
+ *
+ *
