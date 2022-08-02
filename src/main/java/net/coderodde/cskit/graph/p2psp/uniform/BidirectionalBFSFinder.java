@@ -12,4 +12,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 /**
  * This class implements bidirectional breadth-first search algorithm.
  *
- *
+ * @author Rodion Efremov
+ * @version 1.6
+ */
+public class BidirectionalB
