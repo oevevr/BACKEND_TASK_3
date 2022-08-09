@@ -18,4 +18,5 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 public class BidirectionalBFSFinder
 implements UniformCostPathFinder {
 
-    // We choose to re
+    // We choose to reuse the data structures. This resembles losing virginity:
+    // it all 
