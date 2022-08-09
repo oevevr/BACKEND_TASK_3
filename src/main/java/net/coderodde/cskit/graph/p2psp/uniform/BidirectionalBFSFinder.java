@@ -15,4 +15,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  * @author Rodion Efremov
  * @version 1.6
  */
-public class BidirectionalB
+public class BidirectionalBFSFinder
+implements UniformCostPathFinder {
+
+    // We choose to re
