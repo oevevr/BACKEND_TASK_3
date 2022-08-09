@@ -19,4 +19,5 @@ public class BidirectionalBFSFinder
 implements UniformCostPathFinder {
 
     // We choose to reuse the data structures. This resembles losing virginity:
-    // it all 
+    // it all expands and becomes loose enough. :)
+    private Map<DirectedGraphNode,
