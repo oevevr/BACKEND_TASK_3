@@ -21,4 +21,6 @@ implements UniformCostPathFinder {
     // We choose to reuse the data structures. This resembles losing virginity:
     // it all expands and becomes loose enough. :)
     private Map<DirectedGraphNode, DirectedGraphNode> parentMapA =
-            new HashMap<DirectedGraphNode, DirectedGraphNo
+            new HashMap<DirectedGraphNode, DirectedGraphNode>();
+
+    private Map<DirectedGraphNode, DirectedGraphNode> pare
