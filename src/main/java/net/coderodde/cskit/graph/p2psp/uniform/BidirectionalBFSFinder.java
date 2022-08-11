@@ -27,4 +27,8 @@ implements UniformCostPathFinder {
             new HashMap<DirectedGraphNode, DirectedGraphNode>();
 
     public List<DirectedGraphNode>
-            find(DirectedGraphNode sourc
+            find(DirectedGraphNode source, DirectedGraphNode target) {
+        clear();
+
+        parentMapA.put(source, null);
+       
