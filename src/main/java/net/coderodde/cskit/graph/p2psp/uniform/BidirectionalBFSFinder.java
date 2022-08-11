@@ -31,4 +31,6 @@ implements UniformCostPathFinder {
         clear();
 
         parentMapA.put(source, null);
-       
+        parentMapB.put(target, null);
+
+        Deque<DirectedGraphNode> 
