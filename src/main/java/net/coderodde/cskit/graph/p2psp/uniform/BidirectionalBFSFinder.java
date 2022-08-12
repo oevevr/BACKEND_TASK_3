@@ -47,4 +47,5 @@ implements UniformCostPathFinder {
                     parentMapA.put(child, A);
                     queueA.addLast(child);
                     
-       
+                    if (parentMapB.containsKey(child)) {
+                       
