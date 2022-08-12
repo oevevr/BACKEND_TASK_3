@@ -45,4 +45,6 @@ implements UniformCostPathFinder {
             for (DirectedGraphNode child : A) {
                 if (parentMapA.containsKey(child) == false) {
                     parentMapA.put(child, A);
-     
+                    queueA.addLast(child);
+                    
+       
