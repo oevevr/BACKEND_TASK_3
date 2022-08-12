@@ -48,4 +48,5 @@ implements UniformCostPathFinder {
                     queueA.addLast(child);
                     
                     if (parentMapB.containsKey(child)) {
-                       
+                        return tracebackPathBidirectional(child,
+                               
