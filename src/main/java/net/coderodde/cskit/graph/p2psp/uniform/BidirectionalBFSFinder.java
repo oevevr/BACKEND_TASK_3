@@ -42,4 +42,5 @@ implements UniformCostPathFinder {
         while (queueA.isEmpty() == false && queueB.isEmpty() == false) {
             DirectedGraphNode A = queueA.removeFirst();
 
-            f
+            for (DirectedGraphNode child : A) {
+                if (parentMapA.
