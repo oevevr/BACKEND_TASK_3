@@ -37,4 +37,6 @@ implements UniformCostPathFinder {
         Deque<DirectedGraphNode> queueB = new LinkedList<DirectedGraphNode>();
 
         queueA.addLast(source);
-        queueB.addLast(
+        queueB.addLast(target);
+        
+        while (queueA.isEmpty() == false && queueB.isE
