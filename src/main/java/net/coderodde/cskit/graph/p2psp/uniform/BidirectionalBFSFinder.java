@@ -39,4 +39,7 @@ implements UniformCostPathFinder {
         queueA.addLast(source);
         queueB.addLast(target);
         
-        while (queueA.isEmpty() == false && queueB.isE
+        while (queueA.isEmpty() == false && queueB.isEmpty() == false) {
+            DirectedGraphNode A = queueA.removeFirst();
+
+            f
