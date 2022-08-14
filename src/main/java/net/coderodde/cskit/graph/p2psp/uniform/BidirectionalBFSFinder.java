@@ -50,4 +50,9 @@ implements UniformCostPathFinder {
                     if (parentMapB.containsKey(child)) {
                         return tracebackPathBidirectional(child,
                                                           parentMapA,
-                                    
+                                                          parentMapB);
+                    }
+                }
+            }
+
+  
