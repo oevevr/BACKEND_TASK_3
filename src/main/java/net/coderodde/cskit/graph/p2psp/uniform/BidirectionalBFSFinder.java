@@ -55,4 +55,5 @@ implements UniformCostPathFinder {
                 }
             }
 
-  
+            // Expand the backwards search.
+            DirectedGraphNode 
