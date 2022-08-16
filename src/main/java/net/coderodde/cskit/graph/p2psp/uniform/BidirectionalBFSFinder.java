@@ -58,4 +58,6 @@ implements UniformCostPathFinder {
             // Expand the backwards search.
             DirectedGraphNode B = queueB.removeFirst();
 
-            for (DirectedGraphNode parent : B.parentIter
+            for (DirectedGraphNode parent : B.parentIterable()) {
+                if (parentMapB.containsKey(parent) == false) {
+                 
