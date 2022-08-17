@@ -68,4 +68,8 @@ implements UniformCostPathFinder {
                                                           parentMapA,
                                                           parentMapB);
                     }
-    
+                }
+            }
+        }
+
+        return Collections.<Dir
