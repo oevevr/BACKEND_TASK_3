@@ -66,4 +66,6 @@ implements UniformCostPathFinder {
                     if (parentMapA.containsKey(parent)) {
                         return tracebackPathBidirectional(parent,
                                                           parentMapA,
-       
+                                                          parentMapB);
+                    }
+    
