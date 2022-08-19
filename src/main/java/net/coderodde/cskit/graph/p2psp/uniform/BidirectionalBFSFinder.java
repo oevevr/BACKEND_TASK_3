@@ -72,4 +72,8 @@ implements UniformCostPathFinder {
             }
         }
 
-        return Collections.<Dir
+        return Collections.<DirectedGraphNode>emptyList();
+    }
+
+    private void clear() {
+        parentMapA.cl
