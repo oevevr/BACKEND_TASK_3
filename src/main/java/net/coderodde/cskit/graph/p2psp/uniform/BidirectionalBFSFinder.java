@@ -76,4 +76,7 @@ implements UniformCostPathFinder {
     }
 
     private void clear() {
-        parentMapA.cl
+        parentMapA.clear();
+        parentMapB.clear();
+    }
+}
