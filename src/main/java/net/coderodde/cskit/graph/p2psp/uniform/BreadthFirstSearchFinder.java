@@ -18,4 +18,6 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  * @author Rodion Efremov
  * @version 1.6 (7.12.2013)
  */
-publ
+public class BreadthFirstSearchFinder implements UniformCostPathFinder {
+
+    private final
