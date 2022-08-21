@@ -13,4 +13,9 @@ import static net.coderodde.cskit.Utilities.tracebackPath;
 import net.coderodde.cskit.graph.DirectedGraphNode;
 
 /**
- * Implements the classic, point-to-point breadth-first
+ * Implements the classic, point-to-point breadth-first search.
+ *
+ * @author Rodion Efremov
+ * @version 1.6 (7.12.2013)
+ */
+publ
