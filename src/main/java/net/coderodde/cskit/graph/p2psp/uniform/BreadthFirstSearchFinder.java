@@ -21,4 +21,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
 public class BreadthFirstSearchFinder implements UniformCostPathFinder {
 
     private final Map<DirectedGraphNode, DirectedGraphNode> parentMap =
-          new HashMap<Direct
+          new HashMap<DirectedGraphNode, DirectedGraphNode>();
+
+    @Override
+    public List<Dire
