@@ -25,4 +25,7 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
 
     @Override
     public List<DirectedGraphNode> find(DirectedGraphNode source,
-                              
+                                        DirectedGraphNode target) {
+        parentMap.clear();
+        
+      
