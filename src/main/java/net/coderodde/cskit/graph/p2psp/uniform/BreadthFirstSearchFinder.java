@@ -24,4 +24,5 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
           new HashMap<DirectedGraphNode, DirectedGraphNode>();
 
     @Override
-    public List<Dire
+    public List<DirectedGraphNode> find(DirectedGraphNode source,
+                              
