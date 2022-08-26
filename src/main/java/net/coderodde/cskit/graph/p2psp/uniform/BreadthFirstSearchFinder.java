@@ -37,4 +37,8 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
             DirectedGraphNode current = Q.removeFirst();
 
             if (current.equals(target)) {
-                return tracebackPath(ta
+                return tracebackPath(target, parentMap);
+            }
+
+            for (DirectedGraphNode child : current) {
+   
