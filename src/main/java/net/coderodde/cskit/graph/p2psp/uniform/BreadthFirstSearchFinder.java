@@ -33,4 +33,5 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
         Q.addLast(source);
         parentMap.put(source, null);
 
-        while
+        while (Q.isEmpty() == false) {
+            DirectedGraphNode current = Q.removeFirst();
