@@ -30,4 +30,7 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
         
         Deque<DirectedGraphNode> Q = new LinkedList<DirectedGraphNode>();
 
-        Q.
+        Q.addLast(source);
+        parentMap.put(source, null);
+
+        while
