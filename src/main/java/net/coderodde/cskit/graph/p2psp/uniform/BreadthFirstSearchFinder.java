@@ -43,4 +43,9 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
             for (DirectedGraphNode child : current) {
                 if (parentMap.containsKey(child) == false) {
                     Q.addLast(child);
-                    parentMap.put(child, curre
+                    parentMap.put(child, current);
+                }
+            }
+        }
+
+       
