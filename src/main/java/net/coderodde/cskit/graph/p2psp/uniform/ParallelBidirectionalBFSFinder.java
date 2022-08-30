@@ -201,3 +201,15 @@ public class ParallelBidirectionalBFSFinder implements UniformCostPathFinder {
                 queueB.removeFirst();
                 levelB.remove(current);
             }
+        }
+    }
+
+    private void clear() {
+        distanceMapA.clear();
+        distanceMapB.clear();
+        parentMapA.clear();
+        parentMapB.clear();
+        levelA.clear();
+        levelB.clear();
+    }
+}
