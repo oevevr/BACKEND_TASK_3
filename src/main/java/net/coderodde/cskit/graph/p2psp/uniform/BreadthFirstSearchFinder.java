@@ -49,4 +49,7 @@ public class BreadthFirstSearchFinder implements UniformCostPathFinder {
         }
 
         // No path found.
-        return java.util.Collections.<DirectedGraphNode>emptyLi
+        return java.util.Collections.<DirectedGraphNode>emptyList();
+    }
+
+}
