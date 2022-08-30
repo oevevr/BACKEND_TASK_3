@@ -125,3 +125,79 @@ public class ParallelBidirectionalBFSFinder implements UniformCostPathFinder {
                     mutexB.acquireUninterruptibly();
 
                     if (Collections.disjoint(levelA,
+                                             parentMapB.keySet()) == false) {
+                        thread.stopRunning();
+                        mutexB.release();
+                        return;
+                    }
+
+                    mutexB.release();
+
+                    lastA = queueA.getLast();
+                }
+
+                queueA.removeFirst();
+                levelA.remove(current);
+            }
+        }
+    }
+
+    /**
+     * This class implements the backward search.
+     */
+    private class BackwardsSearchThread extends Thread {
+
+        private DirectedGraphNode node;
+        private ForwardSearchThread thread;
+        private volatile boolean doRun = true;
+
+        BackwardsSearchThread(DirectedGraphNode node,
+                              ForwardSearchThread brotherThread) {
+            this.node = node;
+            this.thread = brotherThread;
+        }
+
+        void stopRunning() {
+            doRun = false;
+        }
+
+        @Override
+        public void run() {
+            DirectedGraphNode lastB = node;
+            Deque<DirectedGraphNode> queueB =
+                    new LinkedList<DirectedGraphNode>();
+            queueB.addLast(node);
+
+            while (queueB.isEmpty() == false && doRun) {
+                DirectedGraphNode current = queueB.getFirst();
+
+                for (DirectedGraphNode parent : current.parentIterable()) {
+                    if (parentMapB.containsKey(parent) == false) {
+                        distanceMapB.put(parent, distanceMapB.get(current) + 1);
+                        queueB.addLast(parent);
+
+                        mutexB.acquireUninterruptibly();
+                        parentMapB.put(parent, current);
+                        levelB.add(parent);
+                        mutexB.release();
+                    }
+                }
+
+                if (current.equals(lastB)) {
+                    mutexA.acquireUninterruptibly();
+
+                    if (Collections.disjoint(levelB,
+                                             parentMapA.keySet()) == false) {
+                        thread.stopRunning();
+                        mutexA.release();
+                        return;
+                    }
+
+                    mutexA.release();
+
+                    lastB = queueB.getLast();
+                }
+
+                queueB.removeFirst();
+                levelB.remove(current);
+            }
