@@ -59,3 +59,69 @@ public class ParallelBidirectionalBFSFinder implements UniformCostPathFinder {
         BackwardsSearchThread threadB = new BackwardsSearchThread(target,
                                                                   threadA);
         threadA.setBrotherThread(threadB);
+        threadB.run();
+
+        try {
+            threadA.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace(System.err);
+            return null;
+        }
+
+        DirectedGraphNode touch = findTouchNode(levelA,
+                                                levelB,
+                                                parentMapA,
+                                                parentMapB,
+                                                distanceMapA,
+                                                distanceMapB);
+
+        return tracebackPathBidirectional(touch, parentMapA, parentMapB);
+    }
+
+    /**
+     * This class implements the forward search.
+     */
+    private class ForwardSearchThread extends Thread {
+
+        private DirectedGraphNode node;
+        private BackwardsSearchThread thread;
+        private volatile boolean doRun = true;
+
+        ForwardSearchThread(DirectedGraphNode node) {
+            this.node = node;
+        }
+
+        void setBrotherThread(BackwardsSearchThread thread) {
+            this.thread = thread;
+        }
+
+        void stopRunning() {
+            doRun = false;
+        }
+
+        @Override
+        public void run() {
+            DirectedGraphNode lastA = node;
+            Deque<DirectedGraphNode> queueA =
+                    new LinkedList<DirectedGraphNode>();
+            queueA.add(node);
+
+            while (queueA.isEmpty() == false && doRun) {
+                DirectedGraphNode current = queueA.getFirst();
+
+                for (DirectedGraphNode child : current) {
+                    if (parentMapA.containsKey(child) == false) {
+                        distanceMapA.put(child, distanceMapA.get(current) + 1);
+                        queueA.addLast(child);
+
+                        mutexA.acquireUninterruptibly();
+                        parentMapA.put(child, current);
+                        levelA.add(child);
+                        mutexA.release();
+                    }
+                }
+
+                if (current.equals(lastA)) {
+                    mutexB.acquireUninterruptibly();
+
+                    if (Collections.disjoint(levelA,
