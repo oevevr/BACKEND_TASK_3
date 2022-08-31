@@ -58,3 +58,18 @@ implements ObjectSortingAlgorithm<E> {
             if (gap > 1) {
                 gap = (int)((float) gap / SHRINK_FACTOR);
             }
+
+            swapped = false;
+
+            for (int i = from; gap + i < N; ++i) {
+                if (array[i].compareTo(array[i + gap]) < 0) {
+                    E tmp = array[i];
+                    array[i] = array[i + gap];
+                    array[i + gap] = tmp;
+                    swapped = true;
+                }
+            }
+        }
+    }
+
+}
