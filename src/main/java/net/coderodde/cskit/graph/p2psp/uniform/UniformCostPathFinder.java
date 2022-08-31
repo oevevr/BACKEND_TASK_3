@@ -7,4 +7,7 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  * This interface defines the entry points for uniform cost shortest path
  * finders.
  *
- * @
+ * @author Rodion Efremov
+ * @version 1.6 (7.12.2013)
+ */
+public interfa
