@@ -12,4 +12,5 @@ import net.coderodde.cskit.graph.DirectedGraphNode;
  */
 public interface UniformCostPathFinder {
     public List<DirectedGraphNode> find(DirectedGraphNode source,
-                                        DirectedGraphNode t
+                                        DirectedGraphNode target);
+}
