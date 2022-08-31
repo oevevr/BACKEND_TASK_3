@@ -4,4 +4,7 @@ import java.util.List;
 import net.coderodde.cskit.graph.DirectedGraphNode;
 
 /**
- * Thi
+ * This interface defines the entry points for uniform cost shortest path
+ * finders.
+ *
+ * @
