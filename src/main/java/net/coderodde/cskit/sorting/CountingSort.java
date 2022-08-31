@@ -58,3 +58,47 @@ implements ObjectSortingAlgorithm<E> {
         Arrays.sort(condensator);
 
         int index = from;
+
+        for (int j = 0; j < condensator.length; ++j) {
+            for (E element : map.get(condensator[j])) {
+                array[index++] = element;
+            }
+        }
+    }
+
+    private void descendingSort(E[] array, int from, int to) {
+        Map<E, LinkedList<E>> map = new HashMap<E, LinkedList<E>>();
+
+        for (int i = from; i <= to; ++i) {
+            if (map.containsKey(array[i]) == false) {
+                LinkedList<E> l = new LinkedList<E>();
+                l.addLast(array[i]);
+                map.put(array[i], l);
+            } else {
+                map.get(array[i]).addLast(array[i]);
+            }
+        }
+
+        int i = 0;
+        Object[] condensator = new Object[map.size()];
+
+        for (E element : map.keySet()) {
+            condensator[i++] = element;
+        }
+
+        Arrays.sort(condensator, new ReverseComparator());
+
+        int index = from;
+    }
+
+    private class ReverseComparator implements Comparator<Object> {
+
+        @Override
+        public int compare(Object left, Object right) {
+            E eLeft = (E) left;
+            E eRight = (E) right;
+
+            return eRight.compareTo(eLeft);
+        }
+    }
+}
