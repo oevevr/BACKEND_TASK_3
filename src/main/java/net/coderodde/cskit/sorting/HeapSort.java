@@ -11,4 +11,6 @@ import net.coderodde.cskit.ds.pq.PriorityQueue;
  * Implements the heap sort.
  *
  * @author Rodion Efremov
- * @version 1.618
+ * @version 1.618033 (18.1.2014)
+ */
+public class HeapSort<E extends Comparable<? su
