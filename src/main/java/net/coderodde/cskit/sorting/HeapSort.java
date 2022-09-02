@@ -13,4 +13,7 @@ import net.coderodde.cskit.ds.pq.PriorityQueue;
  * @author Rodion Efremov
  * @version 1.618033 (18.1.2014)
  */
-public class HeapSort<E extends Comparable<? su
+public class HeapSort<E extends Comparable<? super E>>
+implements ObjectSortingAlgorithm<E> {
+
+    private Map<E, List<E>> 
