@@ -19,4 +19,6 @@ implements ObjectSortingAlgorithm<E> {
     private Map<E, List<E>> MAP;
     private PriorityQueue<E, E> HEAP;
 
-    public HeapSort(Priorit
+    public HeapSort(PriorityQueue<E, E> heap) {
+        this.HEAP = heap.newInstance();
+      
