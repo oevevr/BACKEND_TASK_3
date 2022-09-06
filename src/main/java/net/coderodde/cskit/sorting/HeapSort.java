@@ -29,4 +29,5 @@ implements ObjectSortingAlgorithm<E> {
     }
 
     @Override
-    publi
+    public void sort(E[] array) {
+        sort(array, new Range(0, array.length - 1)
