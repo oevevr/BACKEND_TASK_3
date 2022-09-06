@@ -24,4 +24,9 @@ implements ObjectSortingAlgorithm<E> {
         this.MAP = new HashMap<E, List<E>>();
     }
 
-    public Hea
+    public HeapSort() {
+        this(new BinaryHeap<E, E>());
+    }
+
+    @Override
+    publi
