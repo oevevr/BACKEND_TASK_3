@@ -21,4 +21,7 @@ implements ObjectSortingAlgorithm<E> {
 
     public HeapSort(PriorityQueue<E, E> heap) {
         this.HEAP = heap.newInstance();
-      
+        this.MAP = new HashMap<E, List<E>>();
+    }
+
+    public Hea
