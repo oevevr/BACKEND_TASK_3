@@ -30,4 +30,9 @@ implements ObjectSortingAlgorithm<E> {
 
     @Override
     public void sort(E[] array) {
-        sort(array, new Range(0, array.length - 1)
+        sort(array, new Range(0, array.length - 1));
+    }
+
+    @Override
+    public void sort(E[] array, Range r) {
+    
