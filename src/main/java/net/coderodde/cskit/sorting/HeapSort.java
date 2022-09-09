@@ -42,4 +42,5 @@ implements ObjectSortingAlgorithm<E> {
         }
     }
 
-    pri
+    private void ascendingSort(E[] array, int from, int to) {
+        HEAP.
