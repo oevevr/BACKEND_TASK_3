@@ -43,4 +43,8 @@ implements ObjectSortingAlgorithm<E> {
     }
 
     private void ascendingSort(E[] array, int from, int to) {
-        HEAP.
+        HEAP.clear();
+        MAP.clear();
+
+        for (int i = from; i <= to; ++i) {
+            if
