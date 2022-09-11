@@ -50,4 +50,6 @@ implements ObjectSortingAlgorithm<E> {
             if (MAP.containsKey(array[i])) {
                 MAP.get(array[i]).add(array[i]);
             } else {
-                List<E> list = new Link
+                List<E> list = new LinkedList<E>();
+                list.add(array[i]);
+                MAP.put
