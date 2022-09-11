@@ -47,4 +47,5 @@ implements ObjectSortingAlgorithm<E> {
         MAP.clear();
 
         for (int i = from; i <= to; ++i) {
-            if
+            if (MAP.containsKey(array[i])) {
+                MAP.get(array[i]).add(array
