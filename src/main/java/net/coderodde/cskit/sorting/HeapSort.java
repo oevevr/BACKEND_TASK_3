@@ -48,4 +48,6 @@ implements ObjectSortingAlgorithm<E> {
 
         for (int i = from; i <= to; ++i) {
             if (MAP.containsKey(array[i])) {
-                MAP.get(array[i]).add(array
+                MAP.get(array[i]).add(array[i]);
+            } else {
+                List<E> list = new Link
