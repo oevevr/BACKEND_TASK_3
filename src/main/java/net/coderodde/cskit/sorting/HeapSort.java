@@ -53,4 +53,10 @@ implements ObjectSortingAlgorithm<E> {
                 List<E> list = new LinkedList<E>();
                 list.add(array[i]);
                 MAP.put(array[i], list);
-                HEAP.insert(array[i], array
+                HEAP.insert(array[i], array[i]);
+            }
+        }
+
+        int index = from;
+
+//  
