@@ -59,4 +59,6 @@ implements ObjectSortingAlgorithm<E> {
 
         int index = from;
 
-//  
+//        System.out.println((to - from + 1) + ":" + HEAP.size());
+
+        List<E> l
