@@ -64,4 +64,6 @@ implements ObjectSortingAlgorithm<E> {
         List<E> list = null;
 
         while (index <= to) {
-            if (list == 
+            if (list == null) {
+                list = MAP.get(HEAP.extractMinimum());
+    
