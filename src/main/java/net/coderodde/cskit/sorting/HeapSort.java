@@ -69,4 +69,10 @@ implements ObjectSortingAlgorithm<E> {
             }
 
             for (E element : list) {
-                array[i
+                array[index++] = element;
+            }
+
+            list = null;
+        }
+    }
+
