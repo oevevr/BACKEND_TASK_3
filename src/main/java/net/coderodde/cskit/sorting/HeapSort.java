@@ -80,4 +80,9 @@ implements ObjectSortingAlgorithm<E> {
         HEAP.clear();
 
         for (int i = from; i <= to; ++i) {
-            HEAP.inse
+            HEAP.insert(array[i], array[i]);
+        }
+
+        int index = to;
+
+        while (inde
