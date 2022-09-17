@@ -52,3 +52,41 @@ implements ObjectSortingAlgorithm<E> {
                 // Merging chunk kChunk with (kChunk + 1):
                 int l = chunkSize * kChunk + from;
                 int r = l + chunkSize;
+
+                // An index pointing to array.
+                int i = l;
+
+                final int lmax = r;
+                final int rmax = Math.min(r + chunkSize, N);
+                while (l < lmax && r < rmax) {
+                    destination[i++] =
+                            source[r].compareTo(source[l]) < 0 ?
+                            source[r++] :
+                            source[l++];
+                }
+
+                while (l < lmax) {
+                    destination[i++] = source[l++];
+                }
+
+                while (r < rmax) {
+                    destination[i++] = source[r++];
+                }
+            }
+
+            int i = chunkSize * kChunk;
+
+            for (; i <= to; ++i) {
+                destination[i] = source[i];
+            }
+
+            E[] tmp = destination;
+            destination = source;
+            source = tmp;
+        }
+    }
+
+    private void descendingSort(E[] array, int to, int from) {
+
+    }
+}
