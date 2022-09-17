@@ -87,4 +87,6 @@ implements ObjectSortingAlgorithm<E> {
 
         while (index >= from) {
             array[index--] = HEAP.extractMinimum();
-       
+        }
+    }
+}
