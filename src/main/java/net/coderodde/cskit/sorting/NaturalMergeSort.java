@@ -10,4 +10,8 @@ public class NaturalMergeSort<E extends Comparable<? super E>>
 implements ObjectSortingAlgorithm<E> {
 
     @Override
-    public void sort(E[] array) 
+    public void sort(E[] array) {
+        sort(array, new Range(0, array.length - 1));
+    }
+
+   
