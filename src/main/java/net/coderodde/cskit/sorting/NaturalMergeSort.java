@@ -16,4 +16,7 @@ implements ObjectSortingAlgorithm<E> {
 
     @Override
     public void sort(E[] array, Range r) {
-        if (r.from <= r.t
+        if (r.from <= r.to) {
+            ascendingSort(array, r.from, r.to);
+        } else {
+    
