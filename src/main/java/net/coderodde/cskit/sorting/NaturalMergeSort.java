@@ -24,4 +24,4 @@ implements ObjectSortingAlgorithm<E> {
     }
 
     private void ascendingSort(E[] array, int from, int to) {
-        RunQueue qu
+        RunQueue queue = new RunScanner<E>().scanAndReturnRunQueue(array, from, to)
