@@ -31,4 +31,5 @@ implements ObjectSortingAlgorithm<E> {
         E[] destination = null;
         E[] source = null;
 
-        final int NPASSES = (i
+        final int NPASSES = (int) Math.ceil(Math.log(1.0 * queue.size())
+                                          
