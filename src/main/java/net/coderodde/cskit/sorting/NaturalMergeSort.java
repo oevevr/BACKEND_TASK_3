@@ -28,4 +28,7 @@ implements ObjectSortingAlgorithm<E> {
         E[] buffer = array.clone();
         Run last = queue.last();
 
-      
+        E[] destination = null;
+        E[] source = null;
+
+        final int NPASSES = (i
