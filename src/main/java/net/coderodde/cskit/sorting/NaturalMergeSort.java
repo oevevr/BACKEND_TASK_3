@@ -23,4 +23,5 @@ implements ObjectSortingAlgorithm<E> {
         }
     }
 
-    pr
+    private void ascendingSort(E[] array, int from, int to) {
+        RunQueue qu
