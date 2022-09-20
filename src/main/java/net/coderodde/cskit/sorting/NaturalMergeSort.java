@@ -32,4 +32,7 @@ implements ObjectSortingAlgorithm<E> {
         E[] source = null;
 
         final int NPASSES = (int) Math.ceil(Math.log(1.0 * queue.size())
-                                          
+                                          / Math.log(2.0));
+
+        if ((NPASSES & 1) == 0) {
+            desti
