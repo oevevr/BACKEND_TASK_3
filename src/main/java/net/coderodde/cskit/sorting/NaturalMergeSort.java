@@ -35,4 +35,7 @@ implements ObjectSortingAlgorithm<E> {
                                           / Math.log(2.0));
 
         if ((NPASSES & 1) == 0) {
-            desti
+            destination = buffer;
+            source = array;
+        } else {
+            des
