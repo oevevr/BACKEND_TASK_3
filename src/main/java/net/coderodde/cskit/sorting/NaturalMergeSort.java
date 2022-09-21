@@ -42,4 +42,5 @@ implements ObjectSortingAlgorithm<E> {
             source = buffer;
         }
 
-        // While 
+        // While there are more than one run, do merging:
+        while (queue.size() > 1
