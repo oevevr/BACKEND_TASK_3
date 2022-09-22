@@ -53,4 +53,7 @@ implements ObjectSortingAlgorithm<E> {
 
                 E[] tmp = destination;
                 destination = source;
-               
+                source = tmp;
+                queue.bounce();
+                continue;
+    
