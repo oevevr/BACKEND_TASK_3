@@ -51,4 +51,6 @@ implements ObjectSortingAlgorithm<E> {
                     destination[i] = source[i];
                 }
 
-                E[] 
+                E[] tmp = destination;
+                destination = source;
+               
