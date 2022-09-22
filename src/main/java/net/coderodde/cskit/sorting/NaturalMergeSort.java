@@ -43,4 +43,7 @@ implements ObjectSortingAlgorithm<E> {
         }
 
         // While there are more than one run, do merging:
-        while (queue.size() > 1
+        while (queue.size() > 1) {
+            Run left = queue.first();
+
+            if (left == l
