@@ -46,4 +46,6 @@ implements ObjectSortingAlgorithm<E> {
         while (queue.size() > 1) {
             Run left = queue.first();
 
-            if (left == l
+            if (left == last) {
+                for (int i = left.from; i <= left.to; ++i) {
+        
