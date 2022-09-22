@@ -60,4 +60,6 @@ implements ObjectSortingAlgorithm<E> {
 
             Run right = queue.second();
 
-            int l 
+            int l = left.from;
+            int r = right.from;
+          
