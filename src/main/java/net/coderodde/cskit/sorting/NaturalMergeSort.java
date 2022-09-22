@@ -48,4 +48,7 @@ implements ObjectSortingAlgorithm<E> {
 
             if (left == last) {
                 for (int i = left.from; i <= left.to; ++i) {
-        
+                    destination[i] = source[i];
+                }
+
+                E[] 
