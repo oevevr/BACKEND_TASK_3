@@ -62,4 +62,7 @@ implements ObjectSortingAlgorithm<E> {
 
             int l = left.from;
             int r = right.from;
-          
+            int i = l;
+
+            final int LMAX = left.to + 1;
+            final int RMA
