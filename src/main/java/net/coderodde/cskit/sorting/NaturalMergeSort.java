@@ -56,4 +56,8 @@ implements ObjectSortingAlgorithm<E> {
                 source = tmp;
                 queue.bounce();
                 continue;
-    
+            }
+
+            Run right = queue.second();
+
+            int l 
