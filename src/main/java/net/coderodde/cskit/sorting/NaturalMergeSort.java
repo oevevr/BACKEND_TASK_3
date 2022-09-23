@@ -69,4 +69,8 @@ implements ObjectSortingAlgorithm<E> {
 
             while (l < LMAX && r < RMAX) {
                 destination[i++] = source[r].compareTo(source[l]) < 0 ?
-                        source
+                        source[r++] :
+                        source[l++];
+            }
+
+            whi
