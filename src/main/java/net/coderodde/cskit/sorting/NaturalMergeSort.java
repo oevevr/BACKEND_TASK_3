@@ -65,4 +65,7 @@ implements ObjectSortingAlgorithm<E> {
             int i = l;
 
             final int LMAX = left.to + 1;
-            final int RMA
+            final int RMAX = right.to + 1;
+
+            while (l < LMAX && r < RMAX) {
+                destinat
