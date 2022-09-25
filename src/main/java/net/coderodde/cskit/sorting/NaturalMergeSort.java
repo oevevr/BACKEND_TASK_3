@@ -79,4 +79,8 @@ implements ObjectSortingAlgorithm<E> {
             if (right == last) {
                 E[] tmp = destination;
                 destination = source;
+                source = tmp;
+            }
+
+            queue.merge();
       
