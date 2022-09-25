@@ -88,4 +88,6 @@ implements ObjectSortingAlgorithm<E> {
     }
 
     private void descendingSort(E[] array, int from, int to) {
-        RunQueue queue = new RunScanner<E>().scanAndReturnRu
+        RunQueue queue = new RunScanner<E>().scanAndReturnRunQueue(array, to, from);
+    }
+}
