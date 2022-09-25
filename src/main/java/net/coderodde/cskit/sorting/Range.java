@@ -19,3 +19,4 @@ public final class Range {
     public Range() {
         this(0, 0);
     }
+}
