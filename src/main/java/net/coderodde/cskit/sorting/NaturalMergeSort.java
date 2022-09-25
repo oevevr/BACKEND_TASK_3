@@ -83,4 +83,8 @@ implements ObjectSortingAlgorithm<E> {
             }
 
             queue.merge();
-      
+            queue.bounce();
+        }
+    }
+
+    private void descendingSort(E[] array, i
