@@ -6,4 +6,5 @@ package net.coderodde.cskit.sorting;
  * @author Rodion Efremov
  * @version 1.618 (14.12.2013)
  */
-c
+class RunHeap<E extends Comparable<? super E>> {
+    privat
