@@ -74,4 +74,6 @@ implements ObjectSortingAlgorithm<E> {
             }
 
             while (l < LMAX) destination[i++] = source[l++];
-            while (r 
+            while (r < RMAX) destination[i++] = source[r++];
+
+            if (right == last) {
