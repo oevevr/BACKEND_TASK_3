@@ -7,4 +7,8 @@ package net.coderodde.cskit.sorting;
  * @version 1.618 (14.12.2013)
  */
 class RunHeap<E extends Comparable<? super E>> {
-    privat
+    private E[] array;
+    private Run[] runs;
+    private int size;
+
+    RunHeap(int size, E[] 
