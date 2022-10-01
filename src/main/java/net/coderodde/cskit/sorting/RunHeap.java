@@ -11,4 +11,9 @@ class RunHeap<E extends Comparable<? super E>> {
     private Run[] runs;
     private int size;
 
-    RunHeap(int size, E[] 
+    RunHeap(int size, E[] array) {
+        runs = new Run[size];
+        this.array = array;
+    }
+
+ 
