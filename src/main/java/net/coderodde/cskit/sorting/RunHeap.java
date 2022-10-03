@@ -16,4 +16,9 @@ class RunHeap<E extends Comparable<? super E>> {
         this.array = array;
     }
 
- 
+    E min() {
+        return array[runs[0].from];
+    }
+
+    void inc() {
+        
