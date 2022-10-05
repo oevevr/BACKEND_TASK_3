@@ -21,4 +21,6 @@ class RunHeap<E extends Comparable<? super E>> {
     }
 
     void inc() {
-        
+        if (runs[0].from == runs[0].to) {
+            Run last = runs[--size];
+  
