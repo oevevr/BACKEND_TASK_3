@@ -25,4 +25,7 @@ class RunHeap<E extends Comparable<? super E>> {
             Run last = runs[--size];
             runs[0] = last;
             // Establish the invariant.
-            --
+            --last.from;
+            inc();
+        } else {
+            ++runs[0].f
