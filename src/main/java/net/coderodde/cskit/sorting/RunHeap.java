@@ -30,4 +30,8 @@ class RunHeap<E extends Comparable<? super E>> {
         } else {
             ++runs[0].from;
             int nodeIndex = 0;
-            int leftChildIndex =
+            int leftChildIndex = 1;
+            int rightChildIndex = 2;
+            int minIndex = 0;
+
+ 
