@@ -28,4 +28,6 @@ class RunHeap<E extends Comparable<? super E>> {
             --last.from;
             inc();
         } else {
-            ++runs[0].f
+            ++runs[0].from;
+            int nodeIndex = 0;
+            int leftChildIndex =
