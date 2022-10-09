@@ -34,4 +34,6 @@ class RunHeap<E extends Comparable<? super E>> {
             int rightChildIndex = 2;
             int minIndex = 0;
 
- 
+            for (;;) {
+                if (leftChildIndex < size
+           
