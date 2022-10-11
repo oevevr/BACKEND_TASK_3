@@ -38,4 +38,7 @@ class RunHeap<E extends Comparable<? super E>> {
                 if (leftChildIndex < size
                         && array[runs[leftChildIndex].from].compareTo(
                            array[runs[nodeIndex].from]) < 0) {
-              
+                    minIndex = leftChildIndex;
+                }
+
+                if (ri
