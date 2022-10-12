@@ -41,4 +41,5 @@ class RunHeap<E extends Comparable<? super E>> {
                     minIndex = leftChildIndex;
                 }
 
-                if (ri
+                if (rightChildIndex < size
+                        && array[runs[righ
