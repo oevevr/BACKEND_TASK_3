@@ -42,4 +42,5 @@ class RunHeap<E extends Comparable<? super E>> {
                 }
 
                 if (rightChildIndex < size
-                        && array[runs[righ
+                        && array[runs[rightChildIndex].from].compareTo(
+                         
