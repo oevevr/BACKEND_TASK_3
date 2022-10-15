@@ -48,4 +48,7 @@ class RunHeap<E extends Comparable<? super E>> {
                 }
 
                 if (minIndex == nodeIndex) {
-     
+                    return;
+                }
+
+                // Sift down the 
