@@ -51,4 +51,6 @@ class RunHeap<E extends Comparable<? super E>> {
                     return;
                 }
 
-                // Sift down the 
+                // Sift down the run node.
+                int oldNodeIndex = nodeIndex;
+                nod
