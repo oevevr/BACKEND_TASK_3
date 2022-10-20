@@ -61,4 +61,9 @@ class RunHeap<E extends Comparable<? super E>> {
                 runs[oldNodeIndex] = run;
 
                 leftChildIndex = (nodeIndex << 1) + 1;
-          
+                rightChildIndex = leftChildIndex + 1;
+            }
+        }
+    }
+
+    v
