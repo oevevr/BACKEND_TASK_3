@@ -66,4 +66,6 @@ class RunHeap<E extends Comparable<? super E>> {
         }
     }
 
-    v
+    void insert(Run r) {
+        int nodeIndex = size;
+        runs[nodeIndex] = r
