@@ -72,4 +72,8 @@ class RunHeap<E extends Comparable<? super E>> {
         size++;
 
         for (;;) {
-            int parentIndex = (nodeIndex - 1
+            int parentIndex = (nodeIndex - 1) >> 1;
+
+            if (parentIndex < 0) {
+                return;
+            }
