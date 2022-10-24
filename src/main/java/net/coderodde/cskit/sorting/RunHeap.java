@@ -77,3 +77,6 @@ class RunHeap<E extends Comparable<? super E>> {
             if (parentIndex < 0) {
                 return;
             }
+
+            if (array[runs[parentIndex].from].compareTo(
+             
