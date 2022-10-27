@@ -79,4 +79,6 @@ class RunHeap<E extends Comparable<? super E>> {
             }
 
             if (array[runs[parentIndex].from].compareTo(
-             
+                    array[runs[nodeIndex].from]) > 0) {
+                // Sift up the node.
+ 
