@@ -82,4 +82,6 @@ class RunHeap<E extends Comparable<? super E>> {
                     array[runs[nodeIndex].from]) > 0) {
                 // Sift up the node.
                 Run tmp = runs[parentIndex];
-                runs[parentIndex] = runs[node
+                runs[parentIndex] = runs[nodeIndex];
+                runs[nodeIndex] = tmp;
+                nodeIndex = p
