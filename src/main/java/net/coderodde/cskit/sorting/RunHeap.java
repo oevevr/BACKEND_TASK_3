@@ -84,4 +84,8 @@ class RunHeap<E extends Comparable<? super E>> {
                 Run tmp = runs[parentIndex];
                 runs[parentIndex] = runs[nodeIndex];
                 runs[nodeIndex] = tmp;
-                nodeIndex = p
+                nodeIndex = parentIndex;
+            } else {
+                return;
+            }
+        }
