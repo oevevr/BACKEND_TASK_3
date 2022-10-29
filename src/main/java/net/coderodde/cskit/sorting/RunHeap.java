@@ -89,3 +89,5 @@ class RunHeap<E extends Comparable<? super E>> {
                 return;
             }
         }
+    }
+}
