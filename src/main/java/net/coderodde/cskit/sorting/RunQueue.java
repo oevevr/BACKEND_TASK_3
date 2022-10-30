@@ -76,3 +76,46 @@ public class RunQueue {
     /**
      * Duh.
      *
+     * @return the run stored in this queue.
+     */
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Merges the first 2 runs into one.
+     */
+    public void merge() {
+        Node remove = head;
+        head = head.next;
+        head.run.from = remove.run.from;
+        remove.next = null;
+        --size;
+    }
+
+    /**
+     * Sends the first element to the end of this run queue.
+     */
+    public void bounce() {
+        Node node = head;
+        head = head.next;
+        tail.next = node;
+        node.next = null;
+        tail = node;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(1024).append("<");
+
+        for (Node n = head; n != null; n = n.next) {
+            sb.append(n.run);
+
+            if (n != tail) {
+                sb.append(", ");
+            }
+        }
+
+        return sb.append(">").toString();
+    }
+}
