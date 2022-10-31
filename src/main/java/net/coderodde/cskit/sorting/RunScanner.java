@@ -27,3 +27,79 @@ public class RunScanner<E extends Comparable<? super E>> {
             return descendingScanHeap(array, to, from);
         }
     }
+
+    private RunQueue ascendingScanQueue(E[] array, int from, int to) {
+        if (from == to) {
+            return new RunQueue(new Run(from, from));
+        }
+
+        RunQueue queue;
+        int head = from;
+        int left = from;
+        int right = left + 1;
+        final int last = to;
+
+        if (array[left++].compareTo(array[right++]) <= 0) {
+            while (left < last && array[left].compareTo(array[right]) <= 0) {
+                left++;
+                right++;
+            }
+
+            queue = new RunQueue(new Run(head, left));
+        } else {
+            while (left < last && array[left].compareTo(array[right]) > 0) {
+                left++;
+                right++;
+            }
+
+            Run run = new Run(head, left);
+            reverse(array, head, left);
+            queue = new RunQueue(run);
+        }
+
+        left++;
+        right++;
+
+        if (left == last) {
+            queue.append(new Run(left, left));
+            return queue;
+        }
+
+        while (left < last) {
+            head = left;
+
+            if (array[left++].compareTo(array[right++]) <= 0) {
+                while (left < last
+                        && array[left].compareTo(array[right]) <= 0) {
+                    left++;
+                    right++;
+                }
+
+                queue.append(new Run(head, left));
+            } else {
+                while (left < last
+                        && array[left].compareTo(array[right]) > 0) {
+                    left++;
+                    right++;
+                }
+
+                Run run = new Run(head, left);
+                reverse(array, head, left);
+                queue.append(run);
+            }
+
+            left++;
+            right++;
+        }
+
+        if (left == last) {
+            queue.append(new Run(left, left));
+        }
+
+        return queue;
+    }
+
+    private RunQueue descendingScanQueue(E[] array, int from, int to) {
+        RunQueue queue;
+        int head = from;
+        int left = from;
