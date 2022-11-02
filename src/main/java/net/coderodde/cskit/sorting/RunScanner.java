@@ -103,3 +103,70 @@ public class RunScanner<E extends Comparable<? super E>> {
         RunQueue queue;
         int head = from;
         int left = from;
+        int right = left + 1;
+        final int last = to;
+
+        if (array[left++].compareTo(array[right++]) >= 0) {
+            while (left < last && array[left].compareTo(array[right]) >= 0) {
+                left++;
+                right++;
+            }
+
+            queue = new RunQueue(new Run(head, left));
+        } else {
+            while (left < last && array[left].compareTo(array[right]) < 0) {
+                left++;
+                right++;
+            }
+
+            Run run = new Run(head, left);
+            reverse(array, head, left);
+            queue = new RunQueue(run);
+        }
+
+        left++;
+        right++;
+
+        if (left == last) {
+            queue.append(new Run(left, left));
+            return queue;
+        }
+
+        while (left < last) {
+            head = left;
+
+            if (array[left++].compareTo(array[right++]) >= 0) {
+                while (left < last
+                        && array[left].compareTo(array[right]) >= 0) {
+                    left++;
+                    right++;
+                }
+
+                queue.append(new Run(head, left));
+            } else {
+                while (left < last
+                        && array[left].compareTo(array[right]) < 0) {
+                    left++;
+                    right++;
+                }
+
+                Run run = new Run(head, left);
+                reverse(array, head, left);
+                queue.append(run);
+            }
+
+            left++;
+            right++;
+        }
+
+        if (left == last) {
+            queue.append(new Run(left, left));
+        }
+
+        return queue;
+    }
+
+    private RunHeap<E> ascendingScanHeap(E[] array, int from, int to) {
+        RunHeap<E> heap = new RunHeap<E>((to - from + 1) / 2 + 1, array);
+
+        if (from == to) {
