@@ -170,3 +170,76 @@ public class RunScanner<E extends Comparable<? super E>> {
         RunHeap<E> heap = new RunHeap<E>((to - from + 1) / 2 + 1, array);
 
         if (from == to) {
+            heap.insert(new Run(from, from));
+            return heap;
+        }
+
+        int head = from;
+        int left = from;
+        int right = left + 1;
+        final int last = to;
+
+        if (array[left++].compareTo(array[right++]) <= 0) {
+            while (left < last && array[left].compareTo(array[right]) <= 0) {
+                left++;
+                right++;
+            }
+
+            heap.insert(new Run(head, left));
+        } else {
+            while (left < last && array[left].compareTo(array[right]) > 0) {
+                left++;
+                right++;
+            }
+
+            Run run = new Run(head, left);
+            reverse(array, head, left);
+            heap.insert(run);
+        }
+
+        left++;
+        right++;
+
+        if (left == last) {
+            heap.insert(new Run(left, left));
+            return heap;
+        }
+
+        while (left < last) {
+            head = left;
+
+            if (array[left++].compareTo(array[right++]) <= 0) {
+                while (left < last
+                        && array[left].compareTo(array[right]) <= 0) {
+                    left++;
+                    right++;
+                }
+
+                heap.insert(new Run(head, left));
+            } else {
+                while (left < last
+                        && array[left].compareTo(array[right]) > 0) {
+                    left++;
+                    right++;
+                }
+
+                Run run = new Run(head, left);
+                reverse(array, head, left);
+                heap.insert(run);
+            }
+
+            left++;
+            right++;
+        }
+
+        if (left == last) {
+            heap.insert(new Run(left, left));
+        }
+
+        return heap;
+    }
+
+    private RunHeap<E> descendingScanHeap(E[] array, int from, int to) {
+        RunHeap<E> heap = new RunHeap<E>(array.length / 2 + 1, array);
+        int head = from;
+        int left = from;
