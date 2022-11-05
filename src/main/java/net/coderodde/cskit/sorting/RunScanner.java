@@ -304,3 +304,5 @@ public class RunScanner<E extends Comparable<? super E>> {
         }
 
         return heap;
+    }
+}
