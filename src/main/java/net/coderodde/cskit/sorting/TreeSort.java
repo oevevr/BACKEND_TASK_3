@@ -144,3 +144,69 @@ implements ObjectSortingAlgorithm<E> {
             Node<E> left;
             Node<E> right;
             Node<E> parent;
+
+            Node(E value) {
+                this.value = value;
+            }
+        }
+
+        private Node<E> root;
+        private int size;
+
+        DescendingTree(E first) {
+            this.root = new Node<E>(first);
+            this.size = 1;
+        }
+
+        @Override
+        public Iterator<E> iterator() {
+            return new TreeIterator();
+        }
+
+        void insert(E value) {
+            Node<E> newNode = new Node<E>(value);
+            Node<E> current = root;
+            int c;
+
+            for (;;) {
+                if (value.compareTo(current.value) > 0) {
+                    if (current.left != null) {
+                        current = current.left;
+                    } else {
+                        current.left = newNode;
+                        break;
+                    }
+                } else {
+                    if (current.right != null) {
+                        current = current.right;
+                    } else {
+                        current.right = newNode;
+                        break;
+                    }
+                }
+            }
+
+            newNode.parent = current;
+            size++;
+        }
+
+        Node<E> successor(Node<E> node) {
+            if (node.right == null) {
+                while (node.parent != null && node.parent.right == node) {
+                    node = node.parent;
+                }
+
+                return node.parent == null ? null : node.parent;
+            }
+
+            node = node.right;
+
+            while (node.left != null) {
+                node = node.left;
+            }
+
+            return node;
+        }
+
+        private class TreeIterator implements Iterator<E> {
+            private int retrieved;
