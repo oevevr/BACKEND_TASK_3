@@ -210,3 +210,71 @@ implements ObjectSortingAlgorithm<E> {
 
         private class TreeIterator implements Iterator<E> {
             private int retrieved;
+            private Node<E> current;
+
+            TreeIterator() {
+                current = root;
+                if (current != null) {
+                    while (current.left != null) {
+                        current = current.left;
+                    }
+                }
+            }
+
+            @Override
+            public boolean hasNext() {
+                return retrieved < size;
+            }
+
+            @Override
+            public E next() {
+                Node<E> next = successor(current);
+                E value = current.value;
+                current = next;
+                ++retrieved;
+                return value;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException(
+                        "remove() makes no sense here."
+                        );
+            }
+        }
+    }
+
+    private void ascendingSort(E[] array, int from, int to) {
+        if (from == to) {
+            return;
+        }
+
+        AscendingTree<E> tree = new AscendingTree<E>(array[from]);
+        int i = from + 1;
+
+        for (; i <= to; ++i) {
+            tree.insert(array[i]);
+        }
+
+        i = from;
+
+        for (E element : tree) {
+            array[i++] = element;
+        }
+    }
+
+    private void descendingSort(E[] array, int from, int to) {
+        DescendingTree<E> tree = new DescendingTree<E>(array[from]);
+        int i = from + 1;
+
+        for (; i <= to; ++i) {
+            tree.insert(array[i]);
+        }
+
+        i = from;
+
+        for (E element : tree) {
+            array[i++] = element;
+        }
+    }
+}
