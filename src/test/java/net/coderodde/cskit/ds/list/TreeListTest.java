@@ -51,3 +51,58 @@ public class TreeListTest {
             assertEquals(i, descIter.next());
             --i;
         }
+
+        assertEquals(new Integer(-1), i);
+        assertEquals(100, list.size());
+        assertFalse(list.isEmpty());
+        assertTrue(list.isHealthy());
+    }
+
+    @Test
+    public void iteratorsOnEmpty() {
+        Iterator<Integer> i1 = list.iterator();
+        assertFalse(i1.hasNext());
+
+        Iterator<Integer> i2 = list.iterator();
+        assertFalse(i2.hasNext());
+
+        ListIterator<Integer> i3 = list.listIterator();
+        assertFalse(i3.hasNext());
+        assertFalse(i3.hasPrevious());
+    }
+
+    @Test
+    public void testDescendingIterator() {
+        for (int i = 0; i < 40; ++i) {
+            list.add(i, i);
+        }
+
+        Iterator<Integer> it = list.descendingIterator();
+
+        assertTrue(it.hasNext());
+
+        it.next();
+        Integer tmp = it.next();
+
+        assertEquals(new Integer(38), tmp);
+
+        it.remove();
+
+        assertEquals(39, list.size());
+        assertEquals(new Integer(39), list.get(list.size() - 1));
+        assertEquals(new Integer(37), list.get(list.size() - 2));
+        assertTrue(list.isHealthy());
+
+        for (int i = 0; i < 19; ++i) {
+            assertTrue(it.hasNext());
+            it.next();
+        }
+
+        for (int i = 0; i < 6; ++i) {
+            assertTrue(it.hasNext());
+            it.next();
+            it.remove();
+            assertTrue(list.isHealthy());
+        }
+    }
+}
