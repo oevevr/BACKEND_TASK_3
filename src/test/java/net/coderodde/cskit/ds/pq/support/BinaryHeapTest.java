@@ -22,3 +22,41 @@ public class BinaryHeapTest {
 
     @Test(expected = NoSuchElementException.class)
     public void testSize() {
+        assertTrue(pq.isEmpty());
+        assertEquals(pq.size(), 0);
+        pq.min();
+    }
+
+    @Test
+    public void testInsert() {
+        pq.clear();
+        Integer[] array = getAscendingArray(10);
+        Random r = new Random();
+        shuffle(array, r);
+
+        for (Integer i : array) {
+            pq.insert(i, i);
+        }
+
+        int i = 0;
+        while (pq.size() > 0) {
+            array[i++] = pq.extractMinimum();
+        }
+
+        assertTrue(isSorted(array, new Range(0, array.length - 1)));
+    }
+
+    @Test
+    public void testDecreasePriority() {
+        pq.clear();
+
+        for (int i = 0; i < 7; ++i) {
+                pq.insert(i, i);
+        }
+
+        pq.decreasePriority(6, -1);
+
+        assertEquals(6, pq.min(), 0.01);
+        assertEquals(6, pq.extractMinimum(), 0.01);
+    }
+}
