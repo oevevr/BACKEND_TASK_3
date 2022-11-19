@@ -5,4 +5,5 @@ import java.util.Random;
 import net.coderodde.cskit.ds.pq.FibonacciHeap;
 import org.junit.Test;
 import static net.coderodde.cskit.Utilities.getAscendingArray;
-import stati
+import static net.coderodde.cskit.Utilities.isSorted;
+import static net.coderodde.cskit.Utilitie
