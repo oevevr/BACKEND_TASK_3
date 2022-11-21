@@ -8,4 +8,9 @@ import static net.coderodde.cskit.Utilities.getAscendingArray;
 import static net.coderodde.cskit.Utilities.isSorted;
 import static net.coderodde.cskit.Utilities.shuffle;
 import net.coderodde.cskit.sorting.Range;
-import static org.junit.Assert.
+import static org.junit.Assert.*;
+
+/**
+ * This class test <code>FibonacciHeap</code>.
+ *
+ * @author Rodion Efr
