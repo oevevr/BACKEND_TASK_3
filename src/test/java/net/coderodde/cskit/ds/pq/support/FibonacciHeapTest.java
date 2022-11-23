@@ -13,4 +13,7 @@ import static org.junit.Assert.*;
 /**
  * This class test <code>FibonacciHeap</code>.
  *
- * @author Rodion Efr
+ * @author Rodion Efremov
+ */
+public class FibonacciHeapTest {
+    private FibonacciHeap<Integer, Int
