@@ -16,4 +16,7 @@ import static org.junit.Assert.*;
  * @author Rodion Efremov
  */
 public class FibonacciHeapTest {
-    private FibonacciHeap<Integer, Int
+    private FibonacciHeap<Integer, Integer> pq =
+        new FibonacciHeap<Integer, Integer>(9);
+
+    @Test(expec
