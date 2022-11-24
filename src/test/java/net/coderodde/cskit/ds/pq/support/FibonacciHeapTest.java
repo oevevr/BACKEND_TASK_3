@@ -19,4 +19,6 @@ public class FibonacciHeapTest {
     private FibonacciHeap<Integer, Integer> pq =
         new FibonacciHeap<Integer, Integer>(9);
 
-    @Test(expec
+    @Test(expected = NoSuchElementException.class)
+    public void testSize() {
+    
