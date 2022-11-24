@@ -21,4 +21,5 @@ public class FibonacciHeapTest {
 
     @Test(expected = NoSuchElementException.class)
     public void testSize() {
-    
+        assertTrue(pq.isEmpty());
+        assertEquals(pq.size(), 0);
