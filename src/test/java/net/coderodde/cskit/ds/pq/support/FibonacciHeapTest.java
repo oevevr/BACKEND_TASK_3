@@ -23,3 +23,9 @@ public class FibonacciHeapTest {
     public void testSize() {
         assertTrue(pq.isEmpty());
         assertEquals(pq.size(), 0);
+        pq.min();
+    }
+
+    @Test
+    public void testInsert() {
+  
