@@ -28,4 +28,6 @@ public class FibonacciHeapTest {
 
     @Test
     public void testInsert() {
-  
+        pq.clear();
+        Integer[] array = getAscendingArray(10);
+        Rand
