@@ -30,4 +30,7 @@ public class FibonacciHeapTest {
     public void testInsert() {
         pq.clear();
         Integer[] array = getAscendingArray(10);
-        Rand
+        Random r = new Random();
+        shuffle(array, r);
+
+        for (Integer i : arra
