@@ -33,4 +33,9 @@ public class FibonacciHeapTest {
         Random r = new Random();
         shuffle(array, r);
 
-        for (Integer i : arra
+        for (Integer i : array) {
+            pq.insert(i, i);
+        }
+
+        int i = 0;
+     
