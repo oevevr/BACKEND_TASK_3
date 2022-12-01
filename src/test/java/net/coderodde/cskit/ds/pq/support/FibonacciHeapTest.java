@@ -40,4 +40,9 @@ public class FibonacciHeapTest {
         int i = 0;
         while (pq.size() > 0) {
             array[i++] = pq.extractMinimum();
-    
+        }
+
+        assertTrue(isSorted(array, new Range(0, array.length - 1)));
+    }
+
+    @Tes
