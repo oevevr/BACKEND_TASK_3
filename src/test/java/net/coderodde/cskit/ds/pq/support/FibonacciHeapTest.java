@@ -38,4 +38,6 @@ public class FibonacciHeapTest {
         }
 
         int i = 0;
-     
+        while (pq.size() > 0) {
+            array[i++] = pq.extractMinimum();
+    
