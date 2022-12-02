@@ -45,4 +45,8 @@ public class FibonacciHeapTest {
         assertTrue(isSorted(array, new Range(0, array.length - 1)));
     }
 
-    @Tes
+    @Test
+    public void testDecreasePriority() {
+        pq.clear();
+
+       
