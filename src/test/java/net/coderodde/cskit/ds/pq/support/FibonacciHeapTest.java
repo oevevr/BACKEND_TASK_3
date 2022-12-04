@@ -49,4 +49,8 @@ public class FibonacciHeapTest {
     public void testDecreasePriority() {
         pq.clear();
 
-       
+        for (int i = 0; i < 7; ++i) {
+                pq.insert(i, i);
+        }
+
+    
