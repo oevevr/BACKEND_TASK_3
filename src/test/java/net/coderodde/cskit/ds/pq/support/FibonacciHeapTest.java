@@ -56,4 +56,6 @@ public class FibonacciHeapTest {
         pq.decreasePriority(6, -1);
 
         assertEquals(6, pq.min(), 0.01);
-       
+        assertEquals(6, pq.extractMinimum(), 0.01);
+    }
+}
