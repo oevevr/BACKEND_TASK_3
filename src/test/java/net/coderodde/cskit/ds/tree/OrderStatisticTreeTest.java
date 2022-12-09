@@ -86,3 +86,31 @@ public class OrderStatisticTreeTest {
         assertEquals(0, tree.size());
 
         tree.put(1, 1);
+
+        assertFalse(tree.isEmpty());
+        assertTrue(tree.isHealthy());
+        assertEquals(1, tree.size());
+
+        Set<Integer> set = tree.keySet();
+
+        assertEquals(1, set.size());
+
+        set.remove(1);
+
+        assertTrue(set.isEmpty());
+
+        tree.put(1, 1);
+        tree.put(2, 2);
+        tree.put(3, 3);
+
+        assertEquals(3, tree.size());
+
+        set = tree.keySet();
+        Iterator<Integer> iter2 = set.iterator();
+
+        for (i = 1; i <= 3; ++i) {
+            Integer tmp = iter2.next();
+            assertEquals(new Integer(i), tmp);
+        }
+    }
+}
