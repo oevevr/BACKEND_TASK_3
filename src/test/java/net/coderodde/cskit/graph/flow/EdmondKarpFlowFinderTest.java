@@ -7,4 +7,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * This class tests Edmond-Karp's maximum flow algorith
+ * This class tests Edmond-Karp's maximum flow algorithm.
+ *
+ * @author Rodion Efremov
+ * @version 1.61803
+ */
+public class E
