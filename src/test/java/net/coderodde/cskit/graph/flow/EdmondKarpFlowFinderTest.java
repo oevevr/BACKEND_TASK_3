@@ -12,4 +12,8 @@ import static org.junit.Assert.*;
  * @author Rodion Efremov
  * @version 1.61803
  */
-public class E
+public class EdmondKarpFlowFinderTest {
+
+    @Test
+    public void testFind() {
+     
