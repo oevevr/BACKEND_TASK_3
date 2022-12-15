@@ -17,4 +17,5 @@ public class EdmondKarpFlowFinderTest {
     @Test
     public void testFind() {
         DirectedGraphNode Vancouver = new DirectedGraphNode("Vancover");
-        DirectedGr
+        DirectedGraphNode Edmonton = new DirectedGraphNode("Edmonton");
+        DirectedGraph
