@@ -21,4 +21,6 @@ public class EdmondKarpFlowFinderTest {
         DirectedGraphNode Calgary = new DirectedGraphNode("Calgary");
         DirectedGraphNode Saskatoon = new DirectedGraphNode("Saskatoon");
         DirectedGraphNode Regina = new DirectedGraphNode("Regina");
-        DirectedGraphNode Winnipeg = new 
+        DirectedGraphNode Winnipeg = new DirectedGraphNode("Winnipeg");
+
+        DirectedGraphWeightFunction c = new DirectedG
