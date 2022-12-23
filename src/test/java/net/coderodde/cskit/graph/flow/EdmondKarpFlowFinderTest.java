@@ -23,4 +23,8 @@ public class EdmondKarpFlowFinderTest {
         DirectedGraphNode Regina = new DirectedGraphNode("Regina");
         DirectedGraphNode Winnipeg = new DirectedGraphNode("Winnipeg");
 
-        DirectedGraphWeightFunction c = new DirectedG
+        DirectedGraphWeightFunction c = new DirectedGraphWeightFunction();
+
+        /// 1 - 3
+        Vancouver.addChild(Edmonton);
+     
