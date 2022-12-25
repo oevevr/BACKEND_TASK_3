@@ -30,4 +30,7 @@ public class EdmondKarpFlowFinderTest {
         c.put(Vancouver, Edmonton, 16.0);
 
         Vancouver.addChild(Calgary);
-        c.put
+        c.put(Vancouver, Calgary, 13.0);
+
+        Calgary.addChild(Edmonton);
+   
