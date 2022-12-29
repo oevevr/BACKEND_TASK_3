@@ -39,4 +39,7 @@ public class EdmondKarpFlowFinderTest {
         Edmonton.addChild(Saskatoon);
         c.put(Edmonton, Saskatoon, 12.0);
 
-        Saskatoo
+        Saskatoon.addChild(Calgary);
+        c.put(Saskatoon, Calgary, 9.0);
+
+        Calgary.addChild(Reg
