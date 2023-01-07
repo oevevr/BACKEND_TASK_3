@@ -52,4 +52,7 @@ public class EdmondKarpFlowFinderTest {
         Regina.addChild(Saskatoon);
         c.put(Regina, Saskatoon, 7.0);
 
-        Regina.addChild(W
+        Regina.addChild(Winnipeg);
+        c.put(Regina, Winnipeg, 4.0);
+
+        Pair<DirectedGraphWeightFunctio
