@@ -55,4 +55,5 @@ public class EdmondKarpFlowFinderTest {
         Regina.addChild(Winnipeg);
         c.put(Regina, Winnipeg, 4.0);
 
-        Pair<DirectedGraphWeightFunctio
+        Pair<DirectedGraphWeightFunction, Double> pair =
+                new EdmondKarpFlowFinder().find(Vanco
