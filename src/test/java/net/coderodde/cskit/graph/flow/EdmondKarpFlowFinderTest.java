@@ -56,4 +56,8 @@ public class EdmondKarpFlowFinderTest {
         c.put(Regina, Winnipeg, 4.0);
 
         Pair<DirectedGraphWeightFunction, Double> pair =
-                new EdmondKarpFlowFinder().find(Vanco
+                new EdmondKarpFlowFinder().find(Vancouver, Winnipeg, c);
+
+        assertEquals(23.0, pair.second, 0.01);
+    }
+}
