@@ -8,4 +8,9 @@ import static org.junit.Assert.*;
 /**
  * This class tests <code>RunScanner</code>.
  *
- * @author Rodio
+ * @author Rodion Efremov
+ */
+public class RunScannerTest {
+
+    private static final class AscendingComparator
+  
