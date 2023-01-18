@@ -13,4 +13,7 @@ import static org.junit.Assert.*;
 public class RunScannerTest {
 
     private static final class AscendingComparator
-  
+    implements Comparator<Integer> {
+
+        @Override
+        public int co
