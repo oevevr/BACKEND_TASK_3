@@ -19,4 +19,7 @@ public class RunScannerTest {
         public int compare(Integer i1, Integer i2) {
             return i1 - i2;
         }
-    
+    }
+
+    private static final class DescendingComparator
+    implements Comparator<
