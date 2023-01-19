@@ -22,4 +22,7 @@ public class RunScannerTest {
     }
 
     private static final class DescendingComparator
-    implements Comparator<
+    implements Comparator<Integer> {
+
+        @Override
+        public int compare(Integer i1, Integer i2)
