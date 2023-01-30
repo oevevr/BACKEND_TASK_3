@@ -30,4 +30,5 @@ public class RunScannerTest {
         }
     }
 
-    private AscendingCom
+    private AscendingComparator ascCmp = new AscendingComparator();
+    private DescendingComparator 
