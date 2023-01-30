@@ -25,4 +25,9 @@ public class RunScannerTest {
     implements Comparator<Integer> {
 
         @Override
-        public int compare(Integer i1, Integer i2)
+        public int compare(Integer i1, Integer i2) {
+            return i2 - i1;
+        }
+    }
+
+    private AscendingCom
