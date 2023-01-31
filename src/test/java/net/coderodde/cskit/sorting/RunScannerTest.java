@@ -31,4 +31,8 @@ public class RunScannerTest {
     }
 
     private AscendingComparator ascCmp = new AscendingComparator();
-    private DescendingComparator 
+    private DescendingComparator descCmp = new DescendingComparator();
+
+    @Test
+    public void testScan() {
+        Integer[] 
