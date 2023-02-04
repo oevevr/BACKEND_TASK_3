@@ -36,4 +36,6 @@ public class RunScannerTest {
     @Test
     public void testScan() {
         Integer[] array = new Integer[]{1, 2, 3, 4, 5, 6, 7};
-        debugPrintArra
+        debugPrintArray(array);
+        RunScanner<Integer> scanner = new RunScanner<Integer>();
+   
