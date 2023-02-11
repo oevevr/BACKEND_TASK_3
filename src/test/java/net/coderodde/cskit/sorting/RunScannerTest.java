@@ -38,4 +38,6 @@ public class RunScannerTest {
         Integer[] array = new Integer[]{1, 2, 3, 4, 5, 6, 7};
         debugPrintArray(array);
         RunScanner<Integer> scanner = new RunScanner<Integer>();
-   
+        RunQueue q = null;
+
+        assertEquals(1, (q = scanner.scanAndReturnRunQueue(arr
