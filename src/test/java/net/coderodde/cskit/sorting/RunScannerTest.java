@@ -40,4 +40,7 @@ public class RunScannerTest {
         RunScanner<Integer> scanner = new RunScanner<Integer>();
         RunQueue q = null;
 
-        assertEquals(1, (q = scanner.scanAndReturnRunQueue(arr
+        assertEquals(1, (q = scanner.scanAndReturnRunQueue(array, 0, 6)).size());
+        System.out.println(q);
+
+        assertEquals(1, (q = scanne
