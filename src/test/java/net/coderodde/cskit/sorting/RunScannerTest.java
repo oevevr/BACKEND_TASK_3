@@ -61,4 +61,4 @@ public class RunScannerTest {
 
         array = new Integer[]{1, 3};
 
-      
+        assertEquals(1, (q = scanner.scanAndReturnRunQueue(array, 0, 1)).siz
