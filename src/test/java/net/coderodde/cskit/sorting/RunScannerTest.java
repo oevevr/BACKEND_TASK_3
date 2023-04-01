@@ -61,4 +61,7 @@ public class RunScannerTest {
 
         array = new Integer[]{1, 3};
 
-        assertEquals(1, (q = scanner.scanAndReturnRunQueue(array, 0, 1)).siz
+        assertEquals(1, (q = scanner.scanAndReturnRunQueue(array, 0, 1)).size());
+        System.out.println(q);
+
+        assertEquals(1, (q = s
